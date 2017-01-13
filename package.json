@@ -1,0 +1,55 @@
+{
+  "name": "interface-module-sql-admin",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app/index.jsx",
+  "scripts": {
+    "start": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server",
+    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
+    "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
+    "lint": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
+    "preview": "NODE_ENV=\"production\" webpack-dashboard -t 'Preview Mode - React-Redux Boilerplate' -- webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RDB-Academy/Interface-Module-SQL-Admin.git"
+  },
+  "keywords": [
+    "react",
+    "sql",
+    "tu-bs",
+    "ifis",
+    "poeblis",
+    "webpack"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/RDB-Academy/Interface-Module-SQL-Admin/issues"
+  },
+  "homepage": "https://github.com/RDB-Academy/Interface-Module-SQL-Admin#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.6.1",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "html-webpack-plugin": "^2.26.0",
+    "webpack": "beta",
+    "webpack-dashboard": "^0.2.1",
+    "webpack-dev-server": "beta"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.20.0",
+    "es6-promise": "^4.0.5",
+    "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-helmet": "^3.3.0",
+    "react-redux": "^5.0.2",
+    "react-router": "next",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  }
+}
