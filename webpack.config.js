@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const autoprefixer = require('autoprefixer');
 
 
@@ -81,5 +82,6 @@ module.exports = {
         context: APP.sourcePath,
       },
     }),
+    new DashboardPlugin()
   ]
 };
