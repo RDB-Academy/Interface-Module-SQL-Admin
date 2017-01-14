@@ -17,8 +17,14 @@ const APP = {
 module.exports = {
   context: APP.sourcePath,
   entry: {
-    app: './index.jsx',
+    app: [
+      'react-hot-loader/patch',
+      './index.jsx',
+    ],
     vendor: [
+      'lodash',
+      'react-hot-loader',
+      'react-proxy',
       'babel-polyfill',
       'es6-promise',
       'immutable',
@@ -54,6 +60,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new DashboardPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
@@ -64,11 +71,13 @@ module.exports = {
         NODE_ENV: JSON.stringify(APP.env),
       },
     }),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.ejs',
       filename: 'index.html',
     }),
+
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [
@@ -82,6 +91,6 @@ module.exports = {
         context: APP.sourcePath,
       },
     }),
-    new DashboardPlugin()
+
   ]
 };
