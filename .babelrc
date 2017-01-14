@@ -1,4 +1,5 @@
 {
+  "plugins": ["react-hot-loader/babel", "lodash"],
   "presets": [
     ["es2015", {"modules": false}],
     "react"

@@ -1,10 +1,5 @@
-import React from 'react';
-import { render } from 'react-dom';
-
-import App from 'App';
-
-// appMount point
-const appMount = document.getElementById('root');
-
-// render App
-render(<App />, appMount);
+if(process.env.NODE_ENV === 'production') {
+  module.exports = require('./index.prod.jsx');
+} else {
+  module.exports = require('./index.dev.jsx');
+}

@@ -1,45 +1,35 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
-
+const nodeEnv = process.env.NODE_ENV || 'development';
 
 const APP = {
-  env: process.env.NODE_ENV || 'development',
+  env: nodeEnv,
+  isProduction: nodeEnv === 'production',
 
   sourcePath: path.resolve(__dirname, './app'),
 
   buildPath: path.resolve(__dirname, './build/dev'),
 };
-module.exports = {
+
+const webpackConfig = {
   context: APP.sourcePath,
   entry: {
     app: [
-      'react-hot-loader/patch',
       './index.jsx',
     ],
     vendor: [
-      'lodash',
-      'react-hot-loader',
-      'react-proxy',
-      'babel-polyfill',
-      'es6-promise',
-      'immutable',
-      'isomorphic-fetch',
       'react-dom',
-      'react-redux',
-      'react-router',
       'react',
-      'redux-thunk',
-      'redux',
     ]
   },
   output: {
     path: APP.buildPath,
-    filename: 'assets/app-[hash].bundle.js'
+    filename: 'assets/[name].js'
   },
   module: {
     rules: [
@@ -62,35 +52,41 @@ module.exports = {
   plugins: [
     new DashboardPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-      filename: 'assets/vendor-[hash].js',
+      names: ['vendor', 'manifest'],
     }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(APP.env),
       },
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
+      title: 'SQL-Module Admin',
       template: 'index.ejs',
-      filename: 'index.html',
     }),
-
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [
-          autoprefixer({
-            browsers: [
-              'last 3 version',
-              'ie >= 10',
-            ],
-          }),
-        ],
-        context: APP.sourcePath,
-      },
-    }),
-
-  ]
+  ],
 };
+
+// if Production
+if(APP.isProduction) {
+  webpackConfig.plugins.push(
+    //new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new LodashModuleReplacementPlugin
+  );
+} else {
+  webpackConfig.entry.app.unshift(
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server'
+  );
+  webpackConfig.plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  );
+  webpackConfig.devServer = {
+    hot: true,
+    contentBase: APP.buildPath,
+    publicPath: '/'
+  };
+}
+
+module.exports = webpackConfig;
