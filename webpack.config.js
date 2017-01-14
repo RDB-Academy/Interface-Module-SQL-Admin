@@ -23,8 +23,11 @@ const webpackConfig = {
       './index.jsx',
     ],
     vendor: [
-      'react-dom',
       'react',
+      'react-dom',
+      'react-redux',
+      'redux',
+      'redux-thunk',
     ]
   },
   output: {
@@ -78,6 +81,10 @@ if(APP.isProduction) {
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server'
+  );
+  webpackConfig.entry.vendor.unshift(
+    'react-proxy',
+    'react-hot-loader'
   );
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin()

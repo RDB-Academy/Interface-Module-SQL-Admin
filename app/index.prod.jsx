@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux'
 
 import App from 'App';
+import configureStore from './store';
 
-// appMount point
 const appMount = document.getElementById('root');
+const store = configureStore();
 
-const render = (Component) => {
-  ReactDOM.render(
-    <Component />,
-    appMount);
-}
-
-render(App)
+ReactDOM.render(
+  <App store={store}/>,
+  appMount);

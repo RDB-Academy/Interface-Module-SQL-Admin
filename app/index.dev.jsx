@@ -1,26 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { createStore } from 'redux';
 import { AppContainer } from 'react-hot-loader';
 
 import App from 'App';
+import configureStore from './store';
 
-// appMount point
 const appMount = document.getElementById('root');
+const store = configureStore();
 
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
-    appMount);
-}
-
-render(App)
+ReactDOM.render(
+  <AppContainer>
+    <App store={store} />
+  </AppContainer>,
+  appMount );
 
 if(module.hot) {
   module.hot.accept('./App', () =>{
     const NewApp = require('./App').default;
-    render(NewApp);
+    ReactDOM.render(
+      <AppContainer>
+        <NewApp store={store} />
+      </AppContainer>,
+      appMount);
   });
 }
