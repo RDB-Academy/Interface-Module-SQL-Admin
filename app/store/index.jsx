@@ -12,5 +12,13 @@ export default function configureStore(initialState) {
         composeEnhancers(applyMiddleware(thunk)),
   );
 
+  if (module.hot) {
+    module.hot.accept('reducers', () => {
+      const nextReducers = require('reducers').default; // eslint-disable-line
+
+      store.replaceReducer(nextReducers);
+    });
+  }
+
   return store;
 }

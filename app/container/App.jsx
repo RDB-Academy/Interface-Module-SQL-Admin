@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { BrowserRouter, Match, Redirect, Miss, Link } from 'react-router';
 
-import { connect } from 'react-redux';
-
+import { logoutUser } from 'actions/sessionActions';
 import LoginPage from './LoginPage';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    this.props.logoutUser();
+  }
+
   render() {
     const { isLoggedIn } = this.props;
     return (
@@ -20,17 +30,23 @@ class App extends Component {
                 <Link to="/tasks" activeClassName="active" activeOnlyWhenExact>Tasks</Link>
                 <Link to="/taskTrials" activeClassName="active" activeOnlyWhenExact>TaskTrials</Link>
                 <Link to="/status" activeClassName="active" activeOnlyWhenExact>Status</Link>
+                <button onClick={this.logout}>Logout</button>
               </div>
             )}
           </nav>
           <main>
             { isLoggedIn ? (
               <div>
-                <Match pattern="/" exactly render={() => (<div>Index</div>)} />
-                <Match pattern="/schemaDefs" exactly render={() => (<div>schemaDefs</div>)} />
-                <Match pattern="/tasks" exactly render={() => (<div>tasks</div>)} />
-                <Match pattern="/taskTrials" exactly render={() => (<div>taskTrials</div>)} />
-                <Match pattern="/status" exactly render={() => (<div>status</div>)} />
+                <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />
+                <Match pattern="/schemaDefs" exactly render={() => (<h1>schemaDefs</h1>)} />
+                <Match pattern="/tasks" exactly render={() => (<h1>tasks</h1>)} />
+                <Match pattern="/taskTrials" exactly render={() => (<h1>taskTrials</h1>)} />
+                <Match pattern="/status" exactly render={() => (<h1>status</h1>)} />
+                <Miss
+                  render={() => (
+                    <Redirect to="/" />
+                  )}
+                />
               </div>
             ) : (
               <div>
@@ -42,11 +58,6 @@ class App extends Component {
                 />
               </div>
             )}
-            <Miss
-              render={({ location }) => (
-                <div>Nothing matched {location.pathname}.</div>
-              )}
-            />
           </main>
           <footer>
             <p>Footer</p>
@@ -59,6 +70,7 @@ class App extends Component {
 
 App.propTypes = {
   isLoggedIn: React.PropTypes.bool.isRequired,
+  logoutUser: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -67,4 +79,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchtoProps(dispatch) {
+  return {
+    logoutUser: bindActionCreators(logoutUser, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(App);

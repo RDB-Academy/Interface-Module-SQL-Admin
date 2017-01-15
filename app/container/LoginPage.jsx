@@ -40,7 +40,7 @@ class LoginPage extends Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.props);
-    this.props.actions(this.state.loginForm);
+    this.props.loginUser(this.state.loginForm);
   }
 
   render() {
@@ -63,9 +63,13 @@ class LoginPage extends Component {
   }
 }
 
+LoginPage.propTypes = {
+  loginUser: React.PropTypes.func.isRequired,
+};
+
 function mapDispatchtoProps(dispatch) {
   return {
-    actions: bindActionCreators(loginUser, dispatch),
+    loginUser: bindActionCreators(loginUser, dispatch),
   };
 }
 

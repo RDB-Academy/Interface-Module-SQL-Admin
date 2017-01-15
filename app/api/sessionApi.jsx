@@ -11,11 +11,17 @@ class SessionApi {
     });
 
 
-    return fetch(request).then((response) => {
-      console.log('session api');
-      console.log(response);
-      return response.json();
-    }).catch(error => (
+    return fetch(request).then(response => (
+      response.json()
+    )).catch(error => (
+      error
+    ));
+  }
+
+  static logout() {
+    return fetch('/api/logout').then(response => (
+      response.json()
+    )).catch(error => (
       error
     ));
   }
