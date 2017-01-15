@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader'; // eslint-disable-line
 
-import App from 'App';
+import App from 'container/App';
 import configureStore from './store';
 
 const appMount = document.getElementById('root');
@@ -13,11 +12,11 @@ ReactDOM.render(
   <AppContainer>
     <App store={store} />
   </AppContainer>,
-  appMount );
+  appMount);
 
-if(module.hot) {
-  module.hot.accept('./App', () =>{
-    const NewApp = require('./App').default;
+if (module.hot) {
+  module.hot.accept('./container/App', () => {
+    const NewApp = require('./container/App').default; // eslint-disable-line
     ReactDOM.render(
       <AppContainer>
         <NewApp store={store} />

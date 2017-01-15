@@ -7,7 +7,7 @@
     "start": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server",
     "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
     "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
-    "lint": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
+    "lint": "eslint . --ext .js --ext .jsx  --ignore-path .gitignore --cache --fix",
     "preview": "NODE_ENV=\"production\" webpack-dashboard -t 'Preview Mode - React-Redux Boilerplate' -- webpack-dev-server"
   },
   "repository": {
@@ -30,11 +30,19 @@
   "homepage": "https://github.com/RDB-Academy/Interface-Module-SQL-Admin#readme",
   "devDependencies": {
     "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-lodash": "^3.2.11",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-import-resolver-webpack": "^0.8.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
     "html-webpack-plugin": "^2.26.0",
     "lodash-webpack-plugin": "^0.10.7",
     "react-hot-loader": "next",

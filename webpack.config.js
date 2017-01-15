@@ -28,34 +28,43 @@ const webpackConfig = {
       'react-redux',
       'redux',
       'redux-thunk',
-    ]
+    ],
   },
   output: {
     path: APP.buildPath,
-    filename: 'assets/[name].js'
+    filename: 'assets/[name].js',
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        use: [
+          'eslint-loader',
+        ],
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
           'babel-loader',
         ],
-      }
-    ]
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
     modules: [
       APP.sourcePath,
-      'node_modules'
-    ]
+      'node_modules',
+    ],
   },
   plugins: [
     new DashboardPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
+    new HtmlWebpackPlugin({
+      title: 'SQL-Module Admin',
+      template: 'index.ejs',
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -63,36 +72,33 @@ const webpackConfig = {
       },
     }),
     new webpack.NamedModulesPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'SQL-Module Admin',
-      template: 'index.ejs',
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
     }),
   ],
 };
 
 // if Production
-if(APP.isProduction) {
+if (APP.isProduction) {
   webpackConfig.plugins.push(
-    //new webpack.optimize.UglifyJsPlugin({minimize: true}),
-    new LodashModuleReplacementPlugin
-  );
+    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+    new LodashModuleReplacementPlugin());
 } else {
   webpackConfig.entry.app.unshift(
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server'
-  );
+    'webpack/hot/only-dev-server');
   webpackConfig.entry.vendor.unshift(
     'react-proxy',
-    'react-hot-loader'
-  );
+    'react-hot-loader');
   webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin()
-  );
+    new webpack.HotModuleReplacementPlugin());
   webpackConfig.devServer = {
     hot: true,
     contentBase: APP.buildPath,
-    publicPath: '/'
+    publicPath: '/',
+    historyApiFallback: true,
   };
 }
 
