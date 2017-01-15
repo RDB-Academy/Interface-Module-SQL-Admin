@@ -1,15 +1,61 @@
 import React, { Component } from 'react';
 
+import { loginUser } from 'actions/sessionActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loginForm: {
+        email: '',
+        password: '',
+      },
+    };
+
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChangeEmail(event) {
+    const { loginForm } = this.state;
+    loginForm.email = event.target.value;
+    this.setState({
+      loginForm,
+    });
+  }
+
+  handleChangePassword(event) {
+    const { loginForm } = this.state;
+    loginForm.password = event.target.value;
+
+    this.setState({
+      loginForm,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.props);
+    this.props.actions(this.state.loginForm);
+  }
+
   render() {
     return (
       <div>
         <h1> Login </h1>
-        <form>
-          <label htmlFor="email">E-Mail</label>
-          <input type="email" id="email" />
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" />
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="email">
+            E-Mail:
+            <input type="email" id="email" value={this.state.email} onChange={this.handleChangeEmail} />
+          </label>
+          <label htmlFor="password">
+            Password:
+            <input type="password" id="password" value={this.state.password} onChange={this.handleChangePassword} />
+          </label>
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -17,4 +63,10 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+function mapDispatchtoProps(dispatch) {
+  return {
+    actions: bindActionCreators(loginUser, dispatch),
+  };
+}
+
+export default connect(null, mapDispatchtoProps)(LoginPage);

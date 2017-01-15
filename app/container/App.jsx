@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
-import BrowserRouter from 'react-router/BrowserRouter';
-import Match from 'react-router/Match';
-import Redirect from 'react-router/Redirect';
-import Miss from 'react-router/Miss';
-import Link from 'react-router/Link';
+import { BrowserRouter, Match, Redirect, Miss, Link } from 'react-router';
 
 import { connect } from 'react-redux';
 
@@ -12,7 +8,7 @@ import LoginPage from './LoginPage';
 
 class App extends Component {
   render() {
-    const isLoggedIn = false;
+    const { isLoggedIn } = this.props;
     return (
       <BrowserRouter>
         <div>
@@ -61,11 +57,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state, props) {
-  console.log(state);
-  console.log(props);
+App.propTypes = {
+  isLoggedIn: React.PropTypes.bool.isRequired,
+};
+
+function mapStateToProps(state) {
   return {
-    store: state,
+    isLoggedIn: state.session !== null,
   };
 }
 

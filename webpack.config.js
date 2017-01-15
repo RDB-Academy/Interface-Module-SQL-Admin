@@ -23,6 +23,7 @@ const webpackConfig = {
       './index.jsx',
     ],
     vendor: [
+      'isomorphic-fetch',
       'react',
       'react-dom',
       'react-redux',
@@ -79,10 +80,16 @@ const webpackConfig = {
     }),
   ],
   devServer: {
-    hot: true,
+    hot: !APP.isProduction,
     contentBase: APP.buildPath,
     publicPath: '/',
     historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:9000',
+        //pathRewrite: { '^/api': '/admin/api' },
+      },
+    },
   },
 };
 
