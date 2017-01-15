@@ -1,4 +1,13 @@
-function todos(state = [], action) {
+import { combineReducers } from 'redux';
+
+const initialState = {
+  user: {
+    id: 123,
+    username: 'fabiomazzone',
+  },
+};
+
+function auth(state = initialState, action) {
   switch (action.type) {
     case 'ADD_TODO':
       return state.concat([action.text]);
@@ -6,4 +15,6 @@ function todos(state = [], action) {
       return state;
   }
 }
-export default todos;
+export default combineReducers({
+  auth,
+});

@@ -26,6 +26,7 @@ const webpackConfig = {
       'react',
       'react-dom',
       'react-redux',
+      'react-router',
       'redux',
       'redux-thunk',
     ],
@@ -77,12 +78,18 @@ const webpackConfig = {
       names: ['vendor', 'manifest'],
     }),
   ],
+  devServer: {
+    hot: true,
+    contentBase: APP.buildPath,
+    publicPath: '/',
+    historyApiFallback: true,
+  },
 };
 
 // if Production
 if (APP.isProduction) {
   webpackConfig.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+    // new webpack.optimize.UglifyJsPlugin({ minimize: true }),
     new LodashModuleReplacementPlugin());
 } else {
   webpackConfig.entry.app.unshift(
@@ -94,12 +101,6 @@ if (APP.isProduction) {
     'react-hot-loader');
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin());
-  webpackConfig.devServer = {
-    hot: true,
-    contentBase: APP.buildPath,
-    publicPath: '/',
-    historyApiFallback: true,
-  };
 }
 
 module.exports = webpackConfig;
