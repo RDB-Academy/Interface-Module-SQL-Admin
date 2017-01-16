@@ -1,5 +1,6 @@
 import schemaDefApi from 'api/schemaDefApi';
 import * as types from 'actionTypes';
+import { getSessionId } from 'store/sessionSelector';
 
 export function loadSchemaDefListSuccess(response) {
   return {
@@ -9,8 +10,8 @@ export function loadSchemaDefListSuccess(response) {
 }
 
 export function loadSchemaDefList() {
-  return dispatch => (
-    schemaDefApi.loadSchemaDefList().then((response) => {
+  return (dispatch, getState) => (
+    schemaDefApi.loadSchemaDefList(getSessionId(getState())).then((response) => {
       console.log(response);
       dispatch(loadSchemaDefListSuccess(response));
     }).catch((error) => {

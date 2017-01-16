@@ -1,14 +1,14 @@
 import * as types from 'actionTypes';
 
 const initialState = {
-  schemaDefList: [],
+  taskList: [],
 };
 
-export default function schemaDefReducer(state = initialState, action) {
+export default function taskReducer(state = initialState, action) {
   switch (action.type) {
-    case types.SCHEMA_DEF_LIST_SUCCESS: {
+    case types.TASK_LIST_SUCCESS: {
       return Object.assign({}, state, {
-        schemaDefList: action.data,
+        taskList: action.data,
       });
     }
     default:

@@ -3,5 +3,5 @@ export const getSchemaDefStore = state => (
 );
 
 export const getSchemaDefList = state => (
-  getSchemaDefStore(state).schemaDefStore
+  getSchemaDefStore(state).schemaDefList
 );

@@ -15,8 +15,6 @@ class SessionApi {
       if (response.status !== 200) {
         throw new Error('error');
       }
-      console.log('response');
-      console.log(response);
       return response.json();
     }).catch((error) => {
       throw error;

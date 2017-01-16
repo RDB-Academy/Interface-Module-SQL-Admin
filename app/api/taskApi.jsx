@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
-class SchemaDefApi {
-  static loadSchemaDefList(sessionId) {
+class TaskApi {
+  static loadTaskList(sessionId) {
     console.log(sessionId);
-    return fetch('/api/schemaDef', {
+    return fetch('/api/task', {
       headers: {
         'auth-key': sessionId,
       },
@@ -16,4 +16,4 @@ class SchemaDefApi {
   }
 }
 
-export default SchemaDefApi;
+export default TaskApi;

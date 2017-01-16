@@ -35,6 +35,7 @@ const webpackConfig = {
   output: {
     path: APP.buildPath,
     filename: 'assets/[name].js',
+    publicPath: '/',
   },
   module: {
     rules: [

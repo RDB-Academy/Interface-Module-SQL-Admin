@@ -1,5 +1,6 @@
-import sessionApi from 'api/sessionApi';
+import invalidateStore from 'actions';
 import * as types from 'actionTypes';
+import sessionApi from 'api/sessionApi';
 
 function loginSuccess(response) {
   return {
@@ -8,7 +9,7 @@ function loginSuccess(response) {
   };
 }
 
-function loginFailure(response) {
+function loginFailure() {
   return {
     type: types.LOG_IN_FAILURE,
   };
@@ -37,6 +38,7 @@ export function logoutUser() {
   return dispatch => (
     sessionApi.logout().then(() => {
       dispatch(logoutSuccess());
+      dispatch(invalidateStore());
     }).catch((error) => {
       throw error;
     })
