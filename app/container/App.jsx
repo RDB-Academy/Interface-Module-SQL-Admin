@@ -6,7 +6,7 @@ import { BrowserRouter, Match, Redirect, Miss, Link } from 'react-router';
 import { logoutUser } from 'actions/sessionActions';
 import LoginPage from './LoginPage';
 import SchemaDefPage from './SchemaDef';
-import TaskPage from './TaskPage';
+import TaskPage from './Task';
 
 class App extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class App extends Component {
               <div>
                 <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />
                 <Match pattern="/schemaDef" component={SchemaDefPage} />
-                <Match pattern="/task" exactly component={TaskPage} />
+                <Match pattern="/task" component={TaskPage} />
                 <Match pattern="/taskTrial" exactly render={() => (<h1>taskTrials</h1>)} />
                 <Match pattern="/status" exactly render={() => (<h1>status</h1>)} />
                 <Miss

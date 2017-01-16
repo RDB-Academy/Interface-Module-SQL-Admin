@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import Link from 'react-router/Link';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDefList } from 'actions/schemaDefActions';
 import { getSchemaDefList } from 'store/schemaDefSelector';
 
-const SchemaDefTable = ({ schemaDefList, handleClick }) => {
+const SchemaDefTable = ({ schemaDefList }) => {
   if (schemaDefList.length === 0) {
     return (
       <p>List is Empty</p>
@@ -16,7 +17,6 @@ const SchemaDefTable = ({ schemaDefList, handleClick }) => {
     <table>
       <thead>
         <tr>
-          <th>id</th>
           <th>name</th>
           <th>createdAt</th>
           <th>modifiedAt</th>
@@ -24,9 +24,8 @@ const SchemaDefTable = ({ schemaDefList, handleClick }) => {
       </thead>
       <tbody>
         { schemaDefList.map(schemaDef => (
-          <tr key={schemaDef.id} onClick={() => (handleClick(schemaDef.id))}>
-            <td>{ schemaDef.id }</td>
-            <td>{ schemaDef.name }</td>
+          <tr key={schemaDef.id}>
+            <td><Link to={`/schemaDef/${schemaDef.id}`}> { schemaDef.name }</Link></td>
             <th><Moment fromNow>{schemaDef.createdAt}</Moment></th>
             <th><Moment fromNow>{schemaDef.modifiedAt}</Moment></th>
           </tr>
@@ -38,7 +37,6 @@ const SchemaDefTable = ({ schemaDefList, handleClick }) => {
 
 SchemaDefTable.propTypes = {
   schemaDefList: React.PropTypes.array.isRequired,
-  handleClick: React.PropTypes.func.isRequired,
 };
 
 class SchemaDefList extends Component {
@@ -51,7 +49,6 @@ class SchemaDefList extends Component {
     super(props);
 
     this.loadSchemaDefList = this.loadSchemaDefList.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     console.log(this.props);
   }
 
@@ -59,19 +56,13 @@ class SchemaDefList extends Component {
     this.props.loadSchemaDefList();
   }
 
-  handleClick(id) {
-    console.log(id);
-    console.log(this.props);
-  }
-
   render() {
     const { schemaDefList } = this.props;
-    console.log(this.context.router);
     return (
       <div>
         <h1>SchemaDef List</h1>
         <button onClick={this.loadSchemaDefList} >Load SchemaDefList</button>
-        <SchemaDefTable schemaDefList={schemaDefList} handleClick={this.handleClick} />
+        <SchemaDefTable schemaDefList={schemaDefList} />
       </div>
     );
   }

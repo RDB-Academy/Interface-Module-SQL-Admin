@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { loadTaskList } from 'actions/taskActions';
 import { getTaskList } from 'store/taskSelector';
 
-const TaskTable = ({ taskList, handleClick }) => {
+const TaskTable = ({ taskList }) => {
   if (taskList.length === 0) {
     return (
       <p>List is Empty</p>
@@ -17,9 +17,8 @@ const TaskTable = ({ taskList, handleClick }) => {
     <table>
       <thead>
         <tr>
-          <th>id</th>
-          <th>SchemaId</th>
           <th>name</th>
+          <th>SchemaId</th>
           <th>difficulty</th>
           <th>createdAt</th>
           <th>modifiedAt</th>
@@ -27,10 +26,9 @@ const TaskTable = ({ taskList, handleClick }) => {
       </thead>
       <tbody>
         { taskList.map(task => (
-          <tr key={task.id} onClick={() => handleClick(task.id)}>
-            <td>{task.id}</td>
+          <tr key={task.id}>
+            <td><Link to={`/task/${task.id}`}>{task.name}</Link></td>
             <td><Link to={`/schemaDef/${task.schemaDefId}`}>{task.schemaDefId}</Link></td>
-            <td>{task.name}</td>
             <th>{task.difficulty}</th>
             <th><Moment fromNow>{task.createdAt}</Moment></th>
             <th><Moment fromNow>{task.modifiedAt}</Moment></th>
@@ -43,10 +41,9 @@ const TaskTable = ({ taskList, handleClick }) => {
 
 TaskTable.propTypes = {
   taskList: React.PropTypes.array.isRequired,
-  handleClick: React.PropTypes.func.isRequired,
 };
 
-class TaskPage extends Component {
+class TaskList extends Component {
   static propTypes = {
     taskList: React.PropTypes.array.isRequired, // eslint-disable-line
     loadTaskList: React.PropTypes.func.isRequired,
@@ -56,17 +53,10 @@ class TaskPage extends Component {
     super(props);
 
     this.loadTaskList = this.loadTaskList.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    console.log(this.props);
   }
 
   loadTaskList() {
     this.props.loadTaskList();
-  }
-
-  handleClick(id) {
-    console.log(id);
-    console.log(this.props);
   }
 
   render() {
@@ -76,7 +66,7 @@ class TaskPage extends Component {
       <div>
         <h1>Task List</h1>
         <button onClick={this.loadTaskList} >Load TaskList</button>
-        <TaskTable taskList={taskList} handleClick={this.handleClick} />
+        <TaskTable taskList={taskList} />
       </div>
     );
   }
@@ -94,4 +84,4 @@ const mapDispatchToProps = dispatch => (
   }
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
