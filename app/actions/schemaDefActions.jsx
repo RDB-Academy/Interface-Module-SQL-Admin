@@ -12,7 +12,6 @@ export function loadSchemaDefListSuccess(response) {
 export function loadSchemaDefList() {
   return (dispatch, getState) => (
     schemaDefApi.loadSchemaDefList(getSessionId(getState())).then((response) => {
-      console.log(response);
       dispatch(loadSchemaDefListSuccess(response));
     }).catch((error) => {
       throw error;

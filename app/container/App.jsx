@@ -5,7 +5,7 @@ import { BrowserRouter, Match, Redirect, Miss, Link } from 'react-router';
 
 import { logoutUser } from 'actions/sessionActions';
 import LoginPage from './LoginPage';
-import SchemaDefPage from './SchemaDefPage';
+import SchemaDefPage from './SchemaDef';
 import TaskPage from './TaskPage';
 
 class App extends Component {
@@ -28,9 +28,9 @@ class App extends Component {
             <Link to="/" activeClassName="active" activeOnlyWhenExact>Home</Link>
             { isLoggedIn && (
               <div>
-                <Link to="/schemaDefs" activeClassName="active" activeOnlyWhenExact>SchemaDefs</Link>
-                <Link to="/tasks" activeClassName="active" activeOnlyWhenExact>Tasks</Link>
-                <Link to="/taskTrials" activeClassName="active" activeOnlyWhenExact>TaskTrials</Link>
+                <Link to="/schemaDef" activeClassName="active" activeOnlyWhenExact>SchemaDefs</Link>
+                <Link to="/task" activeClassName="active" activeOnlyWhenExact>Tasks</Link>
+                <Link to="/taskTrial" activeClassName="active" activeOnlyWhenExact>TaskTrials</Link>
                 <Link to="/status" activeClassName="active" activeOnlyWhenExact>Status</Link>
                 <button onClick={this.logout}>Logout</button>
               </div>
@@ -40,9 +40,9 @@ class App extends Component {
             { isLoggedIn ? (
               <div>
                 <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />
-                <Match pattern="/schemaDefs" exactly component={SchemaDefPage} />
-                <Match pattern="/tasks" exactly component={TaskPage} />
-                <Match pattern="/taskTrials" exactly render={() => (<h1>taskTrials</h1>)} />
+                <Match pattern="/schemaDef" component={SchemaDefPage} />
+                <Match pattern="/task" exactly component={TaskPage} />
+                <Match pattern="/taskTrial" exactly render={() => (<h1>taskTrials</h1>)} />
                 <Match pattern="/status" exactly render={() => (<h1>status</h1>)} />
                 <Miss
                   render={() => (

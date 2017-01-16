@@ -8,9 +8,13 @@ class SchemaDefApi {
         'auth-key': sessionId,
       },
     }).then((response) => {
-      console.log(response);
+      if (response.status !== 200) {
+        const error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+      }
       return response.json();
-    }).catch(error => (
+    }, error => (
       error
     ));
   }

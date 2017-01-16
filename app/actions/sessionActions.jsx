@@ -24,13 +24,10 @@ function logoutSuccess() {
 export function loginUser(credentials) {
   return dispatch => (
     sessionApi.login(credentials).then((response) => {
-      console.log(response);
       dispatch(loginSuccess(response));
-    }).catch((error) => {
-      console.log('loginUser');
-      console.log(error);
-      dispatch(loginFailure());
-    })
+    }).catch(() => (
+      dispatch(loginFailure())
+    ))
   );
 }
 
@@ -39,8 +36,9 @@ export function logoutUser() {
     sessionApi.logout().then(() => {
       dispatch(logoutSuccess());
       dispatch(invalidateStore());
-    }).catch((error) => {
-      throw error;
+    }).catch(() => {
+      dispatch(logoutSuccess());
+      dispatch(invalidateStore());
     })
   );
 }

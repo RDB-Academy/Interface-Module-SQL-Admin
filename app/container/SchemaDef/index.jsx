@@ -1,12 +1,13 @@
 import React from 'react';
 import Match from 'react-router/Match';
 
-import SchemaDefList from './SchemaDef/list';
+import SchemaDefList from './list';
+import SchemaDefView from './view';
 
 const SchemaDefPage = ({ pathname }) => (
   <div>
     <Match pattern={`${pathname}`} exactly component={SchemaDefList} />
-    <Match pattern={`${pathname}/:id`} exactly render={() => (<h3>Test</h3>)} />
+    <Match pattern={`${pathname}/:id`} exactly component={SchemaDefView} />
   </div>
 );
 

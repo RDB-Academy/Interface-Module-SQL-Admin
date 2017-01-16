@@ -13,7 +13,9 @@ class SessionApi {
 
     return fetch(request).then((response) => {
       if (response.status !== 200) {
-        throw new Error('error');
+        const error = new Error(response.statusText);
+        error.response = response;
+        throw error;
       }
       return response.json();
     }).catch((error) => {

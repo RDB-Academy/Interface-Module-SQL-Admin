@@ -12,5 +12,8 @@ module.exports = {
   "env": {
     "es6": true,
     "browser": true,
+  },
+  "rules": {
+    "jsx-a11y/no-static-element-interactions": 0
   }
 };
