@@ -87,7 +87,7 @@ const webpackConfig = {
     proxy: {
       '/api': {
         target: 'http://localhost:9000',
-        //pathRewrite: { '^/api': '/admin/api' },
+        pathRewrite: { '^/api': '/admin/api' },
       },
     },
   },

@@ -5,6 +5,8 @@ import { BrowserRouter, Match, Redirect, Miss, Link } from 'react-router';
 
 import { logoutUser } from 'actions/sessionActions';
 import LoginPage from './LoginPage';
+import SchemaDefPage from './SchemaDefPage';
+import TaskPage from './TaskPage';
 
 class App extends Component {
   constructor(props) {
@@ -38,8 +40,8 @@ class App extends Component {
             { isLoggedIn ? (
               <div>
                 <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />
-                <Match pattern="/schemaDefs" exactly render={() => (<h1>schemaDefs</h1>)} />
-                <Match pattern="/tasks" exactly render={() => (<h1>tasks</h1>)} />
+                <Match pattern="/schemaDefs" exactly component={SchemaDefPage} />
+                <Match pattern="/tasks" exactly component={TaskPage} />
                 <Match pattern="/taskTrials" exactly render={() => (<h1>taskTrials</h1>)} />
                 <Match pattern="/status" exactly render={() => (<h1>status</h1>)} />
                 <Miss
@@ -79,10 +81,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchtoProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     logoutUser: bindActionCreators(logoutUser, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -8,6 +8,12 @@ function loginSuccess(response) {
   };
 }
 
+function loginFailure(response) {
+  return {
+    type: types.LOG_IN_FAILURE,
+  };
+}
+
 function logoutSuccess() {
   return {
     type: types.LOG_OUT_SUCCESS,
@@ -17,9 +23,12 @@ function logoutSuccess() {
 export function loginUser(credentials) {
   return dispatch => (
     sessionApi.login(credentials).then((response) => {
+      console.log(response);
       dispatch(loginSuccess(response));
     }).catch((error) => {
-      throw error;
+      console.log('loginUser');
+      console.log(error);
+      dispatch(loginFailure());
     })
   );
 }

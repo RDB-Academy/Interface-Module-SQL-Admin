@@ -11,11 +11,16 @@ class SessionApi {
     });
 
 
-    return fetch(request).then(response => (
-      response.json()
-    )).catch(error => (
-      error
-    ));
+    return fetch(request).then((response) => {
+      if (response.status !== 200) {
+        throw new Error('error');
+      }
+      console.log('response');
+      console.log(response);
+      return response.json();
+    }).catch((error) => {
+      throw error;
+    });
   }
 
   static logout() {

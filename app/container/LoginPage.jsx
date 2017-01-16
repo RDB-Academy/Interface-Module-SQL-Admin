@@ -67,10 +67,10 @@ LoginPage.propTypes = {
   loginUser: React.PropTypes.func.isRequired,
 };
 
-function mapDispatchtoProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     loginUser: bindActionCreators(loginUser, dispatch),
   };
 }
 
-export default connect(null, mapDispatchtoProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(LoginPage);
