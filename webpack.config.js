@@ -26,6 +26,8 @@ const webpackConfig = {
       'isomorphic-fetch',
       'react',
       'react-dom',
+      'react-helmet',
+      'react-moment',
       'react-redux',
       'react-router',
       'redux',

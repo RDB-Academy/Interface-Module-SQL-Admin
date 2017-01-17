@@ -2,7 +2,6 @@ import fetch from 'isomorphic-fetch';
 
 class SchemaDefApi {
   static loadSchemaDefList(sessionId) {
-    console.log(sessionId);
     return fetch('/api/schemaDef', {
       headers: {
         'auth-key': sessionId,

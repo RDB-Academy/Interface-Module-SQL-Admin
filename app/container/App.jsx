@@ -36,6 +36,7 @@ class App extends Component {
               </div>
             )}
           </nav>
+          <hr />
           <main>
             { isLoggedIn ? (
               <div>
@@ -61,6 +62,7 @@ class App extends Component {
               </div>
             )}
           </main>
+          <hr />
           <footer>
             <p>Footer</p>
           </footer>

@@ -39,7 +39,7 @@ class LoginPage extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.props);
+    
     this.props.loginUser(this.state.loginForm);
   }
 

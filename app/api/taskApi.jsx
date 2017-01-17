@@ -6,9 +6,9 @@ class TaskApi {
       headers: {
         'auth-key': sessionId,
       },
-    }).then((response) => {
-      return response.json();
-    }).catch(error => (
+    }).then(response => (
+      response.json()
+    )).catch(error => (
       error
     ));
   }

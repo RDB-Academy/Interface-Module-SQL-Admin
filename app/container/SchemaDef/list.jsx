@@ -5,6 +5,7 @@ import Link from 'react-router/Link';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDefList } from 'actions/schemaDefActions';
+import { SchemaDef } from 'PropTypes';
 import { getSchemaDefList } from 'store/schemaDefSelector';
 
 const SchemaDefTable = ({ schemaDefList }) => {
@@ -36,12 +37,16 @@ const SchemaDefTable = ({ schemaDefList }) => {
 };
 
 SchemaDefTable.propTypes = {
-  schemaDefList: React.PropTypes.array.isRequired,
+  schemaDefList: React.PropTypes.arrayOf(
+    SchemaDef.isRequired,
+  ).isRequired,
 };
 
 class SchemaDefList extends Component {
   static propTypes = {
-    schemaDefList: React.PropTypes.array.isRequired, // eslint-disable-line
+    schemaDefList: React.PropTypes.arrayOf(
+      SchemaDef.isRequired,
+    ).isRequired,
     loadSchemaDefList: React.PropTypes.func.isRequired,
   }
 
@@ -49,7 +54,6 @@ class SchemaDefList extends Component {
     super(props);
 
     this.loadSchemaDefList = this.loadSchemaDefList.bind(this);
-    console.log(this.props);
   }
 
   loadSchemaDefList() {
@@ -68,16 +72,12 @@ class SchemaDefList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    schemaDefList: getSchemaDefList(state),
-  };
-}
+const mapStateToProps = state => ({
+  schemaDefList: getSchemaDefList(state),
+});
 
-const mapDispatchToProps = dispatch => (
-  {
-    loadSchemaDefList: bindActionCreators(loadSchemaDefList, dispatch),
-  }
-);
+const mapDispatchToProps = dispatch => ({
+  loadSchemaDefList: bindActionCreators(loadSchemaDefList, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefList);

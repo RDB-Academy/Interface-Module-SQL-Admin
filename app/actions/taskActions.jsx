@@ -12,7 +12,6 @@ export function loadTaskListSuccess(response) {
 export function loadTaskList() {
   return (dispatch, getState) => (
     taskApi.loadTaskList(getSessionId(getState())).then((response) => {
-      console.log(response);
       dispatch(loadTaskListSuccess(response));
     }).catch((error) => {
       throw error;
