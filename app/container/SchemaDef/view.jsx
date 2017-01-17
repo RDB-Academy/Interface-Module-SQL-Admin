@@ -12,6 +12,12 @@ class SchemaDefView extends Component {
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.shape({
+        from: PropTypes.string,
+      }),
+    }).isRequired,
+    pathname: PropTypes.string.isRequired,
     schemaDef: SchemaDef,
   };
 
@@ -20,15 +26,101 @@ class SchemaDefView extends Component {
   };
 
   render() {
-    const { schemaDef } = this.props;
+    const { schemaDef, location, pathname } = this.props;
     return (
       <div>
         <Helmet
           title={schemaDef.name}
         />
-        <h1><Link to="/schemaDef">{'<'}</Link> SchemaDef View</h1>
+        <h1>
+          <Link
+            to={
+              location.state === null ? ('/schemaDef') : (location.state.from)
+            }
+          >
+            {'<'}
+          </Link>
+          SchemaDef View
+        </h1>
+
         <p>id: {schemaDef.id}</p>
         <p>name: {schemaDef.name}</p>
+        <div>
+          <p>
+            tableDefList:
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  id
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {schemaDef.tableDefList.map(id => (
+                <tr key={id}>
+                  <td>
+                    {id}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <p>
+            foreigenKeyList:
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  id
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {schemaDef.foreignKeyList.map(id => (
+                <tr key={id}>
+                  <td>
+                    {id}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <p>
+            taskList:
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  id
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {schemaDef.taskList.map(id => (
+                <tr key={id}>
+                  <td>
+                    <Link
+                      to={{
+                        pathname: `/task/${id}`,
+                        state: { from: pathname },
+                      }}
+                    >
+                      {id}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <p>
           createdAt: <Moment fromNow>{schemaDef.createdAt}</Moment>
         </p>

@@ -12,26 +12,50 @@ class TaskView extends Component {
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.shape({
+        from: PropTypes.string,
+      }),
+    }).isRequired,
+    pathname: PropTypes.string.isRequired,
     task: Task,
   };
 
   static defaultProps = {
     task: null,
-    schemaDef: null,
   };
 
   render() {
-    const { task } = this.props;
+    const { task, location, pathname } = this.props;
     return (
       <div>
         <Helmet
           title={task.name}
         />
-        <h1><Link to="/task">{'<'}</Link> Task View</h1>
+        <h1>
+          <Link
+            to={
+              location.state === null ? ('/task') : (location.state.from)
+            }
+          >
+            {'<'}
+          </Link>
+          Task View
+        </h1>
         <hr />
         <p>id: {task.id}</p>
         <p>name: {task.name}</p>
-        <p>schemaDef: <Link to={`/schemaDef/${task.schemaDefId}`}>{task.schemaDefName}</Link></p>
+        <p>
+          schemaDef:
+          <Link
+            to={{
+              pathname: `/schemaDef/${task.schemaDefId}`,
+              state: { from: pathname },
+            }}
+          >
+            {task.schemaDefName}
+          </Link>
+        </p>
         <p>text: {task.text}</p>
         <p>referenceStatement: {task.referenceStatement}</p>
         <p>difficulty: {task.difficulty}</p>
