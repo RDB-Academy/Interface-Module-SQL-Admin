@@ -27,3 +27,10 @@ export const Task = PropTypes.shape({
   createdAt: PropTypes.string.isRequired,
   modifiedAt: PropTypes.string.isRequired,
 });
+
+export const TableDef = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  modifiedAt: PropTypes.string.isRequired,
+});

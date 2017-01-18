@@ -61,7 +61,14 @@ class SchemaDefView extends Component {
               {schemaDef.tableDefList.map(id => (
                 <tr key={id}>
                   <td>
-                    {id}
+                    <Link
+                      to={{
+                        pathname: `/tableDef/${id}`,
+                        state: { from: pathname },
+                      }}
+                    >
+                      {id}
+                    </Link>
                   </td>
                 </tr>
               ))}
