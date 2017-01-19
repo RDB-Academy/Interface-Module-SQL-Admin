@@ -37,7 +37,7 @@ const webpackConfig = {
   output: {
     path: APP.buildPath,
     filename: 'assets/[name].js',
-    publicPath: '/',
+    publicPath: '/admin/',
   },
   module: {
     rules: [
@@ -85,12 +85,11 @@ const webpackConfig = {
   devServer: {
     hot: !APP.isProduction,
     contentBase: APP.buildPath,
-    publicPath: '/',
+    publicPath: '/admin/',
     historyApiFallback: true,
     proxy: {
-      '/api': {
+      '/admin/api': {
         target: 'http://localhost:9000',
-        pathRewrite: { '^/api': '/admin/api' },
       },
     },
   },

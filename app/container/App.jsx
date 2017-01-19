@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     const { isLoggedIn } = this.props;
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/admin">
         <div>
           <nav>
             <Link to="/" activeClassName="active" activeOnlyWhenExact>Home</Link>

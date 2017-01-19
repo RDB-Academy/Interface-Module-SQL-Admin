@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 class TaskApi {
   static loadTaskList(sessionId) {
-    return fetch('/api/task', {
+    return fetch('/admin/api/task', {
       headers: {
         'auth-key': sessionId,
       },
