@@ -24,6 +24,7 @@ function logoutSuccess() {
 export function loginUser(credentials) {
   return dispatch => (
     sessionApi.login(credentials).then((response) => {
+      localStorage.setItem('auth-key', response.id);
       dispatch(loginSuccess(response));
     }).catch(() => (
       dispatch(loginFailure())
@@ -34,6 +35,7 @@ export function loginUser(credentials) {
 export function logoutUser() {
   return dispatch => (
     sessionApi.logout().then(() => {
+      localStorage.removeItem('auth-key');
       dispatch(logoutSuccess());
       dispatch(invalidateStore());
     }).catch(() => {

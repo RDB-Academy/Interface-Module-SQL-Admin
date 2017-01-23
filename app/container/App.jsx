@@ -81,7 +81,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.session !== null,
+    isLoggedIn: state.session.id !== null,
   };
 }
 

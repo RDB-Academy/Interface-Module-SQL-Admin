@@ -67,6 +67,31 @@ class TableDefView extends Component {
 
         <p>id: {tableDef.id}</p>
         <p>name: {tableDef.name}</p>
+        <p>SchemaDefId: {tableDef.schemaDefId}</p>
+        <p>Test</p>
+        <div>
+          <p>
+            columnDefList:
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  id
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableDef.columnDefList.map(id => (
+                <tr key={id}>
+                  <td>
+                    {id}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <p>
           createdAt: <Moment fromNow>{tableDef.createdAt}</Moment>
         </p>
