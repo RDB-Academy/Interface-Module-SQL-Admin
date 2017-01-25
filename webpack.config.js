@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 
@@ -13,7 +14,7 @@ const APP = {
 
   sourcePath: path.resolve(__dirname, './app'),
 
-  buildPath: path.resolve(__dirname, './build/dev'),
+  buildPath: path.resolve(__dirname, './dist'),
 };
 
 const webpackConfig = {
@@ -66,7 +67,6 @@ const webpackConfig = {
     ],
   },
   plugins: [
-    new DashboardPlugin(),
     new HtmlWebpackPlugin({
       title: 'SQL-Module Admin',
       template: 'index.ejs',
@@ -82,7 +82,29 @@ const webpackConfig = {
       names: ['vendor', 'manifest'],
     }),
   ],
-  devServer: {
+};
+
+// if Production
+if (APP.isProduction) {
+  webpackConfig.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+    new LodashModuleReplacementPlugin(),
+    new ZipPlugin({
+      filename: 'rdb-academy-sql-admintool.zip',
+    }));
+} else {
+  webpackConfig.entry.app.unshift(
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server');
+  webpackConfig.entry.vendor.unshift(
+    'react-proxy',
+    'react-hot-loader');
+  webpackConfig.plugins.push(
+    new DashboardPlugin(),
+    new webpack.HotModuleReplacementPlugin());
+
+  webpackConfig.devServer = {
     hot: !APP.isProduction,
     contentBase: APP.buildPath,
     publicPath: '/admin/',
@@ -95,24 +117,7 @@ const webpackConfig = {
         target: 'http://localhost:9000',
       },
     },
-  },
-};
-
-// if Production
-if (APP.isProduction) {
-  webpackConfig.plugins.push(
-    // new webpack.optimize.UglifyJsPlugin({ minimize: true }),
-    new LodashModuleReplacementPlugin());
-} else {
-  webpackConfig.entry.app.unshift(
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server');
-  webpackConfig.entry.vendor.unshift(
-    'react-proxy',
-    'react-hot-loader');
-  webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin());
+  };
 }
 
 module.exports = webpackConfig;
