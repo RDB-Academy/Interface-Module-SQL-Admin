@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 class SessionApi {
   static login(credentials) {
-    const request = new Request('/admin/api/login', {
+    const request = new Request('/api/login', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ class SessionApi {
   }
 
   static logout() {
-    return fetch('/admin/api/logout').then(response => (
+    return fetch('/api/logout').then(response => (
       response.json()
     )).catch(error => (
       error

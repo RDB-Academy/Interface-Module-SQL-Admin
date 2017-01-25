@@ -91,6 +91,9 @@ const webpackConfig = {
       '/admin/api': {
         target: 'http://localhost:9000',
       },
+      '/api': {
+        target: 'http://localhost:9000',
+      },
     },
   },
 };

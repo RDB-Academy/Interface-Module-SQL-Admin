@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 class TableDefApi {
   static loadTableDefById(sessionId, tableDefId) {
-    return fetch(`/admin/api/tableDef/${tableDefId}`, {
+    return fetch(`/api/table-defs/${tableDefId}`, {
       headers: {
         'auth-key': sessionId,
       },
