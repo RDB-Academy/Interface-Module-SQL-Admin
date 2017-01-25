@@ -53,6 +53,11 @@ class SchemaDefList extends Component {
   constructor(props) {
     super(props);
 
+    const { schemaDefList } = this.props;
+    if (schemaDefList === undefined || schemaDefList.length === 0) {
+      this.props.loadSchemaDefList();
+    }
+
     this.loadSchemaDefList = this.loadSchemaDefList.bind(this);
   }
 

@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import { BrowserRouter, Match, Redirect, Miss } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { BrowserRouter, Match, Redirect, Miss, Link } from 'react-router';
+import 'tether';
+import 'jquery';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'styles/main.css';
 
 import { logoutUser } from 'actions/sessionActions';
+import Navbar from 'components/Navbar';
+
 import LoginPage from './LoginPage';
 import SchemaDefPage from './SchemaDef';
 import TableDefPage from './TableDef';
@@ -25,20 +33,11 @@ class App extends Component {
     return (
       <BrowserRouter basename="/admin">
         <div>
-          <nav>
-            <Link to="/" activeClassName="active" activeOnlyWhenExact>Home</Link>
-            { isLoggedIn && (
-              <div>
-                <Link to="/schemaDef" activeClassName="active" activeOnlyWhenExact>SchemaDefs</Link>
-                <Link to="/task" activeClassName="active" activeOnlyWhenExact>Tasks</Link>
-                <Link to="/taskTrial" activeClassName="active" activeOnlyWhenExact>TaskTrials</Link>
-                <Link to="/status" activeClassName="active" activeOnlyWhenExact>Status</Link>
-                <button onClick={this.logout}>Logout</button>
-              </div>
-            )}
-          </nav>
-          <hr />
-          <main>
+          <Helmet
+            title="SQL Admin-Tool"
+          />
+          <Navbar isLoggedIn={isLoggedIn} logout={this.logout} />
+          <main className="container">
             { isLoggedIn ? (
               <div>
                 <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />
@@ -66,7 +65,9 @@ class App extends Component {
           </main>
           <hr />
           <footer>
-            <p>Footer</p>
+            <div className="container">
+              <p>Footer</p>
+            </div>
           </footer>
         </div>
       </BrowserRouter>

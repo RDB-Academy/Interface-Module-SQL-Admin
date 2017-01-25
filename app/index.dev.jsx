@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader'; // eslint-disable-line
 
-import App from 'container/App';
+import App from 'containers/App';
 import configureStore from './store';
 
 const appMount = document.getElementById('root');
@@ -19,8 +19,8 @@ ReactDOM.render(
   appMount);
 
 if (module.hot) {
-  module.hot.accept('./container/App', () => {
-    const NewApp = require('./container/App').default; // eslint-disable-line
+  module.hot.accept('./containers/App', () => {
+    const NewApp = require('./containers/App').default; // eslint-disable-line
     ReactDOM.render(
       <AppContainer>
         <Provider store={store}>

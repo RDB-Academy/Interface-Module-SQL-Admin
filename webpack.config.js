@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 
@@ -13,7 +14,7 @@ const APP = {
 
   sourcePath: path.resolve(__dirname, './app'),
 
-  buildPath: path.resolve(__dirname, './build/dev'),
+  buildPath: path.resolve(__dirname, './dist'),
 };
 
 const webpackConfig = {
@@ -23,6 +24,10 @@ const webpackConfig = {
       './index.jsx',
     ],
     vendor: [
+      'tether',
+      'jquery',
+      'bootstrap',
+      'bootstrap/dist/css/bootstrap.min.css',
       'isomorphic-fetch',
       'react',
       'react-dom',
@@ -50,6 +55,10 @@ const webpackConfig = {
         ],
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
@@ -66,7 +75,6 @@ const webpackConfig = {
     ],
   },
   plugins: [
-    new DashboardPlugin(),
     new HtmlWebpackPlugin({
       title: 'SQL-Module Admin',
       template: 'index.ejs',
@@ -76,14 +84,40 @@ const webpackConfig = {
         NODE_ENV: JSON.stringify(APP.env),
       },
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      Tether: 'tether',
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
     }),
   ],
-  devServer: {
-    hot: !APP.isProduction,
+};
+
+// if Production
+if (APP.isProduction) {
+  webpackConfig.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+    new LodashModuleReplacementPlugin(),
+    new ZipPlugin({
+      filename: 'rdb-academy-sql-admin.zip',
+    }));
+} else {
+  webpackConfig.entry.app.unshift(
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server');
+  webpackConfig.entry.vendor.unshift(
+    'react-proxy',
+    'react-hot-loader');
+  webpackConfig.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin());
+  webpackConfig.devServer = {
+    hot: true,
     contentBase: APP.buildPath,
     publicPath: '/admin/',
     historyApiFallback: true,
@@ -95,24 +129,7 @@ const webpackConfig = {
         target: 'http://localhost:9000',
       },
     },
-  },
-};
-
-// if Production
-if (APP.isProduction) {
-  webpackConfig.plugins.push(
-    // new webpack.optimize.UglifyJsPlugin({ minimize: true }),
-    new LodashModuleReplacementPlugin());
-} else {
-  webpackConfig.entry.app.unshift(
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server');
-  webpackConfig.entry.vendor.unshift(
-    'react-proxy',
-    'react-hot-loader');
-  webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin());
+  };
 }
 
 module.exports = webpackConfig;
