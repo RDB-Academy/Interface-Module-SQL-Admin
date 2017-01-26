@@ -1,3 +1,23 @@
-body {
-  margin-top: 56px;
+html, body, #root, #root>div {
+  height: 100%;
+}
+
+main {
+  padding-top: 3.3em;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -17em;
+}
+
+.footer, .push {
+  height: 15em;
+}
+
+.footer {
+    padding: 4rem 0;
+    margin-top: 4rem;
+    font-size: 85%;
+    text-align: center;
+    background-color: #f7f7f7;
 }

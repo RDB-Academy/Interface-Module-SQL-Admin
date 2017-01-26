@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron } from 'reactstrap';
+import { Card, Jumbotron } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -41,10 +41,12 @@ class SchemaDefList extends Component {
           </div>
         </Jumbotron>
         <div className="container">
-          <SchemaDefTable
-            schemaDefList={schemaDefList}
-            loadSchemaDefList={this.loadSchemaDefList}
-          />
+          <Card>
+            <SchemaDefTable
+              schemaDefList={schemaDefList}
+              loadSchemaDefList={this.loadSchemaDefList}
+            />
+          </Card>
         </div>
       </div>
     );

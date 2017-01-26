@@ -59,9 +59,9 @@ class App extends Component {
                 />
               </div>
             )}
+            <div className="push" />
           </main>
-          <hr />
-          <footer>
+          <footer className="footer text-muted">
             <div className="container">
               <p>Footer</p>
               <p><b>Build Date:</b> <i>{__VERSION__}</i></p>

@@ -13,7 +13,7 @@ const TaskTable = ({ taskList, loadTaskList }) => {
     );
   }
   return (
-    <Table hover striped>
+    <Table hover striped className="mb-0">
       <thead>
         <tr>
           <th>#</th>

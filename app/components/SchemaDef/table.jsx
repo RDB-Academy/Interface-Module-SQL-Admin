@@ -14,7 +14,7 @@ const SchemaDefTable = ({ schemaDefList, loadSchemaDefList }) => {
   }
   return (
     <div>
-      <Table hover striped>
+      <Table hover striped className="mb-0">
         <thead>
           <tr>
             <th>#</th>

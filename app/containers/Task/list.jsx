@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron } from 'reactstrap';
+import { Card, Jumbotron } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -42,7 +42,9 @@ class TaskList extends Component {
           </div>
         </Jumbotron>
         <div className="container">
-          <TaskTable taskList={taskList} loadTaskList={this.loadTaskList} />
+          <Card>
+            <TaskTable taskList={taskList} loadTaskList={this.loadTaskList} />
+          </Card>
         </div>
       </div>
     );
