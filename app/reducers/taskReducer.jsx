@@ -11,6 +11,9 @@ export default function taskReducer(state = initialState, action) {
         taskList: action.data,
       });
     }
+    case types.INVALIDATE_STORE: {
+      return initialState;
+    }
     default:
       return state;
   }

@@ -3,9 +3,6 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { BrowserRouter, Match, Redirect, Miss } from 'react-router';
 import { bindActionCreators } from 'redux';
-import 'tether';
-import 'jquery';
-import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/main.css';
 
@@ -67,6 +64,7 @@ class App extends Component {
           <footer>
             <div className="container">
               <p>Footer</p>
+              <p><b>Build Date:</b> <i>{__VERSION__}</i></p>
             </div>
           </footer>
         </div>

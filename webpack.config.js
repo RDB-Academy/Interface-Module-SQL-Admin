@@ -24,15 +24,17 @@ const webpackConfig = {
       './index.jsx',
     ],
     vendor: [
-      'tether',
-      'jquery',
-      'bootstrap',
+      'tether/dist/js/tether.min.js',
+      'tether/dist/css/tether.min.css',
+      'jquery/dist/jquery.min.js',
+      'bootstrap/dist/js/bootstrap.min',
       'bootstrap/dist/css/bootstrap.min.css',
       'isomorphic-fetch',
       'react',
       'react-dom',
       'react-helmet',
       'react-moment',
+      'react-octicon',
       'react-redux',
       'react-router',
       'redux',
@@ -59,6 +61,10 @@ const webpackConfig = {
         use: ['style-loader', 'css-loader'],
       },
       {
+        test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
+        use: 'url-loader?limit=8192',
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
@@ -83,11 +89,11 @@ const webpackConfig = {
       'process.env': {
         NODE_ENV: JSON.stringify(APP.env),
       },
+      '__VERSION__': JSON.stringify(new Date()),
     }),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      Tether: 'tether',
+      jQuery: 'jquery/dist/jquery.min.js',
+      Tether: 'tether/dist/js/tether.min.js',
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
