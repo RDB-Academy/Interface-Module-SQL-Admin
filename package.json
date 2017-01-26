@@ -5,7 +5,7 @@
   "main": "app/index.jsx",
   "scripts": {
     "start": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server",
-    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
+    "build": "rm -rf ./dist && NODE_ENV=\"production\" webpack",
     "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
     "lint": "eslint . --ext .js --ext .jsx  --ignore-path .gitignore --cache --fix",
     "preview": "NODE_ENV=\"production\" webpack-dashboard -t 'Preview Mode - React-Redux Boilerplate' -- webpack-dev-server"
