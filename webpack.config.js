@@ -24,6 +24,10 @@ const webpackConfig = {
       './index.jsx',
     ],
     vendor: [
+      'tether',
+      'jquery',
+      'bootstrap',
+      'bootstrap/dist/css/bootstrap.min.css',
       'isomorphic-fetch',
       'react',
       'react-dom',
@@ -51,6 +55,10 @@ const webpackConfig = {
         ],
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
@@ -76,6 +84,11 @@ const webpackConfig = {
         NODE_ENV: JSON.stringify(APP.env),
       },
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      Tether: 'tether',
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
@@ -90,7 +103,7 @@ if (APP.isProduction) {
     new webpack.optimize.UglifyJsPlugin({ minimize: true }),
     new LodashModuleReplacementPlugin(),
     new ZipPlugin({
-      filename: 'rdb-academy-sql-admintool.zip',
+      filename: 'rdb-academy-sql-admin.zip',
     }));
 } else {
   webpackConfig.entry.app.unshift(
@@ -103,9 +116,8 @@ if (APP.isProduction) {
   webpackConfig.plugins.push(
     new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin());
-
   webpackConfig.devServer = {
-    hot: !APP.isProduction,
+    hot: true,
     contentBase: APP.buildPath,
     publicPath: '/admin/',
     historyApiFallback: true,

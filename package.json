@@ -16,6 +16,7 @@
   },
   "keywords": [
     "react",
+    "redux",
     "sql",
     "tu-bs",
     "ifis",
@@ -36,6 +37,7 @@
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
+    "css-loader": "^0.26.1",
     "eslint": "^3.14.0",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
@@ -46,13 +48,16 @@
     "html-webpack-plugin": "^2.26.0",
     "lodash-webpack-plugin": "^0.11.0",
     "react-hot-loader": "next",
+    "style-loader": "^0.13.1",
     "webpack": "^2.2.0",
     "webpack-dashboard": "^0.2.1",
     "webpack-dev-server": "2.2.0",
     "zip-webpack-plugin": "^0.3.0"
   },
   "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.1.1",
     "moment": "^2.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -61,6 +66,7 @@
     "react-redux": "^5.0.2",
     "react-router": "next",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "tether": "^1.4.0"
   }
 }

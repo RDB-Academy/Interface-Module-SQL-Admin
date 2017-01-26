@@ -20,7 +20,6 @@ class TableDefView extends Component {
       }),
     }).isRequired,
     loadTableDefById: PropTypes.func.isRequired,
-    pathname: PropTypes.string.isRequired,
     tableDef: TableDef,
   };
 
@@ -42,7 +41,7 @@ class TableDefView extends Component {
   }
 
   render() {
-    const { tableDef, location, pathname } = this.props;
+    const { tableDef, location } = this.props;
     if (tableDef === null) {
       return (
         <div>

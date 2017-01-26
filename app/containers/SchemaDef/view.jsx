@@ -9,9 +9,6 @@ import { getSchemaDefById } from 'store/schemaDefSelector';
 
 class SchemaDefView extends Component {
   static propTypes = {
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
     location: PropTypes.shape({
       state: PropTypes.shape({
         from: PropTypes.string,

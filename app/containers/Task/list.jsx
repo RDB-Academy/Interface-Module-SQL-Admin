@@ -57,6 +57,11 @@ class TaskList extends Component {
   constructor(props) {
     super(props);
 
+    const { taskList } = this.props;
+    if (taskList === undefined || taskList.length === 0) {
+      this.props.loadTaskList();
+    }
+
     this.loadTaskList = this.loadTaskList.bind(this);
   }
 
