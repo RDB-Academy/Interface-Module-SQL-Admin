@@ -19,14 +19,15 @@ const SchemaDefTable = ({ schemaDefList, loadSchemaDefList }) => {
           <tr>
             <th>#</th>
             <th>name</th>
+            <th>Tasks</th>
             <th>createdAt</th>
             <th>modifiedAt</th>
-            <th width="20px">
+            <th width="50px">
               <Button size="sm" color="success" onClick={() => { console.log('create new object'); }}>
                 <Octicon name="plus" />
               </Button>
             </th>
-            <th width="20px">
+            <th width="50px">
               <Button size="sm" color="info" onClick={loadSchemaDefList}>
                 <Octicon name="sync" />
               </Button>
@@ -38,6 +39,7 @@ const SchemaDefTable = ({ schemaDefList, loadSchemaDefList }) => {
             <tr key={schemaDef.id}>
               <th scope="row">{schemaDef.id}</th>
               <td><Link to={`/schemaDef/${schemaDef.id}`}> { schemaDef.name }</Link></td>
+              <td>{schemaDef.taskList.length}</td>
               <td><ImprovedMoment>{schemaDef.createdAt}</ImprovedMoment></td>
               <td><ImprovedMoment>{schemaDef.modifiedAt}</ImprovedMoment></td>
               <td>
@@ -47,7 +49,11 @@ const SchemaDefTable = ({ schemaDefList, loadSchemaDefList }) => {
                   </Link>
                 </Button>
               </td>
-              <td><Button size="sm" outline color="danger" onClick={() => { console.log(schemaDef.id); }}><Octicon name="x" /></Button></td>
+              <td>
+                <Button size="sm" outline color="danger" onClick={() => { console.log(schemaDef.id); }}>
+                  <Octicon name="x" />
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>

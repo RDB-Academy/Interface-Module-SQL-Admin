@@ -37,7 +37,7 @@ class ImprovedMoment extends Component {
         <Moment fromNow id={componentId}>
           {children}
         </Moment>
-        <Tooltip placement="bottom" isOpen={tooltipOpen} target={componentId} toggle={this.toggle}>
+        <Tooltip placement="right" isOpen={tooltipOpen} target={componentId} toggle={this.toggle}>
           {children}
         </Tooltip>
       </div>
