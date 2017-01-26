@@ -34,7 +34,7 @@ class App extends Component {
             title="SQL Admin-Tool"
           />
           <Navbar isLoggedIn={isLoggedIn} logout={this.logout} />
-          <main className="container">
+          <main>
             { isLoggedIn ? (
               <div>
                 <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />

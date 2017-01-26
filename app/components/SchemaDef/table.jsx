@@ -14,9 +14,6 @@ const SchemaDefTable = ({ schemaDefList, loadSchemaDefList }) => {
   }
   return (
     <div>
-      <Button outline color="success" onClick={loadSchemaDefList}>
-        <Octicon name="sync" />
-      </Button>
       <Table hover striped>
         <thead>
           <tr>
@@ -24,8 +21,16 @@ const SchemaDefTable = ({ schemaDefList, loadSchemaDefList }) => {
             <th>name</th>
             <th>createdAt</th>
             <th>modifiedAt</th>
-            <th width="20px" />
-            <th width="20px" />
+            <th width="20px">
+              <Button size="sm" color="success" onClick={() => { console.log('create new object'); }}>
+                <Octicon name="plus" />
+              </Button>
+            </th>
+            <th width="20px">
+              <Button size="sm" color="info" onClick={loadSchemaDefList}>
+                <Octicon name="sync" />
+              </Button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -35,7 +40,13 @@ const SchemaDefTable = ({ schemaDefList, loadSchemaDefList }) => {
               <td><Link to={`/schemaDef/${schemaDef.id}`}> { schemaDef.name }</Link></td>
               <td><ImprovedMoment>{schemaDef.createdAt}</ImprovedMoment></td>
               <td><ImprovedMoment>{schemaDef.modifiedAt}</ImprovedMoment></td>
-              <td><Button size="sm" outline color="warning"><Octicon name="pencil" /></Button></td>
+              <td>
+                <Button size="sm" outline color="warning">
+                  <Link to={`/schemaDef/${schemaDef.id}`} style={{ color: 'inherit', cursor: 'default' }}>
+                    <Octicon name="pencil" />
+                  </Link>
+                </Button>
+              </td>
               <td><Button size="sm" outline color="danger" onClick={() => { console.log(schemaDef.id); }}><Octicon name="x" /></Button></td>
             </tr>
           ))}

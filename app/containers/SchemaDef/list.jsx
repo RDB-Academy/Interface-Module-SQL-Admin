@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Jumbotron } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -34,8 +35,17 @@ class SchemaDefList extends Component {
     const { schemaDefList } = this.props;
     return (
       <div>
-        <h1>SchemaDef List</h1>
-        <SchemaDefTable schemaDefList={schemaDefList} loadSchemaDefList={this.loadSchemaDefList} />
+        <Jumbotron>
+          <div className="container">
+            <h1 className="display-3">SchemaDef List</h1>
+          </div>
+        </Jumbotron>
+        <div className="container">
+          <SchemaDefTable
+            schemaDefList={schemaDefList}
+            loadSchemaDefList={this.loadSchemaDefList}
+          />
+        </div>
       </div>
     );
   }
