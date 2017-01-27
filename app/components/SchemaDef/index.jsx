@@ -1,3 +1,1 @@
-import SchemaDefTable from './table';
-
-export { SchemaDefTable };
+export { default as SchemaDefList } from './list';

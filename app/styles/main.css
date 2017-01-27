@@ -10,6 +10,63 @@ main {
   margin: 0 auto -17em;
 }
 
+.schemadef-list {
+  width: 100%;
+  padding: 0;
+  margin: 5px auto;
+  border-radius: 0;
+}
+
+.list-group-item.schemadef-list-entry {
+  display: block;
+  width: 100%;
+  padding: 5px 0 0;
+  margin: 4px auto;
+  border-radius: 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.schemadef-list-entry-footer {
+  border-top: 1px solid lightgrey;
+  display: inline-flex;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+
+  .btn {
+    background-color: transparent;
+    width: 20%;
+    margin:0 auto;
+    border: 0;
+    border-radius: 0;
+
+    &:hover {
+      background-color: #e6e6e6;
+    }
+
+    &:first-child {
+      border-left: 0;
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.reaction {
+  &.voted {
+    background-color: rgba(155, 155, 155, 0.2);
+  }
+}
+
 .footer, .push {
   height: 15em;
 }

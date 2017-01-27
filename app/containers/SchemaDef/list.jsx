@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDefList } from 'actions/schemaDefActions';
-import { SchemaDefTable } from 'components/SchemaDef';
-import { SchemaDef } from 'PropTypes';
+import { SchemaDefList } from 'components/SchemaDef';
+import { SchemaDefMin } from 'PropTypes';
 import { getSchemaDefList } from 'store/schemaDefSelector';
 
-class SchemaDefList extends Component {
+class SchemaDefListContainer extends Component {
   static propTypes = {
     schemaDefList: React.PropTypes.arrayOf(
-      SchemaDef.isRequired,
+      SchemaDefMin.isRequired,
     ).isRequired,
     loadSchemaDefList: React.PropTypes.func.isRequired,
   }
@@ -42,7 +42,7 @@ class SchemaDefList extends Component {
         </Jumbotron>
         <div className="container">
           <Card>
-            <SchemaDefTable
+            <SchemaDefList
               schemaDefList={schemaDefList}
               loadSchemaDefList={this.loadSchemaDefList}
             />
@@ -61,4 +61,4 @@ const mapDispatchToProps = dispatch => ({
   loadSchemaDefList: bindActionCreators(loadSchemaDefList, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefList);
+export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefListContainer);

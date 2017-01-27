@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/RDB-Academy/Interface-Module-SQL-Admin#readme",
   "devDependencies": {
+    "autoprefixer": "^6.7.0",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
@@ -48,6 +49,8 @@
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.26.0",
     "lodash-webpack-plugin": "^0.11.0",
+    "postcss-loader": "^1.2.2",
+    "precss": "^1.4.0",
     "react-hot-loader": "next",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -58,6 +61,7 @@
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
+    "classnames": "^2.2.5",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1",
     "moment": "^2.17.1",
