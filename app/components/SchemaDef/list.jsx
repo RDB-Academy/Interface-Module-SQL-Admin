@@ -13,7 +13,7 @@ class SchemaDefEntry extends Component {
     this.toggle = this.toggle.bind(this);
 
     this.state = {
-      collapse: false,
+      collapse: true,
     };
   }
 
@@ -37,7 +37,18 @@ class SchemaDefEntry extends Component {
               </Link>
             </h5>
             <small>
-              <Octicon mega name={collapse ? 'chevron-down' : 'chevron-up'} />
+              <Button hidden={!collapse}>
+                <Octicon name="circle-slash" />
+              </Button>
+              <Button hidden={!collapse}>
+                <Octicon name="pencil" />
+              </Button>
+              <Button hidden={!collapse}>
+                <Octicon name="x" />
+              </Button>
+              <Button>
+                <Octicon name={collapse ? 'chevron-down' : 'chevron-up'} />
+              </Button>
             </small>
           </div>
           <ListGroupItemText hidden={collapse}>
