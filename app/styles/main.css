@@ -28,6 +28,23 @@ main {
     margin-top: 8px;
   }
 
+  .list-group-item-text {
+    margin-bottom: 10px;
+
+    .field {
+      display: flex;
+      margin: .5em 2em;
+
+      p {
+        margin: 0 .5em 0 0;
+      }
+
+      &:last-child {
+        margin-bottom: 1.3em;
+      }
+    }
+  }
+
   small {
     .btn {
       height: 100%;
