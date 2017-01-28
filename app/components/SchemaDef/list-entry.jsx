@@ -59,7 +59,7 @@ class SchemaDefListEntry extends Component {
         <div className="container" onClick={this.toggle}>
           <div className="d-flex w-100 justify-content-between">
             <h5>
-              <Link to={`/schemaDef/${schemaDef.id}`}>
+              <Link to={`/schema-defs/${schemaDef.id}`}>
                 #{schemaDef.id} - {schemaDef.name}
               </Link>
             </h5>

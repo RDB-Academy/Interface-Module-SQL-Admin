@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBlock, Jumbotron } from 'reactstrap';
+import { Button, Card, CardBlock, Container, Jumbotron } from 'reactstrap';
 
 import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
@@ -32,7 +32,7 @@ class SchemaDefListContainer extends Component {
     return (
       <div>
         <Jumbotron>
-          <div className="container">
+          <Container>
             <div className="d-flex w-100 justify-content-between">
               <h1>SchemaDef List</h1>
               <div className="d-flex">
@@ -44,9 +44,9 @@ class SchemaDefListContainer extends Component {
                 </Button>
               </div>
             </div>
-          </div>
+          </Container>
         </Jumbotron>
-        <div className="container">
+        <Container>
           <Card>
             <CardBlock>
               <SchemaDefList
@@ -54,7 +54,7 @@ class SchemaDefListContainer extends Component {
               />
             </CardBlock>
           </Card>
-        </div>
+        </Container>
       </div>
     );
   }

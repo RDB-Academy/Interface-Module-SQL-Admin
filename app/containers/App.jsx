@@ -38,10 +38,10 @@ class App extends Component {
             { isLoggedIn ? (
               <div>
                 <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />
-                <Match pattern="/schemaDef" component={SchemaDefPage} />
-                <Match pattern="/tableDef" component={TableDefPage} />
-                <Match pattern="/task" component={TaskPage} />
-                <Match pattern="/taskTrial" exactly render={() => (<h1>taskTrials</h1>)} />
+                <Match pattern="/schema-defs" component={SchemaDefPage} />
+                <Match pattern="/table-defs" component={TableDefPage} />
+                <Match pattern="/tasks" component={TaskPage} />
+                <Match pattern="/task-trials" exactly render={() => (<h1>taskTrials</h1>)} />
                 <Match pattern="/status" exactly render={() => (<h1>status</h1>)} />
                 <Miss
                   render={() => (

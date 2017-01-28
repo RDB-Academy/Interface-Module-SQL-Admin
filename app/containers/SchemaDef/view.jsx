@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Card, Jumbotron } from 'reactstrap';
+import { Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
 
 import { loadSchemaDef } from 'actions/schemaDefActions';
 import { SchemaDefBase } from 'PropTypes';
@@ -50,15 +50,29 @@ class SchemaDefView extends Component {
           title={`#${schemaDef.id}-${schemaDef.name}`}
         />
         <Jumbotron>
-          <div className="container">
+          <Container>
             <h1>#{schemaDef.id}-{schemaDef.name}</h1>
-          </div>
+          </Container>
         </Jumbotron>
-        <div className="container">
+        <Container>
           <Card>
-            <p>Tables:</p>
+            <CardBlock>
+              <p>asjdkl</p>
+              <Card>
+                <CardHeader>
+                  Tables:
+                </CardHeader>
+                <ListGroup className="list-group-flush">
+                  { schemaDef.relations.tableDefList.map(tableDef => (
+                    <ListGroupItem key={tableDef.name}>
+                      #{tableDef.id}-{tableDef.name}
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
+              </Card>
+            </CardBlock>
           </Card>
-        </div>
+        </Container>
       </div>
     );
   }

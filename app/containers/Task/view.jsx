@@ -24,7 +24,7 @@ class TaskView extends Component {
           title={task.name}
         />
         <h1>
-          <Link to="/task">
+          <Link to="/tasks">
             {'<'}
           </Link>
           Task View
@@ -34,7 +34,7 @@ class TaskView extends Component {
         <p>name: {task.name}</p>
         <p>
           schemaDef:
-          <Link to={`/schemaDef/${task.schemaDefId}`} >
+          <Link to={`/schema-defs/${task.schemaDefId}`} >
             {task.schemaDefName}
           </Link>
         </p>

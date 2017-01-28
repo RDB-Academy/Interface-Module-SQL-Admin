@@ -34,13 +34,13 @@ class Navbar extends Component {
             { isLoggedIn && (
               <ul className="navbar-nav mr-auto">
                 <NavItem>
-                  <Link to="/schemaDef" className="nav-link" activeClassName="active">SchemaDefs</Link>
+                  <Link to="/schema-defs" className="nav-link" activeClassName="active">SchemaDefs</Link>
                 </NavItem>
                 <NavItem>
-                  <Link to="/task" className="nav-link" activeClassName="active">Tasks</Link>
+                  <Link to="/tasks" className="nav-link" activeClassName="active">Tasks</Link>
                 </NavItem>
                 <NavItem>
-                  <Link to="/taskTrial" className="nav-link" activeClassName="active">TaskTrials</Link>
+                  <Link to="/task-trials" className="nav-link" activeClassName="active">TaskTrials</Link>
                 </NavItem>
                 <NavItem>
                   <Link to="/status" className="nav-link" activeClassName="active">Status</Link>

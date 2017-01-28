@@ -38,18 +38,18 @@ const TaskTable = ({ taskList, loadTaskList }) => {
         { taskList.map(task => (
           <tr key={task.id}>
             <th scope="row">
-              <Link to={`/task/${task.id}`}>
+              <Link to={`/tasks/${task.id}`}>
                 {task.id}
               </Link>
             </th>
-            <td><Link to={`/schemaDef/${task.schemaDefId}`}>{task.schemaDefName}</Link></td>
+            <td><Link to={`/schema-defs/${task.schemaDefId}`}>{task.schemaDefName}</Link></td>
             <td>{task.name}</td>
             <td>{task.difficulty}</td>
             <td><ImprovedMoment fromNow>{task.createdAt}</ImprovedMoment></td>
             <td><ImprovedMoment fromNow>{task.modifiedAt}</ImprovedMoment></td>
             <td>
               <Button size="sm" outline color="warning">
-                <Link to={`/task/${task.id}`} style={{ color: 'inherit', cursor: 'default' }}>
+                <Link to={`/tasks/${task.id}`} style={{ color: 'inherit', cursor: 'default' }}>
                   <Octicon name="pencil" />
                 </Link>
               </Button>
