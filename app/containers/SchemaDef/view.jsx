@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
 
 import Helmet from 'react-helmet';
+import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import Link from 'react-router/Link';
 import { bindActionCreators } from 'redux';
@@ -52,7 +53,23 @@ class SchemaDefView extends Component {
         />
         <Jumbotron>
           <Container>
-            <h1>#{schemaDef.id}-{schemaDef.name}</h1>
+            <div className="d-flex w-100 justify-content-between">
+              <h1>#{schemaDef.id}-{schemaDef.name}</h1>
+              <div className="d-flex">
+                <Button color="info" onClick={() => this.props.loadSchemaDef(this.props.params.id)}>
+                  <Octicon name="sync" /> Refresh
+                </Button>
+                <Button color="success" onClick={() => { console.log('publish'); }}>
+                  <Octicon name="radio-tower" /> Publish
+                </Button>
+                <Button color="warning" onClick={() => { console.log('edit'); }}>
+                  <Octicon name="pencil" /> Edit
+                </Button>
+                <Button color="danger" onClick={() => { console.log('delete'); }}>
+                  <Octicon name="x" /> Delete
+                </Button>
+              </div>
+            </div>
           </Container>
         </Jumbotron>
         <Container>
