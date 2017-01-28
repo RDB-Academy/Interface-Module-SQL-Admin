@@ -34,7 +34,7 @@ class SchemaDefList extends Component {
     }
     return (
       <div>
-        <ListGroup className="schemadef-list">
+        <ListGroup className="list-group-flush">
           { schemaDefList.map(schemaDef => (
             <SchemaDefListEntry
               key={schemaDef.id}

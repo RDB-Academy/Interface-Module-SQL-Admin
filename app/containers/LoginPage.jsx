@@ -16,22 +16,16 @@ class LoginPage extends Component {
       },
     };
 
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleChangeEmail(event) {
+  handleInputChange(event) {
+    const { target } = event;
+    const { value, id } = target;
     const { loginForm } = this.state;
-    loginForm.email = event.target.value;
-    this.setState({
-      loginForm,
-    });
-  }
 
-  handleChangePassword(event) {
-    const { loginForm } = this.state;
-    loginForm.password = event.target.value;
+    loginForm[id] = value;
 
     this.setState({
       loginForm,
@@ -64,7 +58,7 @@ class LoginPage extends Component {
                           id="email"
                           placeholder="e-meal 🍖"
                           value={this.state.email}
-                          onChange={this.handleChangeEmail}
+                          onChange={this.handleInputChange}
                         />
                       </Col>
                     </FormGroup>
@@ -76,7 +70,7 @@ class LoginPage extends Component {
                           id="password"
                           placeholder="your password ;)"
                           value={this.state.password}
-                          onChange={this.handleChangePassword}
+                          onChange={this.handleInputChange}
                         />
                       </Col>
                     </FormGroup>

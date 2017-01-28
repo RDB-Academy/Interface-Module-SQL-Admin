@@ -45,7 +45,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "file-loader": "^0.9.0",
+    "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.26.0",
     "lodash-webpack-plugin": "^0.11.0",
     "postcss-loader": "^1.2.2",
@@ -54,7 +54,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.0",
-    "webpack-dashboard": "^0.2.1",
+    "webpack-dashboard": "^0.3.0",
     "webpack-dev-server": "2.2.0",
     "zip-webpack-plugin": "^0.3.0"
   },
