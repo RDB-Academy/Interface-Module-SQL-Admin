@@ -13,7 +13,10 @@ export default function sessionReducer(state = initialState, action) {
       };
     case types.LOG_OUT_SUCCESS:
       localStorage.removeItem('auth-key');
-      return initialState;
+      return {
+        ...initialState,
+        id: null,
+      };
     default:
       return state;
   }

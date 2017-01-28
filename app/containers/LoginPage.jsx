@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Card, CardBlock, CardHeader, Col, Container, Form, FormGroup, Input, Jumbotron, Label, Row } from 'reactstrap';
 
 import { loginUser } from 'actions/sessionActions';
 import { bindActionCreators } from 'redux';
@@ -46,18 +47,50 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <h1> Login </h1>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="email">
-            E-Mail:
-            <input type="email" id="email" value={this.state.email} onChange={this.handleChangeEmail} />
-          </label>
-          <label htmlFor="password">
-            Password:
-            <input type="password" id="password" value={this.state.password} onChange={this.handleChangePassword} />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <Container>
+          <Row>
+            <Col xs={{ size: 6, offset: 3 }}>
+              <Card className="mt-5">
+                <CardHeader>
+                  Login
+                </CardHeader>
+                <CardBlock>
+                  <Form onSubmit={this.handleSubmit}>
+                    <FormGroup row>
+                      <Label sm={2} for="email">E-Mail:</Label>
+                      <Col sm={10}>
+                        <Input
+                          type="email"
+                          id="email"
+                          placeholder="e-meal 🍖"
+                          value={this.state.email}
+                          onChange={this.handleChangeEmail}
+                        />
+                      </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                      <Label sm={2} for="password">Password:</Label>
+                      <Col sm={10}>
+                        <Input
+                          type="password"
+                          id="password"
+                          placeholder="your password ;)"
+                          value={this.state.password}
+                          onChange={this.handleChangePassword}
+                        />
+                      </Col>
+                    </FormGroup>
+                    <FormGroup check row>
+                      <Col sm={{ size: 10, offset: 2 }}>
+                        <Button block color="success" type="submit">Login</Button>
+                      </Col>
+                    </FormGroup>
+                  </Form>
+                </CardBlock>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
