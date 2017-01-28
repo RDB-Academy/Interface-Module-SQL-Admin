@@ -17,21 +17,30 @@ const SchemaDefBaseShape = {
   modifiedAt: PropTypes.string.isRequired,
 };
 
-const SchemaDefExtended = {
+const SchemaDefExtendedShape = {
   ...SchemaDefBaseShape,
-  tableDefList: PropTypes.arrayOf(
-    PropTypes.number,
-  ).isRequired,
-  foreignKeyList: PropTypes.arrayOf(
-    PropTypes.number,
-  ).isRequired,
-  taskList: PropTypes.arrayOf(
-    PropTypes.number,
-  ).isRequired,
+  relations: PropTypes.shape({
+    tableDefList: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    foreignKeyList: PropTypes.arrayOf(
+      PropTypes.number,
+    ).isRequired,
+    taskList: PropTypes.arrayOf(
+      PropTypes.number,
+    ).isRequired,
+  }),
 };
 
 export const SchemaDefBase = PropTypes.shape(
   SchemaDefBaseShape,
+);
+
+export const SchemaDefExtended = PropTypes.shape(
+  SchemaDefExtendedShape,
 );
 
 export const Task = PropTypes.shape({

@@ -8,12 +8,12 @@ import Link from 'react-router/Link';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDef } from 'actions/schemaDefActions';
-import { SchemaDefBase } from 'PropTypes';
+import { SchemaDefExtended } from 'PropTypes';
 import { getSchemaDefById } from 'store/schemaDefSelector';
 
 class SchemaDefView extends Component {
   static propTypes = {
-    schemaDef: SchemaDefBase,
+    schemaDef: SchemaDefExtended,
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired,
