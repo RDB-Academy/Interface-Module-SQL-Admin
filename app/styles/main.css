@@ -70,14 +70,15 @@ main {
   padding: 0;
 
   .btn {
-    background-color: transparent;
     width: 20%;
     margin:0 auto;
     border: 0;
     border-radius: 0;
 
-    &:hover {
-      background-color: #e6e6e6;
+    &.reaction {
+      span {
+        margin-right: 10px;
+      }
     }
 
     &:first-child {

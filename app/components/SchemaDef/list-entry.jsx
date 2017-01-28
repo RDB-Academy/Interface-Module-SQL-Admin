@@ -5,11 +5,11 @@ import Link from 'react-router/Link';
 import { Button, ListGroupItem, ListGroupItemText } from 'reactstrap';
 import { ImprovedMoment } from 'components/Tools';
 
-import { SchemaDefMin } from 'PropTypes';
+import { SchemaDefBase } from 'PropTypes';
 
 class SchemaDefListEntry extends Component {
   static propTypes = {
-    schemaDef: SchemaDefMin.isRequired,
+    schemaDef: SchemaDefBase.isRequired,
     toggleAvailable: PropTypes.func.isRequired,
   };
 
@@ -79,10 +79,10 @@ class SchemaDefListEntry extends Component {
         </div>
         <div className="schemadef-list-entry-footer" hidden={collapse}>
           <Button className={`reaction ${(schemaDef.reactions.self === '+1') ? 'voted' : ''}`}>
-            <Octicon name="thumbsup" />
+            <Octicon name="thumbsup" />{schemaDef.reactions['+1']}
           </Button>
           <Button className={`reaction ${(schemaDef.reactions.self === '-1') ? 'voted' : ''}`}>
-            <Octicon name="thumbsdown" />
+            <Octicon name="thumbsdown" />{schemaDef.reactions['-1']}
           </Button>
           { renderAvailable() }
           { renderEdit() }

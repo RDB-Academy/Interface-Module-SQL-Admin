@@ -5,13 +5,13 @@ import { bindActionCreators } from 'redux';
 
 import { loadSchemaDefList } from 'actions/schemaDefActions';
 import { SchemaDefList } from 'components/SchemaDef';
-import { SchemaDefMin } from 'PropTypes';
+import { SchemaDefBase } from 'PropTypes';
 import { getSchemaDefList } from 'store/schemaDefSelector';
 
 class SchemaDefListContainer extends Component {
   static propTypes = {
     schemaDefList: React.PropTypes.arrayOf(
-      SchemaDefMin.isRequired,
+      SchemaDefBase.isRequired,
     ).isRequired,
     loadSchemaDefList: React.PropTypes.func.isRequired,
   }

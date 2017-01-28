@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import Octicon from 'react-octicon';
 import { Button, ListGroup } from 'reactstrap';
 
-import { SchemaDefMin } from 'PropTypes';
+import { SchemaDefBase } from 'PropTypes';
 
 import SchemaDefListEntry from './list-entry';
 
 class SchemaDefList extends Component {
   static propTypes = {
     schemaDefList: PropTypes.arrayOf(
-      SchemaDefMin.isRequired,
+      SchemaDefBase.isRequired,
     ).isRequired,
     loadSchemaDefList: PropTypes.func.isRequired,
   };

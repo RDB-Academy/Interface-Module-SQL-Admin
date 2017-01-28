@@ -6,7 +6,7 @@ const ReactionNode = {
   self: PropTypes.oneOf(['+1', '-1', 'null']).isRequired,
 };
 
-const SchemaDefBase = {
+const SchemaDefBaseShape = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   available: PropTypes.bool.isRequired,
@@ -18,7 +18,7 @@ const SchemaDefBase = {
 };
 
 const SchemaDefExtended = {
-  ...SchemaDefBase,
+  ...SchemaDefBaseShape,
   tableDefList: PropTypes.arrayOf(
     PropTypes.number,
   ).isRequired,
@@ -30,25 +30,9 @@ const SchemaDefExtended = {
   ).isRequired,
 };
 
-export const SchemaDefMin = PropTypes.shape(
-  SchemaDefBase,
+export const SchemaDefBase = PropTypes.shape(
+  SchemaDefBaseShape,
 );
-
-export const SchemaDef = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  tableDefList: PropTypes.arrayOf(
-    PropTypes.number,
-  ).isRequired,
-  foreignKeyList: PropTypes.arrayOf(
-    PropTypes.number,
-  ).isRequired,
-  taskList: PropTypes.arrayOf(
-    PropTypes.number,
-  ).isRequired,
-  createdAt: PropTypes.string.isRequired,
-  modifiedAt: PropTypes.string.isRequired,
-});
 
 export const Task = PropTypes.shape({
   id: PropTypes.number.isRequired,
