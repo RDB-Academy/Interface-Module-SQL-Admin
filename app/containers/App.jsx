@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Container } from 'reactstrap';
+
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { BrowserRouter, Match, Redirect, Miss } from 'react-router';
 import { bindActionCreators } from 'redux';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/main.css';
 
@@ -62,10 +65,10 @@ class App extends Component {
             <div className="push" />
           </main>
           <footer className="footer text-muted">
-            <div className="container">
+            <Container>
               <p>Footer</p>
               <p><b>Build Date:</b> <i>{__VERSION__}</i></p>
-            </div>
+            </Container>
           </footer>
         </div>
       </BrowserRouter>

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
+
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import Link from 'react-router/Link';
 import { bindActionCreators } from 'redux';
-
-import { Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
 
 import { loadSchemaDef } from 'actions/schemaDefActions';
 import { SchemaDefBase } from 'PropTypes';
@@ -26,20 +27,20 @@ class SchemaDefView extends Component {
     super(props);
 
     const { schemaDef, params } = this.props;
-    if (schemaDef === null) {
+    if (schemaDef === null || schemaDef.relations === undefined) {
       this.props.loadSchemaDef(params.id);
     }
   }
 
   render() {
     const { schemaDef } = this.props;
-    if (schemaDef === null) {
+    if (schemaDef === null || schemaDef.relations === undefined) {
       return (
         <div>
           <Jumbotron>
-            <div className="container">
+            <Container>
               <h1>Loading</h1>
-            </div>
+            </Container>
           </Jumbotron>
         </div>
       );
@@ -65,7 +66,9 @@ class SchemaDefView extends Component {
                 <ListGroup className="list-group-flush">
                   { schemaDef.relations.tableDefList.map(tableDef => (
                     <ListGroupItem key={tableDef.name}>
-                      #{tableDef.id}-{tableDef.name}
+                      <Link to={`/table-defs/${tableDef.id}`}>
+                        #{tableDef.id}-{tableDef.name}
+                      </Link>
                     </ListGroupItem>
                   ))}
                 </ListGroup>

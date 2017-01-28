@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Jumbotron } from 'reactstrap';
 import Helmet from 'react-helmet';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
@@ -23,30 +24,35 @@ class TaskView extends Component {
         <Helmet
           title={task.name}
         />
-        <h1>
-          <Link to="/tasks">
-            {'<'}
-          </Link>
-          Task View
-        </h1>
-        <hr />
-        <p>id: {task.id}</p>
-        <p>name: {task.name}</p>
-        <p>
-          schemaDef:
-          <Link to={`/schema-defs/${task.schemaDefId}`} >
-            {task.schemaDefName}
-          </Link>
-        </p>
-        <p>text: {task.text}</p>
-        <p>referenceStatement: {task.referenceStatement}</p>
-        <p>difficulty: {task.difficulty}</p>
-        <p>
-          createdAt: <Moment fromNow>{task.createdAt}</Moment>
-        </p>
-        <p>
-          modifiedAt: <Moment fromNow>{task.modifiedAt}</Moment>
-        </p>
+        <Jumbotron>
+          <Container>
+            <h1>
+              <Link to="/tasks">
+                {'<'}
+              </Link>
+              Task View
+            </h1>
+          </Container>
+        </Jumbotron>
+        <Container>
+          <p>id: {task.id}</p>
+          <p>name: {task.name}</p>
+          <p>
+            schemaDef:
+            <Link to={`/schema-defs/${task.schemaDefId}`} >
+              {task.schemaDefName}
+            </Link>
+          </p>
+          <p>text: {task.text}</p>
+          <p>referenceStatement: {task.referenceStatement}</p>
+          <p>difficulty: {task.difficulty}</p>
+          <p>
+            createdAt: <Moment fromNow>{task.createdAt}</Moment>
+          </p>
+          <p>
+            modifiedAt: <Moment fromNow>{task.modifiedAt}</Moment>
+          </p>
+        </Container>
       </div>
     );
   }
