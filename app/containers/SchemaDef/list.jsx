@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Button, Card, CardFooter, Container, Col, Input, Jumbotron, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 
 import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { loadSchemaDefList } from 'actions/schemaDefActions';
+import { createSchemaDef, loadSchemaDefList, deleteSchemaDef } from 'actions/schemaDefActions';
 import { SchemaDefList } from 'components/SchemaDef';
 import { SchemaDefBase } from 'PropTypes';
 import { getSchemaDefList } from 'store/schemaDefSelector';
@@ -15,7 +15,9 @@ class SchemaDefListContainer extends Component {
     schemaDefList: React.PropTypes.arrayOf(
       SchemaDefBase.isRequired,
     ).isRequired,
-    loadSchemaDefList: React.PropTypes.func.isRequired,
+    createSchemaDef: PropTypes.func.isRequired,
+    loadSchemaDefList: PropTypes.func.isRequired,
+    deleteSchemaDef: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -34,6 +36,7 @@ class SchemaDefListContainer extends Component {
 
     this.toggleCreateModal = this.toggleCreateModal.bind(this);
     this.createNewSchema = this.createNewSchema.bind(this);
+    this.deleteSchemaDef = this.deleteSchemaDef.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -45,6 +48,17 @@ class SchemaDefListContainer extends Component {
 
   createNewSchema() {
     this.toggleCreateModal();
+    this.props.createSchemaDef(this.state.schemaDef);
+
+    this.setState({
+      schemaDef: {
+        name: '',
+      },
+    });
+  }
+
+  deleteSchemaDef(id) {
+    this.props.deleteSchemaDef(id);
   }
 
   handleInputChange(event) {
@@ -82,9 +96,10 @@ class SchemaDefListContainer extends Component {
           <Card>
             <SchemaDefList
               schemaDefList={schemaDefList}
+              deleteSchemaDef={this.deleteSchemaDef}
             />
             <CardFooter>
-              Count: {schemaDefList.length}{' '}{this.state.schemaDef.name}
+              Count: {schemaDefList.length}
             </CardFooter>
           </Card>
         </Container>
@@ -121,7 +136,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  createSchemaDef: bindActionCreators(createSchemaDef, dispatch),
   loadSchemaDefList: bindActionCreators(loadSchemaDefList, dispatch),
+  deleteSchemaDef: bindActionCreators(deleteSchemaDef, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefListContainer);

@@ -10,6 +10,7 @@ class SchemaDefList extends Component {
     schemaDefList: PropTypes.arrayOf(
       SchemaDefBase.isRequired,
     ).isRequired,
+    deleteSchemaDef: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -40,6 +41,7 @@ class SchemaDefList extends Component {
               key={schemaDef.id}
               schemaDef={schemaDef}
               toggleAvailable={this.toggleAvailable}
+              deleteSchemaDef={this.props.deleteSchemaDef}
             />
           ))}
         </ListGroup>

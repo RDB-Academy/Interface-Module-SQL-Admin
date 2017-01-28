@@ -24,8 +24,8 @@ export default function schemaDefReducer(state = initialState, action) {
     }
 
     case types.LOAD_SCHEMA_DEF_SUCCESS: {
-      const oldSchemaDef = state.schemaDefList.findIndex(e => e.id === action.data.id);
-      if (oldSchemaDef === -1) {
+      const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
+      if (oldIndex === -1) {
         return {
           ...state,
           schemaDefList: [
@@ -37,9 +37,30 @@ export default function schemaDefReducer(state = initialState, action) {
       const newState = {
         ...state,
         schemaDefList: [
-          ...state.schemaDefList.slice(0, oldSchemaDef),
+          ...state.schemaDefList.slice(0, oldIndex),
           action.data,
-          ...state.schemaDefList.slice(oldSchemaDef + 1),
+          ...state.schemaDefList.slice(oldIndex + 1),
+        ],
+      };
+      return newState;
+    }
+
+    case types.DELETE_SCHEMA_DEF_SUCCESS: {
+      console.log(action);
+      const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
+      if (oldIndex === -1) {
+        return {
+          ...state,
+          schemaDefList: [
+            ...state.schemaDefList,
+          ],
+        };
+      }
+      const newState = {
+        ...state,
+        schemaDefList: [
+          ...state.schemaDefList.slice(0, oldIndex),
+          ...state.schemaDefList.slice(oldIndex + 1),
         ],
       };
       return newState;

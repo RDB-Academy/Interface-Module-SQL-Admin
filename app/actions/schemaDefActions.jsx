@@ -38,6 +38,32 @@ export function loadSchemaDefFailure(error) {
   };
 }
 
+export const deleteSchemaDefSuccess = id => ({
+  type: types.DELETE_SCHEMA_DEF_SUCCESS,
+  data: {
+    id,
+  },
+});
+
+export const deleteSchemaDefFailure = error => ({
+  type: types.DELETE_SCHEMA_DEF_FAILURE,
+  data: {
+    httpCode: error.message,
+    httpText: error.httpText,
+    body: error.body,
+  },
+});
+
+export function createSchemaDef(schemaDef) {
+  return (dispatch, getState) => (
+    schemaDefApi.createSchemaDef(schemaDef, getSessionId(getState())).then((response) => {
+      dispatch(loadSchemaDefSuccess(response));
+    }, (error) => {
+      dispatch(loadSchemaDefFailure(error));
+    })
+  );
+}
+
 export function loadSchemaDefList() {
   return (dispatch, getState) => (
     schemaDefApi.loadSchemaDefList(getSessionId(getState())).then((response) => {
@@ -54,6 +80,16 @@ export function loadSchemaDef(id) {
       dispatch(loadSchemaDefSuccess(response));
     }, (error) => {
       dispatch(loadSchemaDefFailure(error));
+    })
+  );
+}
+
+export function deleteSchemaDef(id) {
+  return (dispatch, getState) => (
+    schemaDefApi.deleteSchemaDef(id, getSessionId(getState())).then(() => {
+      dispatch(deleteSchemaDefSuccess(id));
+    }, (error) => {
+      dispatch(deleteSchemaDefFailure(error));
     })
   );
 }

@@ -11,12 +11,14 @@ class SchemaDefListEntry extends Component {
   static propTypes = {
     schemaDef: SchemaDefBase.isRequired,
     toggleAvailable: PropTypes.func.isRequired,
+    deleteSchemaDef: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.delete = this.delete.bind(this);
     this.state = {
       collapse: true,
     };
@@ -26,6 +28,13 @@ class SchemaDefListEntry extends Component {
     this.setState({
       collapse: !this.state.collapse,
     });
+  }
+
+  delete(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    this.props.deleteSchemaDef(this.props.schemaDef.id);
   }
 
   render() {
@@ -49,7 +58,7 @@ class SchemaDefListEntry extends Component {
     );
 
     const renderDelete = () => (
-      <Button outline color="danger">
+      <Button outline color="danger" onClick={this.delete}>
         <Octicon name="x" />
       </Button>
     );
