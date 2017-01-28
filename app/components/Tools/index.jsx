@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Tooltip } from 'reactstrap';
 import Moment from 'react-moment';
 
-var id = 0;
+let id = 0;
 
 const nextID = () => {
   id += 1;

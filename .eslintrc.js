@@ -13,6 +13,9 @@ module.exports = {
     "es6": true,
     "browser": true,
   },
+  "globals": {
+    "__VERSION__": true,
+  },
   "rules": {
     "jsx-a11y/no-static-element-interactions": 0
   }

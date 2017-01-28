@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 

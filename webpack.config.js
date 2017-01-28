@@ -31,6 +31,7 @@ const webpackConfig = {
       'bootstrap/dist/css/bootstrap.min.css',
       'isomorphic-fetch',
       'react',
+      'reactstrap',
       'react-dom',
       'react-helmet',
       'react-moment',
@@ -93,7 +94,7 @@ const webpackConfig = {
       'process.env': {
         NODE_ENV: JSON.stringify(APP.env),
       },
-      '__VERSION__': JSON.stringify(new Date()),
+      __VERSION__: JSON.stringify(new Date()),
     }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery/dist/jquery.min.js',

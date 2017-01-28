@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBlock, CardHeader, Col, Container, Form, FormGroup, Input, Jumbotron, Label, Row } from 'reactstrap';
+import { Button, Card, CardBlock, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 
 import { loginUser } from 'actions/sessionActions';
 import { bindActionCreators } from 'redux';

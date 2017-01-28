@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
@@ -9,15 +9,6 @@ import { getTaskById } from 'store/taskSelector';
 
 class TaskView extends Component {
   static propTypes = {
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      state: PropTypes.shape({
-        from: PropTypes.string,
-      }),
-    }).isRequired,
-    pathname: PropTypes.string.isRequired,
     task: Task,
   };
 
@@ -26,18 +17,14 @@ class TaskView extends Component {
   };
 
   render() {
-    const { task, location, pathname } = this.props;
+    const { task } = this.props;
     return (
       <div>
         <Helmet
           title={task.name}
         />
         <h1>
-          <Link
-            to={
-              location.state === null ? ('/task') : (location.state.from)
-            }
-          >
+          <Link to="/task">
             {'<'}
           </Link>
           Task View
@@ -47,12 +34,7 @@ class TaskView extends Component {
         <p>name: {task.name}</p>
         <p>
           schemaDef:
-          <Link
-            to={{
-              pathname: `/schemaDef/${task.schemaDefId}`,
-              state: { from: pathname },
-            }}
-          >
+          <Link to={`/schemaDef/${task.schemaDefId}`} >
             {task.schemaDefName}
           </Link>
         </p>
