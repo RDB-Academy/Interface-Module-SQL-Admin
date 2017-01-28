@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Jumbotron } from 'reactstrap';
+import { Card, Jumbotron } from 'reactstrap';
 
 import { loadSchemaDef } from 'actions/schemaDefActions';
 import { SchemaDefBase } from 'PropTypes';
@@ -34,15 +34,31 @@ class SchemaDefView extends Component {
 
   render() {
     const { schemaDef } = this.props;
+    if (schemaDef === null) {
+      return (
+        <div>
+          <Jumbotron>
+            <div className="container">
+              <h1>Loading</h1>
+            </div>
+          </Jumbotron>
+        </div>
+      );
+    }
     return (
       <div>
+        <Helmet
+          title={`#${schemaDef.id}-${schemaDef.name}`}
+        />
         <Jumbotron>
           <div className="container">
-            <h1>Title</h1>
+            <h1>#{schemaDef.id}-{schemaDef.name}</h1>
           </div>
         </Jumbotron>
         <div className="container">
-          <h1>Null</h1>
+          <Card>
+            <p>Tables:</p>
+          </Card>
         </div>
       </div>
     );

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Octicon from 'react-octicon';
-import { Button, ListGroup } from 'reactstrap';
+import { ListGroup } from 'reactstrap';
 
 import { SchemaDefBase } from 'PropTypes';
 
@@ -11,7 +10,6 @@ class SchemaDefList extends Component {
     schemaDefList: PropTypes.arrayOf(
       SchemaDefBase.isRequired,
     ).isRequired,
-    loadSchemaDefList: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -27,7 +25,7 @@ class SchemaDefList extends Component {
   }
 
   render() {
-    const { schemaDefList, loadSchemaDefList } = this.props;
+    const { schemaDefList } = this.props;
 
     if (schemaDefList.length === 0) {
       return (
@@ -36,12 +34,6 @@ class SchemaDefList extends Component {
     }
     return (
       <div>
-        <Button size="sm" color="success" onClick={() => { console.log('create new object'); }}>
-          <Octicon name="plus" />
-        </Button>
-        <Button size="sm" color="info" onClick={loadSchemaDefList}>
-          <Octicon name="sync" />
-        </Button>
         <ListGroup className="schemadef-list">
           { schemaDefList.map(schemaDef => (
             <SchemaDefListEntry

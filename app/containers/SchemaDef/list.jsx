@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Card, Jumbotron } from 'reactstrap';
+import { Button, Card, CardBlock, Jumbotron } from 'reactstrap';
+
+import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -23,12 +25,6 @@ class SchemaDefListContainer extends Component {
     if (schemaDefList === undefined || schemaDefList.length === 0) {
       this.props.loadSchemaDefList();
     }
-
-    this.loadSchemaDefList = this.loadSchemaDefList.bind(this);
-  }
-
-  loadSchemaDefList() {
-    this.props.loadSchemaDefList();
   }
 
   render() {
@@ -37,15 +33,26 @@ class SchemaDefListContainer extends Component {
       <div>
         <Jumbotron>
           <div className="container">
-            <h1 className="display-3">SchemaDef List</h1>
+            <div className="d-flex w-100 justify-content-between">
+              <h1>SchemaDef List</h1>
+              <div className="d-flex">
+                <Button color="success" onClick={() => { console.log('create new object'); }}>
+                  <Octicon name="plus" /> New
+                </Button>
+                <Button color="info" onClick={this.props.loadSchemaDefList}>
+                  <Octicon name="sync" /> Reload
+                </Button>
+              </div>
+            </div>
           </div>
         </Jumbotron>
         <div className="container">
           <Card>
-            <SchemaDefList
-              schemaDefList={schemaDefList}
-              loadSchemaDefList={this.loadSchemaDefList}
-            />
+            <CardBlock>
+              <SchemaDefList
+                schemaDefList={schemaDefList}
+              />
+            </CardBlock>
           </Card>
         </div>
       </div>

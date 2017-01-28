@@ -10,6 +10,17 @@ main {
   margin: 0 auto -17em;
 }
 
+.jumbotron {
+  .btn {
+    padding: 0 25px;
+    margin:0 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .schemadef-list {
   width: 100%;
   padding: 0;
