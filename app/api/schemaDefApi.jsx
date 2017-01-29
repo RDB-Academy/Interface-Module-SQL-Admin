@@ -19,7 +19,7 @@ const createFetch = (uri, sessionID, method = 'GET', body) => {
 
   return fetch(fullUri, settings)
       .then((response) => {
-        if (response.status !== 200) {
+        if (!response.ok) {
           const error = new Error(response.status);
           error.httpCode = error.status;
           error.httpText = response.statusText;

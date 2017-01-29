@@ -17,23 +17,22 @@ class SchemaDefListEntry extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleCollapse = this.toggleCollapse.bind(this);
     this.delete = this.delete.bind(this);
     this.state = {
       collapse: true,
     };
   }
 
-  toggle() {
+  toggleCollapse() {
     this.setState({
       collapse: !this.state.collapse,
     });
   }
 
-  delete(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
+  delete(event) {
+    event.preventDefault();
+    event.stopPropagation();
     this.props.deleteSchemaDef(this.props.schemaDef.id);
   }
 
@@ -65,7 +64,7 @@ class SchemaDefListEntry extends Component {
 
     return (
       <ListGroupItem key={schemaDef.id} className="schemadef-list-entry">
-        <div className="container" onClick={this.toggle}>
+        <div className="container" onClick={this.toggleCollapse}>
           <div className="d-flex w-100 justify-content-between">
             <h5>
               <Link to={`/schema-defs/${schemaDef.id}`}>

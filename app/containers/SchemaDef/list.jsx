@@ -1,21 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Card, CardFooter, Container, Col, Input, Jumbotron, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import { Button, Card, CardFooter, Container, Jumbotron } from 'reactstrap';
 
 import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { createSchemaDef, loadSchemaDefList, deleteSchemaDef } from 'actions/schemaDefActions';
+import { loadSchemaDefList, deleteSchemaDef } from 'actions/schemaDefActions';
 import { SchemaDefList } from 'components/SchemaDef';
 import { SchemaDefBase } from 'PropTypes';
 import { getSchemaDefList } from 'store/schemaDefSelector';
+
+import CreateSchemaDefModal from './create';
 
 class SchemaDefListContainer extends Component {
   static propTypes = {
     schemaDefList: React.PropTypes.arrayOf(
       SchemaDefBase.isRequired,
     ).isRequired,
-    createSchemaDef: PropTypes.func.isRequired,
     loadSchemaDefList: PropTypes.func.isRequired,
     deleteSchemaDef: PropTypes.func.isRequired,
   }
@@ -24,9 +25,6 @@ class SchemaDefListContainer extends Component {
     super(props);
     this.state = {
       modal: false,
-      schemaDef: {
-        name: '',
-      },
     };
 
     const { schemaDefList } = this.props;
@@ -35,9 +33,7 @@ class SchemaDefListContainer extends Component {
     }
 
     this.toggleCreateModal = this.toggleCreateModal.bind(this);
-    this.createNewSchema = this.createNewSchema.bind(this);
     this.deleteSchemaDef = this.deleteSchemaDef.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   toggleCreateModal() {
@@ -46,31 +42,8 @@ class SchemaDefListContainer extends Component {
     });
   }
 
-  createNewSchema() {
-    this.toggleCreateModal();
-    this.props.createSchemaDef(this.state.schemaDef);
-
-    this.setState({
-      schemaDef: {
-        name: '',
-      },
-    });
-  }
-
   deleteSchemaDef(id) {
     this.props.deleteSchemaDef(id);
-  }
-
-  handleInputChange(event) {
-    const { target } = event;
-    const { value, id } = target;
-    const { schemaDef } = this.state;
-
-    schemaDef[id] = value;
-
-    this.setState({
-      schemaDef,
-    });
   }
 
   render() {
@@ -103,29 +76,10 @@ class SchemaDefListContainer extends Component {
             </CardFooter>
           </Card>
         </Container>
-        <Modal isOpen={this.state.modal} toggle={this.toggleCreateModal} style={{ marginTop: '200px' }}>
-          <ModalHeader toggle={this.toggleCreateModal}>
-            Create New Schema
-          </ModalHeader>
-          <ModalBody>
-            <Row>
-              <Label sm={2} for="name">Name:</Label>
-              <Col sm={10}>
-                <Input
-                  type="text"
-                  id="name"
-                  placeholder="FancySchema"
-                  value={this.state.schemaDef.name}
-                  onChange={this.handleInputChange}
-                />
-              </Col>
-            </Row>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this.toggleCreateModal}>Cancel</Button>{' '}
-            <Button color="primary" onClick={this.createNewSchema}>Save changes</Button>
-          </ModalFooter>
-        </Modal>
+        <CreateSchemaDefModal
+          isOpen={this.state.modal}
+          toggle={this.toggleCreateModal}
+        />
       </div>
     );
   }
@@ -136,7 +90,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createSchemaDef: bindActionCreators(createSchemaDef, dispatch),
   loadSchemaDefList: bindActionCreators(loadSchemaDefList, dispatch),
   deleteSchemaDef: bindActionCreators(deleteSchemaDef, dispatch),
 });
