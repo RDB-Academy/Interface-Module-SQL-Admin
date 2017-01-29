@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { Badge, Button, ListGroupItem, ListGroupItemText } from 'reactstrap';
+
 import Octicon from 'react-octicon';
 import Link from 'react-router/Link';
 
-import { Button, ListGroupItem, ListGroupItemText } from 'reactstrap';
 import { ImprovedMoment } from 'components/Tools';
-
 import { SchemaDefBase } from 'PropTypes';
 
 class SchemaDefListEntry extends Component {
@@ -30,7 +30,7 @@ class SchemaDefListEntry extends Component {
     event.stopPropagation();
 
     const schemaDef = {
-      available: !this.props.schemaDef.active,
+      available: !this.props.schemaDef.available,
     };
 
     this.props.updateAvailable(this.props.schemaDef.id, schemaDef);
@@ -55,7 +55,7 @@ class SchemaDefListEntry extends Component {
     const renderAvailable = () => (
       <Button
         outline
-        color={!schemaDef.active ? 'success' : 'danger'}
+        color={schemaDef.available ? 'success' : 'danger'}
         onClick={this.setAvailable}
       >
         <Octicon name="radio-tower" />
@@ -77,13 +77,14 @@ class SchemaDefListEntry extends Component {
     return (
       <ListGroupItem key={schemaDef.id} className="schemadef-list-entry">
         <div className="container" onClick={this.toggleCollapse}>
-          <div className="d-flex w-100 justify-content-between">
+          <div className="list-header d-flex w-100 justify-content-between">
             <h5>
               <Link to={`/schema-defs/${schemaDef.id}`}>
                 #{schemaDef.id} - {schemaDef.name}
               </Link>
             </h5>
             <small>
+              <Badge color="info">{schemaDef.available ? 'public' : 'private'}</Badge>
               { collapse && renderAvailable() }
               { collapse && renderEdit() }
               { collapse && renderDelete() }
@@ -98,12 +99,14 @@ class SchemaDefListEntry extends Component {
           </ListGroupItemText>
         </div>
         <div className="schemadef-list-entry-footer" hidden={collapse}>
+          {/*
           <Button className={`reaction ${(schemaDef.reactions.self === '+1') ? 'voted' : ''}`}>
             <Octicon name="thumbsup" />{schemaDef.reactions['+1']}
           </Button>
           <Button className={`reaction ${(schemaDef.reactions.self === '-1') ? 'voted' : ''}`}>
             <Octicon name="thumbsdown" />{schemaDef.reactions['-1']}
           </Button>
+          */}
           { renderAvailable() }
           { renderEdit() }
           { renderDelete() }

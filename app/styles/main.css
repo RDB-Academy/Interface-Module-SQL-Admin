@@ -31,6 +31,12 @@ main {
     margin-top: 8px;
   }
 
+  .list-header {
+    .badge {
+      margin-right: 20px;
+    }
+  }
+
   .list-group-item-text {
     margin-bottom: 10px;
 
