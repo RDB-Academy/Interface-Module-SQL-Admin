@@ -1,99 +1,53 @@
 import fetch from 'isomorphic-fetch';
 
+const uriPrefix = '/api';
+
+const createFetch = (uri, sessionID, method = 'GET', body) => {
+  const fullUri = `${uriPrefix}${uri}`;
+  const settings = {
+    method,
+    headers: {
+      accept: 'application/json',
+      'auth-key': sessionID,
+    },
+  };
+
+  if (method === 'POST' || method === 'PATCH' || method === 'POST') {
+    settings.headers['Content-Type'] = 'application/json';
+    settings.body = JSON.stringify(body);
+  }
+
+  return fetch(fullUri, settings)
+      .then((response) => {
+        if (response.status !== 200) {
+          const error = new Error(response.status);
+          error.httpCode = error.status;
+          error.httpText = response.statusText;
+          error.body = null;
+          if (response.headers.get('Content-Type').includes('application/json')) {
+            error.body = response.json();
+          }
+          throw error;
+        }
+        return response.json();
+      }, error => error);
+};
+
 class SchemaDefApi {
   static createSchemaDef(schemaDef, sessionId) {
-    return fetch('/api/schema-defs', {
-      method: 'POST',
-      headers: {
-        'auth-key': sessionId,
-        accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(schemaDef),
-    }).then((response) => {
-      if (response.status !== 200) {
-        const error = new Error(response.status);
-        error.httpCode = error.status;
-        error.httpText = response.statusText;
-        error.body = null;
-        if (response.headers.get('Content-Type').includes('application/json')) {
-          error.body = response.json();
-        }
-        throw error;
-      }
-      return response.json();
-    }, error => (
-      error
-    ));
+    return createFetch('/schema-defs', sessionId, 'POST', schemaDef);
   }
 
   static loadSchemaDefList(sessionId) {
-    return fetch('/api/schema-defs', {
-      headers: {
-        'auth-key': sessionId,
-        accept: 'application/json',
-      },
-    }).then((response) => {
-      if (response.status !== 200) {
-        const error = new Error(response.status);
-        error.httpCode = error.status;
-        error.httpText = response.statusText;
-        error.body = null;
-        if (response.headers.get('Content-Type').includes('application/json')) {
-          error.body = response.json();
-        }
-        throw error;
-      }
-      return response.json();
-    }, error => (
-      error
-    ));
+    return createFetch('/schema-defs', sessionId);
   }
 
   static loadSchemaDef(id, sessionId) {
-    return fetch(`/api/schema-defs/${id}`, {
-      headers: {
-        'auth-key': sessionId,
-        accept: 'application/json',
-      },
-    }).then((response) => {
-      if (response.status !== 200) {
-        const error = new Error(response.status);
-        error.httpCode = error.status;
-        error.httpText = response.statusText;
-        error.body = null;
-        if (response.headers.get('Content-Type').includes('application/json')) {
-          error.body = response.json();
-        }
-        throw error;
-      }
-      return response.json();
-    }, error => (
-      error
-    ));
+    return createFetch(`/schema-defs/${id}`, sessionId);
   }
 
   static deleteSchemaDef(id, sessionId) {
-    return fetch(`/api/schema-defs/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'auth-key': sessionId,
-        accept: 'application/json',
-      },
-    }).then((response) => {
-      if (response.status !== 200) {
-        const error = new Error(response.status);
-        error.httpCode = error.status;
-        error.httpText = response.statusText;
-        error.body = null;
-        if (response.headers.get('Content-Type').includes('application/json')) {
-          error.body = response.json();
-        }
-        throw error;
-      }
-    }, error => (
-      error
-    ));
+    return createFetch(`/schema-defs/${id}`, sessionId, 'DELETE');
   }
 }
 
