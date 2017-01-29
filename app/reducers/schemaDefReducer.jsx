@@ -46,7 +46,6 @@ export default function schemaDefReducer(state = initialState, action) {
     }
 
     case types.DELETE_SCHEMA_DEF_SUCCESS: {
-      console.log(action);
       const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
       if (oldIndex === -1) {
         return {

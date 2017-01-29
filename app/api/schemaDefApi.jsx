@@ -29,7 +29,10 @@ const createFetch = (uri, sessionID, method = 'GET', body) => {
           }
           throw error;
         }
-        return response.json();
+        if (response.headers.get('content-type') !== null && response.headers.get('content-type').includes('application/json')) {
+          return response.json();
+        }
+        return response.text();
       }, error => error);
 };
 
