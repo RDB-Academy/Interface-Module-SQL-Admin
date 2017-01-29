@@ -64,25 +64,41 @@ export function createSchemaDef(schemaDef) {
   );
 }
 
-export function loadSchemaDefList() {
-  return (dispatch, getState) => (
-    schemaDefApi.loadSchemaDefList(getSessionId(getState())).then((response) => {
-      dispatch(loadSchemaDefListSuccess(response));
-    }).catch((error) => {
-      dispatch(loadSchemaDefListFailure(error));
-    })
-  );
-}
+export const loadSchemaDefList = () => (
+  (dispatch, getState) => (
+    schemaDefApi
+      .loadSchemaDefList(getSessionId(getState()))
+        .then(response => (
+          dispatch(loadSchemaDefListSuccess(response))
+        )).catch(error => (
+          dispatch(loadSchemaDefListFailure(error))
+        ))
+  )
+);
 
-export function loadSchemaDef(id) {
-  return (dispatch, getState) => (
-    schemaDefApi.loadSchemaDef(id, getSessionId(getState())).then((response) => {
-      dispatch(loadSchemaDefSuccess(response));
-    }, (error) => {
-      dispatch(loadSchemaDefFailure(error));
-    })
-  );
-}
+export const loadSchemaDef = id => (
+  (dispatch, getState) => (
+    schemaDefApi
+      .loadSchemaDef(id, getSessionId(getState()))
+      .then((response) => {
+        dispatch(loadSchemaDefSuccess(response));
+      }, (error) => {
+        dispatch(loadSchemaDefFailure(error));
+      })
+  )
+);
+
+export const updateSchemaDef = (id, schemaDef) => (
+  (dispatch, getState) => (
+    schemaDefApi
+      .updateSchemaDef(id, getSessionId(getState()), schemaDef)
+        .then(response => (
+          dispatch(loadSchemaDefSuccess(response))
+        ), error => (
+          dispatch(loadSchemaDefFailure(error))
+        ))
+  )
+);
 
 export function deleteSchemaDef(id) {
   return (dispatch, getState) => (

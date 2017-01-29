@@ -10,7 +10,7 @@ import { SchemaDefBase } from 'PropTypes';
 class SchemaDefListEntry extends Component {
   static propTypes = {
     schemaDef: SchemaDefBase.isRequired,
-    toggleAvailable: PropTypes.func.isRequired,
+    updateAvailable: PropTypes.func.isRequired,
     deleteSchemaDef: PropTypes.func.isRequired,
   };
 
@@ -18,10 +18,22 @@ class SchemaDefListEntry extends Component {
     super(props);
 
     this.toggleCollapse = this.toggleCollapse.bind(this);
+    this.setAvailable = this.setAvailable.bind(this);
     this.delete = this.delete.bind(this);
     this.state = {
       collapse: true,
     };
+  }
+
+  setAvailable(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const schemaDef = {
+      available: !this.props.schemaDef.active,
+    };
+
+    this.props.updateAvailable(this.props.schemaDef.id, schemaDef);
   }
 
   toggleCollapse() {
@@ -43,8 +55,8 @@ class SchemaDefListEntry extends Component {
     const renderAvailable = () => (
       <Button
         outline
-        color={schemaDef.available ? 'success' : 'danger'}
-        onClick={(e) => { this.props.toggleAvailable(e, schemaDef.id); }}
+        color={!schemaDef.active ? 'success' : 'danger'}
+        onClick={this.setAvailable}
       >
         <Octicon name="radio-tower" />
       </Button>

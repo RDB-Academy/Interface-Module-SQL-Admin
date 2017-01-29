@@ -5,7 +5,7 @@ import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { loadSchemaDefList, deleteSchemaDef } from 'actions/schemaDefActions';
+import { loadSchemaDefList, updateSchemaDef, deleteSchemaDef } from 'actions/schemaDefActions';
 import { SchemaDefList } from 'components/SchemaDef';
 import { SchemaDefBase } from 'PropTypes';
 import { getSchemaDefList } from 'store/schemaDefSelector';
@@ -17,6 +17,7 @@ class SchemaDefListContainer extends Component {
     schemaDefList: React.PropTypes.arrayOf(
       SchemaDefBase.isRequired,
     ).isRequired,
+    updateSchemaDef: PropTypes.func.isRequired,
     loadSchemaDefList: PropTypes.func.isRequired,
     deleteSchemaDef: PropTypes.func.isRequired,
   }
@@ -70,6 +71,7 @@ class SchemaDefListContainer extends Component {
             <SchemaDefList
               schemaDefList={schemaDefList}
               deleteSchemaDef={this.deleteSchemaDef}
+              updateAvailable={this.props.updateSchemaDef}
             />
             <CardFooter>
               Count: {schemaDefList.length}
@@ -91,6 +93,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadSchemaDefList: bindActionCreators(loadSchemaDefList, dispatch),
+  updateSchemaDef: bindActionCreators(updateSchemaDef, dispatch),
   deleteSchemaDef: bindActionCreators(deleteSchemaDef, dispatch),
 });
 

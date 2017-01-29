@@ -23,14 +23,19 @@ class CreateSchemaDefModal extends Component {
       },
     };
 
+    this.toggleModal = this.toggleModal.bind(this);
+
     this.createNewSchema = this.createNewSchema.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   createNewSchema() {
-    this.props.toggle();
     this.props.createSchemaDef(this.state.schemaDef);
+    this.props.toggle();
+  }
 
+  toggleModal() {
+    this.props.toggle();
     this.setState({
       schemaDef: {
         name: '',
@@ -52,8 +57,8 @@ class CreateSchemaDefModal extends Component {
 
   render() {
     return (
-      <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} style={{ marginTop: '200px' }}>
-        <ModalHeader toggle={this.props.toggle}>
+      <Modal isOpen={this.props.isOpen} toggle={this.toggleModal} style={{ marginTop: '200px' }}>
+        <ModalHeader toggle={this.toggleModal}>
           Create New Schema
         </ModalHeader>
         <ModalBody>
@@ -71,7 +76,7 @@ class CreateSchemaDefModal extends Component {
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={this.props.toggle}>Cancel</Button>{' '}
+          <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>{' '}
           <Button color="primary" onClick={this.createNewSchema}>Save changes</Button>
         </ModalFooter>
       </Modal>

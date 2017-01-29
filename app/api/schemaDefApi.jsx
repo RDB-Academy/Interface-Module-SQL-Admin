@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 const uriPrefix = '/api';
 
-const createFetch = (uri, sessionID, method = 'GET', body) => {
+const newFetch = (uri, sessionID, method = 'GET', body) => {
   const fullUri = `${uriPrefix}${uri}`;
   const settings = {
     method,
@@ -38,19 +38,23 @@ const createFetch = (uri, sessionID, method = 'GET', body) => {
 
 class SchemaDefApi {
   static createSchemaDef(schemaDef, sessionId) {
-    return createFetch('/schema-defs', sessionId, 'POST', schemaDef);
+    return newFetch('/schema-defs', sessionId, 'POST', schemaDef);
   }
 
   static loadSchemaDefList(sessionId) {
-    return createFetch('/schema-defs', sessionId);
+    return newFetch('/schema-defs', sessionId);
   }
 
   static loadSchemaDef(id, sessionId) {
-    return createFetch(`/schema-defs/${id}`, sessionId);
+    return newFetch(`/schema-defs/${id}`, sessionId);
+  }
+
+  static updateSchemaDef(id, sessionId, schemaDef) {
+    return newFetch(`/schema-defs/${id}`, sessionId, 'PATCH', schemaDef);
   }
 
   static deleteSchemaDef(id, sessionId) {
-    return createFetch(`/schema-defs/${id}`, sessionId, 'DELETE');
+    return newFetch(`/schema-defs/${id}`, sessionId, 'DELETE');
   }
 }
 
