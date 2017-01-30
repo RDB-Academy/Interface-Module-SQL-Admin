@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Card, CardFooter, Container, Jumbotron } from 'reactstrap';
+import { Card, CardFooter, Container, Jumbotron } from 'reactstrap';
 
-import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDefList, updateSchemaDef, deleteSchemaDef } from 'actions/schemaDefActions';
 import { SchemaDefList } from 'components/SchemaDef';
+import { OcticonButton } from 'components/Tools';
 import { SchemaDefBase } from 'PropTypes';
 import { getSchemaDefList } from 'store/schemaDefSelector';
 
@@ -56,12 +56,12 @@ class SchemaDefListContainer extends Component {
             <div className="d-flex w-100 justify-content-between">
               <h1>SchemaDef List</h1>
               <div className="d-flex">
-                <Button color="success" onClick={this.toggleCreateModal}>
-                  <Octicon name="plus" /> New
-                </Button>
-                <Button color="info" onClick={this.props.loadSchemaDefList}>
-                  <Octicon name="sync" /> Reload
-                </Button>
+                <OcticonButton color="success" onClick={this.toggleCreateModal} octiconName="plus">
+                  New
+                </OcticonButton>
+                <OcticonButton color="info" onClick={this.props.loadSchemaDefList} octiconName="sync">
+                  Reload
+                </OcticonButton>
               </div>
             </div>
           </Container>

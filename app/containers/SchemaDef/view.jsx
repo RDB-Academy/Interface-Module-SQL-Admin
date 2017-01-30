@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
+import { Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
 
 import Helmet from 'react-helmet';
-import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import Link from 'react-router/Link';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDef } from 'actions/schemaDefActions';
-import { SchemaDefAvailableButton } from 'components/SchemaDef';
+import { OcticonButton } from 'components/Tools';
 import { SchemaDefExtended } from 'PropTypes';
 import { getSchemaDefById } from 'store/schemaDefSelector';
 
@@ -65,21 +64,34 @@ class SchemaDefView extends Component {
             <div className="d-flex w-100 justify-content-between">
               <h1>#{schemaDef.id}-{schemaDef.name}</h1>
               <div className="d-flex">
-                <Button color="info" onClick={() => this.props.loadSchemaDef(this.props.params.id)}>
-                  <Octicon name="sync" /> Refresh
-                </Button>
-                <SchemaDefAvailableButton
+                <OcticonButton
+                  color="info"
+                  onClick={() => this.props.loadSchemaDef(this.props.params.id)}
+                  octiconName="sync"
+                >
+                  Refresh
+                </OcticonButton>
+                <OcticonButton
                   color={schemaDef.available ? 'success' : 'danger'}
-                  setAvailable={this.setAvailable}
+                  onClick={this.setAvailable}
+                  octiconName="radio-tower"
                 >
                   {schemaDef.available ? 'Publish' : 'Unpublish'}
-                </SchemaDefAvailableButton>
-                <Button color="warning" onClick={() => { console.log('edit'); }}>
-                  <Octicon name="pencil" /> Edit
-                </Button>
-                <Button color="danger" onClick={() => { console.log('delete'); }}>
-                  <Octicon name="x" /> Delete
-                </Button>
+                </OcticonButton>
+                <OcticonButton
+                  color="warning"
+                  onClick={() => { console.log('edit'); }}
+                  octiconName="pencil"
+                >
+                  Edit
+                </OcticonButton>
+                <OcticonButton
+                  color="danger"
+                  onClick={() => { console.log('edit'); }}
+                  octiconName="x"
+                >
+                  Delete
+                </OcticonButton>
               </div>
             </div>
           </Container>

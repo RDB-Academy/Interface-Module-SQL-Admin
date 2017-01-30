@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { Badge, Button, ListGroupItem, ListGroupItemText } from 'reactstrap';
+import { Badge, ListGroupItem, ListGroupItemText } from 'reactstrap';
 
-import Octicon from 'react-octicon';
 import Link from 'react-router/Link';
 
-import { ImprovedMoment } from 'components/Tools';
+import { ImprovedMoment, OcticonButton } from 'components/Tools';
 import { SchemaDefBase } from 'PropTypes';
 
 class SchemaDefListEntry extends Component {
@@ -53,25 +52,15 @@ class SchemaDefListEntry extends Component {
     const { collapse } = this.state;
 
     const renderAvailable = () => (
-      <Button
-        outline
-        color={schemaDef.available ? 'success' : 'danger'}
-        onClick={this.setAvailable}
-      >
-        <Octicon name="radio-tower" />
-      </Button>
+      <OcticonButton outline color={schemaDef.available ? 'success' : 'danger'} onClick={this.setAvailable} octiconName="radio-tower" />
     );
 
     const renderEdit = () => (
-      <Button outline color="warning">
-        <Octicon name="pencil" />
-      </Button>
+      <OcticonButton outline color="warning" onClick={() => { console.log('test'); }} octiconName="pencil" />
     );
 
     const renderDelete = () => (
-      <Button outline color="danger" onClick={this.delete}>
-        <Octicon name="x" />
-      </Button>
+      <OcticonButton outline color="danger" onClick={this.delete} octiconName="x" />
     );
 
     return (
@@ -88,9 +77,7 @@ class SchemaDefListEntry extends Component {
               { collapse && renderAvailable() }
               { collapse && renderEdit() }
               { collapse && renderDelete() }
-              <Button>
-                <Octicon name={collapse ? 'chevron-down' : 'chevron-up'} />
-              </Button>
+              <OcticonButton octiconName={collapse ? 'chevron-down' : 'chevron-up'} />
             </small>
           </div>
           <ListGroupItemText tag="div" hidden={collapse}>

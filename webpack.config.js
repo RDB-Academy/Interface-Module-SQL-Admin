@@ -131,7 +131,9 @@ if (APP.isProduction) {
     hot: true,
     contentBase: APP.buildPath,
     publicPath: '/admin/',
-    historyApiFallback: true,
+    historyApiFallback: {
+      index: '/admin/index.html',
+    },
     proxy: {
       '/admin/api': {
         target: 'http://localhost:9000',
