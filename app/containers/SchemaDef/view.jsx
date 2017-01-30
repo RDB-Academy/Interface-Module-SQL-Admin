@@ -8,6 +8,7 @@ import Link from 'react-router/Link';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDef } from 'actions/schemaDefActions';
+import { SchemaDefAvailableButton } from 'components/SchemaDef';
 import { SchemaDefExtended } from 'PropTypes';
 import { getSchemaDefById } from 'store/schemaDefSelector';
 
@@ -31,10 +32,18 @@ class SchemaDefView extends Component {
     if (schemaDef === null || schemaDef.relations === undefined) {
       this.props.loadSchemaDef(params.id);
     }
+
+    this.setAvailable = this.setAvailable.bind(this);
+  }
+
+  setAvailable(event) {
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   render() {
     const { schemaDef } = this.props;
+
     if (schemaDef === null || schemaDef.relations === undefined) {
       return (
         <div>
@@ -59,9 +68,12 @@ class SchemaDefView extends Component {
                 <Button color="info" onClick={() => this.props.loadSchemaDef(this.props.params.id)}>
                   <Octicon name="sync" /> Refresh
                 </Button>
-                <Button color="success" onClick={() => { console.log('publish'); }}>
-                  <Octicon name="radio-tower" /> Publish
-                </Button>
+                <SchemaDefAvailableButton
+                  color={schemaDef.available ? 'success' : 'danger'}
+                  setAvailable={this.setAvailable}
+                >
+                  {schemaDef.available ? 'Publish' : 'Unpublish'}
+                </SchemaDefAvailableButton>
                 <Button color="warning" onClick={() => { console.log('edit'); }}>
                   <Octicon name="pencil" /> Edit
                 </Button>
