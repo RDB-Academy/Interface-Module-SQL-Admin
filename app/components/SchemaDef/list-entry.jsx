@@ -81,19 +81,11 @@ class SchemaDefListEntry extends Component {
             </small>
           </div>
           <ListGroupItemText tag="div" hidden={collapse}>
-            <div className="field"><p>Created At :</p> <ImprovedMoment>{schemaDef.createdAt}</ImprovedMoment></div>
-            <div className="field"><p>Modified At:</p> <ImprovedMoment>{schemaDef.modifiedAt}</ImprovedMoment></div>
+            <div className="field"><p>Created At:</p>{' '}<ImprovedMoment>{schemaDef.createdAt}</ImprovedMoment></div>
+            <div className="field"><p>Modified At:</p>{' '}<ImprovedMoment>{schemaDef.modifiedAt}</ImprovedMoment></div>
           </ListGroupItemText>
         </div>
         <div className="schemadef-list-entry-footer" hidden={collapse}>
-          {/*
-          <Button className={`reaction ${(schemaDef.reactions.self === '+1') ? 'voted' : ''}`}>
-            <Octicon name="thumbsup" />{schemaDef.reactions['+1']}
-          </Button>
-          <Button className={`reaction ${(schemaDef.reactions.self === '-1') ? 'voted' : ''}`}>
-            <Octicon name="thumbsdown" />{schemaDef.reactions['-1']}
-          </Button>
-          */}
           { renderAvailable() }
           { renderEdit() }
           { renderDelete() }
