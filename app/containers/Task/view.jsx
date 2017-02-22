@@ -3,7 +3,7 @@ import { Container, Jumbotron } from 'reactstrap';
 import Helmet from 'react-helmet';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import Link from 'react-router/Link';
+import Link from 'react-router-dom/Link';
 
 import { Task } from 'PropTypes';
 import { getTaskById } from 'store/taskSelector';

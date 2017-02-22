@@ -3,7 +3,7 @@ import { Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroup
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import Link from 'react-router/Link';
+import Link from 'react-router-dom/Link';
 import { bindActionCreators } from 'redux';
 
 import { loadSchemaDef } from 'actions/schemaDefActions';

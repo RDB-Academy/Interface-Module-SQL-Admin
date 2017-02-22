@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Match from 'react-router/Match';
+import Route from 'react-router-dom/Route';
 
 import TableDefView from './view';
 
@@ -9,7 +9,7 @@ const TableDefPage = ({ pathname }) => (
     <Helmet
       title="TableDef"
     />
-    <Match pattern={`${pathname}/:id`} exactly component={TableDefView} />
+    <Route pattern={`${pathname}/:id`} exactly component={TableDefView} />
   </div>
 );
 /*

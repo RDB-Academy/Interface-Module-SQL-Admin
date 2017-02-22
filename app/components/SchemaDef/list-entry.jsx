@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Badge, ListGroupItem, ListGroupItemText } from 'reactstrap';
 
-import Link from 'react-router/Link';
+import Link from 'react-router-dom/Link';
 
 import { ImprovedMoment, OcticonButton } from 'components/Tools';
 import { SchemaDefBase } from 'PropTypes';

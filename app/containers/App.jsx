@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { BrowserRouter, Match, Redirect, Miss } from 'react-router';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -40,13 +40,13 @@ class App extends Component {
           <main>
             { isLoggedIn ? (
               <div>
-                <Match pattern="/" exactly render={() => (<h1>Index</h1>)} />
-                <Match pattern="/schema-defs" component={SchemaDefPage} />
-                <Match pattern="/table-defs" component={TableDefPage} />
-                <Match pattern="/tasks" component={TaskPage} />
-                <Match pattern="/task-trials" exactly render={() => (<h1>taskTrials</h1>)} />
-                <Match pattern="/status" exactly render={() => (<h1>status</h1>)} />
-                <Miss
+                <Route pattern="/" exactly render={() => (<h1>Index</h1>)} />
+                <Route pattern="/schema-defs" component={SchemaDefPage} />
+                <Route pattern="/table-defs" component={TableDefPage} />
+                <Route pattern="/tasks" component={TaskPage} />
+                <Route pattern="/task-trials" exactly render={() => (<h1>taskTrials</h1>)} />
+                <Route pattern="/status" exactly render={() => (<h1>status</h1>)} />
+                <Route
                   render={() => (
                     <Redirect to="/" />
                   )}
@@ -54,8 +54,8 @@ class App extends Component {
               </div>
             ) : (
               <div>
-                <Match pattern="/login" exactly component={LoginPage} />
-                <Miss
+                <Route pattern="/login" exactly component={LoginPage} />
+                <Route
                   render={() => (
                     <Redirect to="/login" />
                   )}

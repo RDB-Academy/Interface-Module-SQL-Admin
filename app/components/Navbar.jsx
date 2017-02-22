@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Link from 'react-router/Link';
+import Link from 'react-router-dom/Link';
 import { Collapse, Navbar as BSNavBar, NavbarToggler, NavItem } from 'reactstrap';
 
 class Navbar extends Component {

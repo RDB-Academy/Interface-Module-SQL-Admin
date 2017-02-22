@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Match from 'react-router/Match';
+import Route from 'react-router-dom/Route';
 
 import SchemaDefListContainer from './list';
 import SchemaDefView from './view';
@@ -10,8 +10,8 @@ const SchemaDefPage = ({ pathname }) => (
     <Helmet
       title="SchemaDef"
     />
-    <Match pattern={`${pathname}`} exactly component={SchemaDefListContainer} />
-    <Match pattern={`${pathname}/:id`} exactly component={SchemaDefView} />
+    <Route pattern={`${pathname}`} exactly component={SchemaDefListContainer} />
+    <Route pattern={`${pathname}/:id`} exactly component={SchemaDefView} />
   </div>
 );
 

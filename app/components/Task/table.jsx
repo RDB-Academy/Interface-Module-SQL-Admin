@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Octicon from 'react-octicon';
-import Link from 'react-router/Link';
+import Link from 'react-router-dom/Link';
 import { Button, Table } from 'reactstrap';
 
 import { ImprovedMoment } from 'components/Tools';

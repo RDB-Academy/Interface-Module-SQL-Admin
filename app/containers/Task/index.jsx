@@ -1,5 +1,5 @@
 import React from 'react';
-import Match from 'react-router/Match';
+import Route from 'react-router-dom/Route';
 import Helmet from 'react-helmet';
 
 import TaskList from './list';
@@ -10,8 +10,8 @@ const TaskPage = ({ pathname }) => (
     <Helmet
       title="Tasks"
     />
-    <Match pattern={`${pathname}`} exactly component={TaskList} />
-    <Match pattern={`${pathname}/:id`} exactly component={TaskView} />
+    <Route pattern={`${pathname}`} exactly component={TaskList} />
+    <Route pattern={`${pathname}/:id`} exactly component={TaskView} />
   </div>
 );
 
