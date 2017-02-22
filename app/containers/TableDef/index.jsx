@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import Route from 'react-router-dom/Route';
 
 import TableDefView from './view';
 
-const TableDefPage = ({ pathname }) => (
+const TableDefPage = ({ match }) => (
   <div>
     <Helmet
       title="TableDef"
     />
-    <Route pattern={`${pathname}/:id`} exactly component={TableDefView} />
+    <Route path={`${match.path}/:id`} exact component={TableDefView} />
   </div>
 );
 /*
@@ -18,7 +18,9 @@ const TableDefPage = ({ pathname }) => (
 */
 
 TableDefPage.propTypes = {
-  pathname: React.PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default TableDefPage;

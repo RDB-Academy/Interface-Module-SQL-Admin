@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Route from 'react-router-dom/Route';
 import Helmet from 'react-helmet';
 
 import TaskList from './list';
 import TaskView from './view';
 
-const TaskPage = ({ pathname }) => (
+const TaskPage = ({ match }) => (
   <div>
     <Helmet
       title="Tasks"
     />
-    <Route pattern={`${pathname}`} exactly component={TaskList} />
-    <Route pattern={`${pathname}/:id`} exactly component={TaskView} />
+    <Route path={`${match.path}`} exact component={TaskList} />
+    <Route path={`${match.path}/:id`} exact component={TaskView} />
   </div>
 );
 
 TaskPage.propTypes = {
-  pathname: React.PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default TaskPage;

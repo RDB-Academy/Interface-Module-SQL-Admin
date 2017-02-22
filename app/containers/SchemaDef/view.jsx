@@ -14,8 +14,10 @@ import { getSchemaDefById } from 'store/schemaDefSelector';
 class SchemaDefView extends Component {
   static propTypes = {
     schemaDef: SchemaDefExtended,
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }).isRequired,
     }).isRequired,
     loadSchemaDef: PropTypes.func.isRequired,
   }
@@ -27,9 +29,9 @@ class SchemaDefView extends Component {
   constructor(props) {
     super(props);
 
-    const { schemaDef, params } = this.props;
+    const { schemaDef, match } = this.props;
     if (schemaDef === null || schemaDef.relations === undefined) {
-      this.props.loadSchemaDef(params.id);
+      this.props.loadSchemaDef(match.params.id);
     }
 
     this.setAvailable = this.setAvailable.bind(this);
@@ -66,7 +68,7 @@ class SchemaDefView extends Component {
               <div className="d-flex">
                 <OcticonButton
                   color="info"
-                  onClick={() => this.props.loadSchemaDef(this.props.params.id)}
+                  onClick={() => this.props.loadSchemaDef(this.props.match.params.id)}
                   octiconName="sync"
                 >
                   Refresh
@@ -123,7 +125,7 @@ class SchemaDefView extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  schemaDef: getSchemaDefById(state, parseInt(props.params.id, 10)),
+  schemaDef: getSchemaDefById(state, parseInt(props.match.params.id, 10)),
 });
 
 

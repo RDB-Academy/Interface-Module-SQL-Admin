@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import Route from 'react-router-dom/Route';
 
 import SchemaDefListContainer from './list';
 import SchemaDefView from './view';
 
-const SchemaDefPage = ({ pathname }) => (
+const SchemaDefPage = ({ match }) => (
   <div>
     <Helmet
       title="SchemaDef"
     />
-    <Route pattern={`${pathname}`} exactly component={SchemaDefListContainer} />
-    <Route pattern={`${pathname}/:id`} exactly component={SchemaDefView} />
+    <Route path={`${match.path}`} exact component={SchemaDefListContainer} />
+    <Route path={`${match.path}/:id`} exact component={SchemaDefView} />
   </div>
 );
 
 SchemaDefPage.propTypes = {
-  pathname: React.PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default SchemaDefPage;

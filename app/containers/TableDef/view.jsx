@@ -12,8 +12,10 @@ import { getTableById } from 'store/tableDefSelector';
 
 class TableDefView extends Component {
   static propTypes = {
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }).isRequired,
     }).isRequired,
     loadTableDefById: PropTypes.func.isRequired,
     tableDef: TableDef,
@@ -26,6 +28,8 @@ class TableDefView extends Component {
   constructor(props) {
     super(props);
 
+    console.log(props.match);
+
     this.loadTableDef = this.loadTableDef.bind(this);
     if (this.props.tableDef === null) {
       this.loadTableDef();
@@ -33,7 +37,7 @@ class TableDefView extends Component {
   }
 
   loadTableDef() {
-    this.props.loadTableDefById(this.props.params.id);
+    this.props.loadTableDefById(this.props.match.params.id);
   }
 
   render() {
@@ -101,7 +105,7 @@ class TableDefView extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  tableDef: getTableById(state, parseInt(props.params.id, 10)),
+  tableDef: getTableById(state, parseInt(props.match.params.id, 10)),
 });
 
 const mapDispatchToProps = dispatch => ({

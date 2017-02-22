@@ -40,12 +40,12 @@ class App extends Component {
           <main>
             { isLoggedIn ? (
               <div>
-                <Route pattern="/" exactly render={() => (<h1>Index</h1>)} />
-                <Route pattern="/schema-defs" component={SchemaDefPage} />
-                <Route pattern="/table-defs" component={TableDefPage} />
-                <Route pattern="/tasks" component={TaskPage} />
-                <Route pattern="/task-trials" exactly render={() => (<h1>taskTrials</h1>)} />
-                <Route pattern="/status" exactly render={() => (<h1>status</h1>)} />
+                <Route path="/" exact render={() => (<h1>Index</h1>)} />
+                <Route path="/schema-defs" component={SchemaDefPage} />
+                <Route path="/table-defs" component={TableDefPage} />
+                <Route path="/tasks" component={TaskPage} />
+                <Route path="/task-trials" exact render={() => (<h1>taskTrials</h1>)} />
+                <Route path="/status" exact render={() => (<h1>status</h1>)} />
                 <Route
                   render={() => (
                     <Redirect to="/" />
@@ -54,7 +54,7 @@ class App extends Component {
               </div>
             ) : (
               <div>
-                <Route pattern="/login" exactly component={LoginPage} />
+                <Route path="/login" exactly component={LoginPage} />
                 <Route
                   render={() => (
                     <Redirect to="/login" />
