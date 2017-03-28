@@ -3,11 +3,12 @@ import { Button } from 'reactstrap';
 
 import Octicon from 'react-octicon';
 
-const OcticonButton = ({ outline, color, onClick, octiconName, children }) => (
+const OcticonButton = ({ outline, color, onClick, octiconName, children, size }) => (
   <Button
     outline={outline}
     color={color}
     onClick={onClick}
+    size={size}
   >
     <Octicon name={octiconName} /> {children}
   </Button>
@@ -19,6 +20,7 @@ OcticonButton.propTypes = {
   onClick: PropTypes.func,
   octiconName: PropTypes.string.isRequired,
   children: PropTypes.string,
+  size: PropTypes.string,
 };
 
 OcticonButton.defaultProps = {
@@ -26,6 +28,7 @@ OcticonButton.defaultProps = {
   outline: false,
   onClick: null,
   children: '',
+  size: null,
 };
 
 export default OcticonButton;

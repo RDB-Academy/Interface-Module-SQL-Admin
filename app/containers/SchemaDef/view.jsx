@@ -1,15 +1,64 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardBlock, CardHeader, Container, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
+import { Card, CardBlock, CardHeader, Container, Collapse, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import Link from 'react-router-dom/Link';
 import { bindActionCreators } from 'redux';
 
+import TableDefEntry from 'containers/TableDef/listEntry';
 import { loadSchemaDef } from 'actions/schemaDefActions';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefExtended } from 'PropTypes';
 import { getSchemaDefById } from 'store/schemaDefSelector';
+
+class TableDefForm extends Component {
+  static propTypes = {
+    submitAction: PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = { name: '' };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const tableDef = {
+      name: this.state.name.trim(),
+    };
+
+    this.props.submitAction(tableDef);
+
+    this.setState({
+      name: '',
+    });
+  }
+
+  handleChange(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.setState({ name: event.target.value });
+  }
+
+  render() {
+    const { name } = this.state;
+    return (
+      <ListGroupItem>
+        <form onSubmit={this.handleSubmit}>
+          <input placeholder="table name" value={name} onChange={this.handleChange} />
+          <OcticonButton color="success" size="sm" octiconName="plus">Add</OcticonButton>
+        </form>
+      </ListGroupItem>
+    );
+  }
+}
 
 class SchemaDefView extends Component {
   static propTypes = {
@@ -34,12 +83,28 @@ class SchemaDefView extends Component {
       this.props.loadSchemaDef(match.params.id);
     }
 
+    this.state = { collapseTableDefForm: false };
+
+    this.toggleTableDefForm = this.toggleTableDefForm.bind(this);
+
+    this.submitTableDef = this.submitTableDef.bind(this);
     this.setAvailable = this.setAvailable.bind(this);
   }
 
   setAvailable(event) {
     event.preventDefault();
     event.stopPropagation();
+  }
+
+  toggleTableDefForm() {
+    this.setState({ collapseTableDefForm: !this.state.collapseTableDefForm });
+  }
+
+  submitTableDef(tableDef) {
+    console.log(tableDef);
+    console.log("test");
+
+    this.toggleTableDefForm();
   }
 
   render() {
@@ -81,15 +146,8 @@ class SchemaDefView extends Component {
                   {schemaDef.available ? 'Publish' : 'Unpublish'}
                 </OcticonButton>
                 <OcticonButton
-                  color="warning"
-                  onClick={() => { console.log('edit'); }}
-                  octiconName="pencil"
-                >
-                  Edit
-                </OcticonButton>
-                <OcticonButton
                   color="danger"
-                  onClick={() => { console.log('edit'); }}
+                  onClick={() => { console.log('delete'); }}
                   octiconName="x"
                 >
                   Delete
@@ -101,19 +159,27 @@ class SchemaDefView extends Component {
         <Container>
           <Card>
             <CardBlock>
-              <p>asjdkl</p>
               <Card>
                 <CardHeader>
                   Tables:
+                  <div style={{ float: 'right' }}>
+                    <OcticonButton
+                      size="sm"
+                      color="success"
+                      onClick={this.toggleTableDefForm}
+                      octiconName="plus"
+                    >
+                      Add
+                    </OcticonButton>
+                  </div>
                 </CardHeader>
                 <ListGroup className="list-group-flush">
                   { schemaDef.relations.tableDefList.map(tableDef => (
-                    <ListGroupItem key={tableDef.name}>
-                      <Link to={`/table-defs/${tableDef.id}`}>
-                        #{tableDef.id}-{tableDef.name}
-                      </Link>
-                    </ListGroupItem>
+                    <TableDefEntry key={tableDef.id} tableDef={tableDef} />
                   ))}
+                  <Collapse isOpen={this.state.collapseTableDefForm}>
+                    <TableDefForm submitAction={this.submitTableDef} />
+                  </Collapse>
                 </ListGroup>
               </Card>
             </CardBlock>
@@ -123,6 +189,14 @@ class SchemaDefView extends Component {
     );
   }
 }
+
+/*
+<ListGroupItem key={tableDef.name}>
+  <Link to={`/table-defs/${tableDef.id}`}>
+    #{tableDef.id}-{tableDef.name}
+  </Link>
+</ListGroupItem>
+*/
 
 const mapStateToProps = (state, props) => ({
   schemaDef: getSchemaDefById(state, parseInt(props.match.params.id, 10)),
