@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import TableDefEntry from 'containers/TableDef/listEntry';
 import { loadSchemaDef } from 'actions/schemaDefActions';
+import { createTableDef } from 'actions/tableDefActions';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefExtended } from 'PropTypes';
 import { getSchemaDefById } from 'store/schemaDefSelector';
@@ -68,6 +69,7 @@ class SchemaDefView extends Component {
         id: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
+    createTableDef: PropTypes.func.isRequired,
     loadSchemaDef: PropTypes.func.isRequired,
   }
 
@@ -100,11 +102,13 @@ class SchemaDefView extends Component {
     this.setState({ collapseTableDefForm: !this.state.collapseTableDefForm });
   }
 
-  submitTableDef(tableDef) {
-    console.log(tableDef);
-    console.log("test");
+  submitTableDef(tableDefData) {
+    const tableDef = { ...tableDefData };
+    tableDef.schemaDefId = this.props.schemaDef.id;
 
-    this.toggleTableDefForm();
+    console.log(tableDef);
+    this.props.createTableDef(tableDef);
+    // this.toggleTableDefForm();
   }
 
   render() {
@@ -204,6 +208,7 @@ const mapStateToProps = (state, props) => ({
 
 
 const mapDispatchToProps = dispatch => ({
+  createTableDef: bindActionCreators(createTableDef, dispatch),
   loadSchemaDef: bindActionCreators(loadSchemaDef, dispatch),
 });
 
