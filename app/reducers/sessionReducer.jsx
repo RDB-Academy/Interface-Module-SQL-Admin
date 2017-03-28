@@ -1,7 +1,8 @@
 import * as types from 'actionTypes';
 
 const initialState = {
-  id: localStorage.getItem('auth-key') || null,
+  sessionId: localStorage.getItem('auth-key') || null,
+  loginFailure: false,
 };
 
 export default function sessionReducer(state = initialState, action) {
@@ -9,13 +10,17 @@ export default function sessionReducer(state = initialState, action) {
     case types.LOG_IN_SUCCESS:
       return {
         ...state,
-        id: action.data.id,
+        sessionId: action.data.id,
       };
+    case types.LOG_IN_FAILURE:
+      return {
+        ...state,
+        loginFailure: true,
+      }
     case types.LOG_OUT_SUCCESS:
-      localStorage.removeItem('auth-key');
       return {
         ...initialState,
-        id: null,
+        sessionId: null,
       };
     default:
       return state;

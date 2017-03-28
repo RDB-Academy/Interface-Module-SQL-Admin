@@ -5,7 +5,7 @@ import { loginUser } from 'actions/sessionActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -54,11 +54,19 @@ class LoginPage extends Component {
                       <Label sm={2} for="email">E-Mail:</Label>
                       <Col sm={10}>
                         <Input
+                          required
                           type="email"
                           id="email"
                           placeholder="e-meal 🍖"
                           value={this.state.email}
                           onChange={this.handleInputChange}
+                          style={this.props.loginFailure ?
+                            {
+                              border: "1px solid #d43f3a",
+                              boxShadow: "0 0 10px #d43f3a",
+                            } :
+                            {}
+                          }
                         />
                       </Col>
                     </FormGroup>
@@ -66,12 +74,20 @@ class LoginPage extends Component {
                       <Label sm={2} for="password">Password:</Label>
                       <Col sm={10}>
                         <Input
+                          required
                           type="password"
                           id="password"
                           placeholder="your password ;)"
                           value={this.state.password}
                           onChange={this.handleInputChange}
-                        />
+                          style={this.props.loginFailure ?
+                            {
+                              border: "1px solid #d43f3a",
+                              boxShadow: "0 0 10px #d43f3a",
+                            } :
+                            {}
+                          }
+                      />
                       </Col>
                     </FormGroup>
                     <FormGroup check row>
@@ -90,7 +106,7 @@ class LoginPage extends Component {
   }
 }
 
-LoginPage.propTypes = {
+Login.propTypes = {
   loginUser: React.PropTypes.func.isRequired,
 };
 
@@ -100,4 +116,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+function mapStateToProps(state) {
+  return {
+    loginFailure: state.session.loginFailure,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

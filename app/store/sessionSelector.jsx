@@ -3,5 +3,5 @@ export const getSessionStore = state => (
 );
 
 export const getSessionId = state => (
-  getSessionStore(state).id
+  getSessionStore(state).sessionId
 );

@@ -12,7 +12,7 @@ import 'styles/main.css';
 import { logoutUser } from 'actions/sessionActions';
 import Navbar from 'components/Navbar';
 
-import LoginPage from './LoginPage';
+import Login from './Login';
 import SchemaDefPage from './SchemaDef';
 import TableDefPage from './TableDef';
 import TaskPage from './Task';
@@ -54,7 +54,7 @@ class App extends Component {
               </div>
             ) : (
               <div>
-                <Route path="/login" exactly component={LoginPage} />
+                <Route path="/login" exactly component={Login} />
                 <Route
                   render={() => (
                     <Redirect to="/login" />
@@ -83,7 +83,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.session.id !== null,
+    isLoggedIn: state.session.sessionId !== null,
   };
 }
 
