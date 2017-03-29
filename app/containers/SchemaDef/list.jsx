@@ -4,7 +4,7 @@ import { Card, CardFooter, Container, Jumbotron } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { loadSchemaDefList, updateSchemaDef, deleteSchemaDef } from 'actions/schemaDefActions';
+import { SchemaDefActions } from 'actions';
 import { SchemaDefList } from 'components/SchemaDef';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefBase } from 'PropTypes';
@@ -92,9 +92,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadSchemaDefList: bindActionCreators(loadSchemaDefList, dispatch),
-  updateSchemaDef: bindActionCreators(updateSchemaDef, dispatch),
-  deleteSchemaDef: bindActionCreators(deleteSchemaDef, dispatch),
+  loadSchemaDefList: bindActionCreators(SchemaDefActions.readAll, dispatch),
+  updateSchemaDef: bindActionCreators(SchemaDefActions.update, dispatch),
+  deleteSchemaDef: bindActionCreators(SchemaDefActions.delete, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefListContainer);

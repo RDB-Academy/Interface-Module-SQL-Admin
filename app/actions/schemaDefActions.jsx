@@ -1,111 +1,151 @@
 import schemaDefApi from 'api/schemaDefApi';
-import * as types from 'actionTypes';
+import { SchemaDefActionTypes as types } from 'actionTypes';
 import { getSessionId } from 'store/sessionSelector';
 
-export function loadSchemaDefListSuccess(response) {
-  return {
-    type: types.SCHEMA_DEF_LIST_LOAD_SUCCESS,
-    data: response,
-  };
-}
 
-export function loadSchemaDefListFailure(error) {
-  return {
-    type: types.SCHEMA_DEF_LIST_LOAD_FAILURE,
-    data: {
+class SchemaDefActions {
+/**
+ * Create
+ */
+  static createSuccess = data => ({
+    type: types.CREATE_SUCCESS,
+    data,
+  })
+
+  static createFailure = error => ({
+    type: types.CREATE_FAILURE,
+    error,
+  });
+
+/**
+ * Read
+ */
+  static readAllSuccess = data => ({
+    type: types.READ_ALL_SUCCESS,
+    data,
+  });
+
+  static readAllFailure = error => ({
+    type: types.READ_ALL_FAILURE,
+    error: {
       httpCode: error.message,
       httpText: error.httpText,
       body: error.body,
     },
-  };
-}
+  });
 
-export function loadSchemaDefSuccess(response) {
-  return {
-    type: types.SCHEMA_DEF_FULL_LOAD_SUCCESS,
-    data: response,
-  };
-}
+  static readSuccess = data => ({
+    type: types.READ_SUCCESS,
+    data,
+  });
 
-export function loadSchemaDefFailure(error) {
-  return {
-    type: types.SCHEMA_DEF_FULL_LOAD_FAILURE,
-    data: {
+  static readFailure = error => ({
+    type: types.READ_FAILURE,
+    error: {
       httpCode: error.message,
       httpText: error.httpText,
       body: error.body,
     },
-  };
+  });
+
+/**
+ * Update
+ */
+  static updateSuccess = data => ({
+    type: types.UPDATE_SUCCESS,
+    data,
+  });
+
+  static updateFailure = error => ({
+    type: types.UPDATE_FAILURE,
+    error,
+  })
+
+/**
+ *  Delete
+ */
+  static deleteSuccess = data => ({
+    type: types.DELETE_SUCCESS,
+    data,
+  });
+
+  static deleteFailure = error => ({
+    type: types.DELETE_FAILURE,
+    error: {
+      httpCode: error.message,
+      httpText: error.httpText,
+      body: error.body,
+    },
+  });
 }
 
-export const deleteSchemaDefSuccess = id => ({
-  type: types.SCHEMA_DEF_DELETE_SUCCESS,
-  data: {
-    id,
-  },
-});
-
-export const deleteSchemaDefFailure = error => ({
-  type: types.SCHEMA_DEF_DELETE_FAILURE,
-  data: {
-    httpCode: error.message,
-    httpText: error.httpText,
-    body: error.body,
-  },
-});
-
-export function createSchemaDef(schemaDef) {
-  return (dispatch, getState) => (
-    schemaDefApi.createSchemaDef(schemaDef, getSessionId(getState())).then((response) => {
-      dispatch(loadSchemaDefSuccess(response));
-    }, (error) => {
-      dispatch(loadSchemaDefFailure(error));
-    })
-  );
-}
-
-export const loadSchemaDefList = () => (
-  (dispatch, getState) => (
-    schemaDefApi
-      .loadSchemaDefList(getSessionId(getState()))
-        .then(response => (
-          dispatch(loadSchemaDefListSuccess(response))
-        )).catch(error => (
-          dispatch(loadSchemaDefListFailure(error))
-        ))
-  )
-);
-
-export const loadSchemaDef = id => (
-  (dispatch, getState) => (
-    schemaDefApi
-      .loadSchemaDef(id, getSessionId(getState()))
-      .then((response) => {
-        dispatch(loadSchemaDefSuccess(response));
+class SchemaDefActionCreator {
+/**
+ *  Create
+ */
+  static create = schemaDef => (
+    (dispatch, getState) => (
+      schemaDefApi.createSchemaDef(schemaDef, getSessionId(getState())).then((response) => {
+        dispatch(SchemaDefActions.createSuccess(response));
       }, (error) => {
-        dispatch(loadSchemaDefFailure(error));
+        dispatch(SchemaDefActions.createFailure(error));
       })
+    )
   )
-);
-
-export const updateSchemaDef = (id, schemaDef) => (
-  (dispatch, getState) => (
-    schemaDefApi
-      .updateSchemaDef(id, getSessionId(getState()), schemaDef)
-        .then(response => (
-          dispatch(loadSchemaDefSuccess(response))
-        ), error => (
-          dispatch(loadSchemaDefFailure(error))
-        ))
-  )
-);
-
-export function deleteSchemaDef(id) {
-  return (dispatch, getState) => (
-    schemaDefApi.deleteSchemaDef(id, getSessionId(getState())).then(() => {
-      dispatch(deleteSchemaDefSuccess(id));
-    }, (error) => {
-      dispatch(deleteSchemaDefFailure(error));
-    })
+/**
+ * Read
+ */
+  static readAll = () => (
+    (dispatch, getState) => (
+      schemaDefApi
+        .loadSchemaDefList(getSessionId(getState()))
+          .then(response => (
+            dispatch(SchemaDefActions.readAllSuccess(response))
+          )).catch(error => (
+            dispatch(SchemaDefActions.readAllFailure(error))
+          ))
+    )
   );
+
+  static read = id => (
+    (dispatch, getState) => (
+      schemaDefApi
+        .loadSchemaDef(id, getSessionId(getState()))
+        .then((response) => {
+          dispatch(SchemaDefActions.readSuccess(response));
+        }, (error) => {
+          dispatch(SchemaDefActions.readFailure(error));
+        })
+    )
+  );
+
+/**
+ * Update
+ */
+  static update = (id, schemaDef) => (
+    (dispatch, getState) => (
+      schemaDefApi
+        .updateSchemaDef(id, getSessionId(getState()), schemaDef)
+          .then(response => (
+            dispatch(SchemaDefActions.updateSuccess(response))
+          ), error => (
+            dispatch(SchemaDefActions.updateFailure(error))
+          ))
+    )
+  );
+
+/**
+ * Delete
+ */
+  static delete = id => (
+    (dispatch, getState) => (
+      schemaDefApi.deleteSchemaDef(id, getSessionId(getState())).then(() => {
+        dispatch(SchemaDefActions.deleteSuccess({ id }));
+      }, (error) => {
+        dispatch(SchemaDefActions.deleteFailure(error));
+      })
+    )
+  )
 }
+
+export default SchemaDefActionCreator;

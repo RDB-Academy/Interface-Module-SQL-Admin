@@ -1,7 +1,9 @@
-import * as types from 'actionTypes';
+import { BaseActionTypes } from 'actionTypes';
 
 const invalidateStore = () => ({
-  type: types.INVALIDATE_STORE,
+  type: BaseActionTypes.INVALIDATE_STORE,
 });
 
+export { default as SchemaDefActions } from './schemaDefActions';
+export { default as TableDefActions } from './tableDefActions';
 export default invalidateStore;

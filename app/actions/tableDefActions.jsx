@@ -1,33 +1,39 @@
 import tableDefApi from 'api/tableDefApi';
-import * as types from 'actionTypes';
+import { TableDefActionTypes as ActionTypes } from 'actionTypes';
 import { getSessionId } from 'store/sessionSelector';
 
-export const loadTableDefByIdSuccess = response => ({
-  type: types.TABLE_DEF_CREATE_SUCCESS,
-  data: response,
-});
+class TableDefActions {
+  static createSuccess = data => ({
+    type: ActionTypes.CREATE_SUCCESS,
+    data,
+  });
 
-export const createTableDefSuccess = response => ({
-  type: types.TABLE_DEF_CREATE_SUCCESS,
-  data: response,
-});
+  static readSuccess = data => ({
+    type: ActionTypes.CREATE_SUCCESS,
+    data,
+  });
+}
 
-export function loadTableDefById(tableDefId) {
-  return (dispatch, getState) => (
-    tableDefApi.loadTableDefById(getSessionId(getState()), tableDefId).then((response) => {
-      dispatch(loadTableDefByIdSuccess(response));
-    }).catch((error) => {
-      throw error;
-    })
+class TableDefActionCreators {
+  static createTableDef = tableDef => (
+    (dispatch, getState) => (
+      tableDefApi.createTableDef(getSessionId(getState()), tableDef).then((response) => {
+        dispatch(TableDefActions.createSuccess(response));
+      }).catch((error) => {
+        throw error;
+      })
+    )
+  );
+
+  static loadTableDefById = tableDefId => (
+    (dispatch, getState) => (
+      tableDefApi.loadTableDefById(getSessionId(getState()), tableDefId).then((response) => {
+        dispatch(TableDefActions.readSuccess(response));
+      }).catch((error) => {
+        throw error;
+      })
+    )
   );
 }
 
-export function createTableDef(tableDef) {
-  return (dispatch, getState) => (
-    tableDefApi.createTableDef(getSessionId(getState()), tableDef).then((response) => {
-      dispatch(createTableDefSuccess(response));
-    }).catch((error) => {
-      throw error;
-    })
-  );
-}
+export default TableDefActionCreators;

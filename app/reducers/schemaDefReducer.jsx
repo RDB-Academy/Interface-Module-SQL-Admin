@@ -1,29 +1,16 @@
-import * as types from 'actionTypes';
+import { SchemaDefActionTypes as types } from 'actionTypes';
 
 const initialState = {
   schemaDefList: [],
 };
 
-export default function schemaDefReducer(state = initialState, action) {
+const schemaDefReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.SCHEMA_DEF_LIST_LOAD_SUCCESS: {
-      return Object.assign({}, state, {
-        schemaDefList: action.data,
-        error: null,
-      });
-    }
-
-    case types.SCHEMA_DEF_LIST_LOAD_FAILURE: {
-      return Object.assign({}, state, {
-        error: {
-          code: action.data.httpCode,
-          text: action.data.httpText,
-          body: action.data.body,
-        },
-      });
-    }
-
-    case types.SCHEMA_DEF_FULL_LOAD_SUCCESS: {
+    /**
+     * Create
+     */
+    case types.CREATE_SUCCESS:
+    case types.READ_SUCCESS: {
       const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
       if (oldIndex === -1) {
         return {
@@ -44,8 +31,27 @@ export default function schemaDefReducer(state = initialState, action) {
       };
       return newState;
     }
+  /**
+   * Read All
+   */
+    case types.READ_ALL_SUCCESS: {
+      return Object.assign({}, state, {
+        schemaDefList: action.data,
+        error: null,
+      });
+    }
 
-    case types.SCHEMA_DEF_DELETE_SUCCESS: {
+    case types.READ_ALL_FAILURE: {
+      return Object.assign({}, state, {
+        error: {
+          code: action.error.httpCode,
+          text: action.error.httpText,
+          body: action.error.body,
+        },
+      });
+    }
+
+    case types.DELETE_SUCCESS: {
       const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
       if (oldIndex === -1) {
         return {
@@ -69,7 +75,12 @@ export default function schemaDefReducer(state = initialState, action) {
       return initialState;
     }
 
+    /**
+     * Fallback
+     */
     default:
       return state;
   }
-}
+};
+
+export default schemaDefReducer;

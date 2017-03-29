@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TableDefEntry, TableDefForm } from 'containers/TableDef';
-import { loadSchemaDef } from 'actions/schemaDefActions';
-import { createTableDef } from 'actions/tableDefActions';
+import { SchemaDefActions, TableDefActions } from 'actions';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefExtended, TableDefBase } from 'PropTypes';
 import { getSchemaDefById } from 'store/schemaDefSelector';
@@ -147,14 +146,6 @@ class SchemaDefView extends Component {
   }
 }
 
-/*
-<ListGroupItem key={tableDef.name}>
-  <Link to={`/table-defs/${tableDef.id}`}>
-    #{tableDef.id}-{tableDef.name}
-  </Link>
-</ListGroupItem>
-*/
-
 const mapStateToProps = (state, props) => {
   const schemaDefId = parseInt(props.match.params.id, 10);
   return {
@@ -165,8 +156,8 @@ const mapStateToProps = (state, props) => {
 
 
 const mapDispatchToProps = dispatch => ({
-  createTableDef: bindActionCreators(createTableDef, dispatch),
-  loadSchemaDef: bindActionCreators(loadSchemaDef, dispatch),
+  createTableDef: bindActionCreators(TableDefActions.create, dispatch),
+  loadSchemaDef: bindActionCreators(SchemaDefActions.read, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefView);

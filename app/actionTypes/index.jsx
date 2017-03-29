@@ -3,34 +3,41 @@ export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 
-export const INVALIDATE_STORE = 'INVALIDATE_STORE';
-
 export const TASK_LIST_SUCCESS = 'TASK_LIST_SUCCESS';
 
+export class BaseActionTypes {
+  static INVALIDATE_STORE = 'INVALIDATE_STORE';
+}
 
 /**
  * SchemaDef Actions
  */
-
-//* Read *******
-// Full Data
-export const SCHEMA_DEF_FULL_LOAD_SUCCESS = 'SCHEMA_DEF_FULL_LOAD_SUCCESS';
-export const SCHEMA_DEF_FULL_LOAD_FAILURE = 'SCHEMA_DEF_FULL_LOAD_FAILURE';
-
-// Read List
-export const SCHEMA_DEF_LIST_LOAD_SUCCESS = 'SCHEMA_DEF_LIST_LOAD_SUCCESS';
-export const SCHEMA_DEF_LIST_LOAD_FAILURE = 'SCHEMA_DEF_LIST_LOAD_FAILURE';
-
-// Delete
-export const SCHEMA_DEF_DELETE_SUCCESS = 'SCHEMA_DEF_DELETE_SUCCESS';
-export const SCHEMA_DEF_DELETE_FAILURE = 'SCHEMA_DEF_DELETE_FAILURE';
-
+export class SchemaDefActionTypes extends BaseActionTypes {
+  // Create
+  static CREATE_SUCCESS = 'SCHEMA_DEF_CREATE_SUCCESS';
+  static CREATE_FAILURE = 'SCHEMA_DEF_CREATE_FAILURE';
+  // Read
+  static READ_SUCCESS = 'SCHEMA_DEF_READ_SUCCESS';
+  static READ_FAILURE = 'SCHEMA_DEF_READ_FAILURE';
+  // ReadAll
+  static READ_ALL_SUCCESS = 'SCHEMA_DEF_READ_ALL_SUCCESS';
+  static READ_ALL_FAILURE = 'SCHEMA_DEF_READ_ALL_FAILURE';
+  // Update
+  static UPDATE_SUCCESS = 'SCHEMA_DEF_UPDATE_SUCCESS';
+  static UPDATE_FAILURE = 'SCHEMA_DEF_UPDATE_FAILURE';
+  // Delete
+  static DELETE_SUCCESS = 'SCHEMA_DEF_DELETE_SUCCESS';
+  static DELETE_FAILURE = 'SCHEMA_DEF_DELETE_FAILURE';
+}
 
 /**
  * TableDef Actions
  */
-
-//* Create *******
-// Read Base Data
-export const TABLE_DEF_CREATE_SUCCESS = 'TABLE_DEF_CREATE_SUCCESS';
-export const TABLE_DEF_CREATE_FAILURE = 'TABLE_DEF_CREATE_FAILURE';
+export class TableDefActionTypes extends BaseActionTypes {
+  // Create
+  static CREATE_SUCCESS = 'TABLE_DEF_CREATE_SUCCESS';
+  static CREATE_FAILURE = 'TABLE_DEF_CREATE_FAILURE';
+  // Read
+  static READ_SUCCESS = 'TABLE_DEF_READ_SUCCESS';
+  static READ_FAILURE = 'TABLE_DEF_READ_FAILURE';
+}

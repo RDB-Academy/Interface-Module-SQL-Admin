@@ -1,4 +1,4 @@
-import * as types from 'actionTypes';
+import { TableDefActionTypes as types, SchemaDefActionTypes } from 'actionTypes';
 
 const initialState = {
   tableDefList: [],
@@ -6,7 +6,10 @@ const initialState = {
 
 export default function tableDefReducer(state = initialState, action) {
   switch (action.type) {
-    case types.SCHEMA_DEF_FULL_LOAD_SUCCESS: {
+    /**
+     * Special Funciton
+     */
+    case SchemaDefActionTypes.READ_SUCCESS: {
       const tableDefList = Object.assign({}, state.tableDefList);
       if (typeof tableDefList[action.data.id] === 'undefined') {
         tableDefList[action.data.id] = [
@@ -20,7 +23,7 @@ export default function tableDefReducer(state = initialState, action) {
         tableDefList,
       };
     }
-    case types.TABLE_DEF_CREATE_SUCCESS: {
+    case types.CREATE_SUCCESS: {
       const tableDefList = [
         ...state.tableDefList[action.data.schemaDefId],
         action.data,
@@ -36,6 +39,7 @@ export default function tableDefReducer(state = initialState, action) {
     case types.INVALIDATE_STORE: {
       return initialState;
     }
+    
     default:
       return state;
   }

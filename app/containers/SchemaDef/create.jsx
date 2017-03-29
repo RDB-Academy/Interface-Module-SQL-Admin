@@ -4,7 +4,7 @@ import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { createSchemaDef } from 'actions/schemaDefActions';
+import { SchemaDefActions } from 'actions';
 
 class CreateSchemaDefModal extends Component {
   static propTypes = {
@@ -85,7 +85,7 @@ class CreateSchemaDefModal extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createSchemaDef: bindActionCreators(createSchemaDef, dispatch),
+  createSchemaDef: bindActionCreators(SchemaDefActions.create, dispatch),
 });
 
 export default connect(null, mapDispatchToProps)(CreateSchemaDefModal);
