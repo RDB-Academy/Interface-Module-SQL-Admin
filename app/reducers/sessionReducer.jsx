@@ -11,16 +11,18 @@ export default function sessionReducer(state = initialState, action) {
       return {
         ...state,
         sessionId: action.data.id,
+        loginFailure: false,
       };
     case types.LOG_IN_FAILURE:
       return {
         ...state,
         loginFailure: true,
-      }
+      };
     case types.LOG_OUT_SUCCESS:
       return {
         ...initialState,
         sessionId: null,
+        loginFailure: false,
       };
     default:
       return state;

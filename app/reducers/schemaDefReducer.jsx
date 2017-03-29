@@ -6,14 +6,14 @@ const initialState = {
 
 export default function schemaDefReducer(state = initialState, action) {
   switch (action.type) {
-    case types.LOAD_SCHEMA_DEF_LIST_SUCCESS: {
+    case types.SCHEMA_DEF_LIST_LOAD_SUCCESS: {
       return Object.assign({}, state, {
         schemaDefList: action.data,
         error: null,
       });
     }
 
-    case types.LOAD_SCHEMA_DEF_LIST_FAILURE: {
+    case types.SCHEMA_DEF_LIST_LOAD_FAILURE: {
       return Object.assign({}, state, {
         error: {
           code: action.data.httpCode,
@@ -23,7 +23,7 @@ export default function schemaDefReducer(state = initialState, action) {
       });
     }
 
-    case types.LOAD_SCHEMA_DEF_SUCCESS: {
+    case types.SCHEMA_DEF_FULL_LOAD_SUCCESS: {
       const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
       if (oldIndex === -1) {
         return {
@@ -45,7 +45,7 @@ export default function schemaDefReducer(state = initialState, action) {
       return newState;
     }
 
-    case types.DELETE_SCHEMA_DEF_SUCCESS: {
+    case types.SCHEMA_DEF_DELETE_SUCCESS: {
       const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
       if (oldIndex === -1) {
         return {

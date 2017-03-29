@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 import { Button, Card, CardBlock, Collapse, ListGroupItem } from 'reactstrap';
-import { TableDef } from 'PropTypes';
+import { TableDefBase } from 'PropTypes';
 
 class TableDefEntry extends Component {
   static propTypes = {
-    tableDef: TableDef.isRequired,
+    tableDef: TableDefBase.isRequired,
   }
 
   constructor(props) {
@@ -31,7 +31,7 @@ class TableDefEntry extends Component {
         <Collapse isOpen={this.state.collapse}>
           <Card>
             <CardBlock>
-              {console.log(tableDef)}
+              <p>Ich bin ein Block</p>
             </CardBlock>
           </Card>
         </Collapse>

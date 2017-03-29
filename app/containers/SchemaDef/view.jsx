@@ -1,69 +1,24 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardBlock, CardHeader, Container, Collapse, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap';
+import { Card, CardBlock, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import TableDefEntry from 'containers/TableDef/listEntry';
+import { TableDefEntry, TableDefForm } from 'containers/TableDef';
 import { loadSchemaDef } from 'actions/schemaDefActions';
 import { createTableDef } from 'actions/tableDefActions';
 import { OcticonButton } from 'components/Tools';
-import { SchemaDefExtended } from 'PropTypes';
+import { SchemaDefExtended, TableDefBase } from 'PropTypes';
 import { getSchemaDefById } from 'store/schemaDefSelector';
-
-class TableDefForm extends Component {
-  static propTypes = {
-    submitAction: PropTypes.func.isRequired,
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = { name: '' };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const tableDef = {
-      name: this.state.name.trim(),
-    };
-
-    this.props.submitAction(tableDef);
-
-    this.setState({
-      name: '',
-    });
-  }
-
-  handleChange(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    this.setState({ name: event.target.value });
-  }
-
-  render() {
-    const { name } = this.state;
-    return (
-      <ListGroupItem>
-        <form onSubmit={this.handleSubmit}>
-          <input placeholder="table name" value={name} onChange={this.handleChange} />
-          <OcticonButton color="success" size="sm" octiconName="plus">Add</OcticonButton>
-        </form>
-      </ListGroupItem>
-    );
-  }
-}
+import { getTableDefList } from 'store/tableDefSelector';
 
 class SchemaDefView extends Component {
   static propTypes = {
     schemaDef: SchemaDefExtended,
+    tableDefList: PropTypes.arrayOf(
+      TableDefBase,
+    ).isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -106,14 +61,12 @@ class SchemaDefView extends Component {
     const tableDef = { ...tableDefData };
     tableDef.schemaDefId = this.props.schemaDef.id;
 
-    console.log(tableDef);
     this.props.createTableDef(tableDef);
-    // this.toggleTableDefForm();
+    this.toggleTableDefForm();
   }
 
   render() {
-    const { schemaDef } = this.props;
-
+    const { schemaDef, tableDefList } = this.props;
     if (schemaDef === null || schemaDef.relations === undefined) {
       return (
         <div>
@@ -178,7 +131,7 @@ class SchemaDefView extends Component {
                   </div>
                 </CardHeader>
                 <ListGroup className="list-group-flush">
-                  { schemaDef.relations.tableDefList.map(tableDef => (
+                  { tableDefList.map(tableDef => (
                     <TableDefEntry key={tableDef.id} tableDef={tableDef} />
                   ))}
                   <Collapse isOpen={this.state.collapseTableDefForm}>
@@ -202,9 +155,13 @@ class SchemaDefView extends Component {
 </ListGroupItem>
 */
 
-const mapStateToProps = (state, props) => ({
-  schemaDef: getSchemaDefById(state, parseInt(props.match.params.id, 10)),
-});
+const mapStateToProps = (state, props) => {
+  const schemaDefId = parseInt(props.match.params.id, 10);
+  return {
+    schemaDef: getSchemaDefById(state, schemaDefId),
+    tableDefList: getTableDefList(state, schemaDefId),
+  };
+};
 
 
 const mapDispatchToProps = dispatch => ({

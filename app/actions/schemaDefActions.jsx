@@ -4,14 +4,14 @@ import { getSessionId } from 'store/sessionSelector';
 
 export function loadSchemaDefListSuccess(response) {
   return {
-    type: types.LOAD_SCHEMA_DEF_LIST_SUCCESS,
+    type: types.SCHEMA_DEF_LIST_LOAD_SUCCESS,
     data: response,
   };
 }
 
 export function loadSchemaDefListFailure(error) {
   return {
-    type: types.LOAD_SCHEMA_DEF_LIST_FAILURE,
+    type: types.SCHEMA_DEF_LIST_LOAD_FAILURE,
     data: {
       httpCode: error.message,
       httpText: error.httpText,
@@ -22,14 +22,14 @@ export function loadSchemaDefListFailure(error) {
 
 export function loadSchemaDefSuccess(response) {
   return {
-    type: types.LOAD_SCHEMA_DEF_SUCCESS,
+    type: types.SCHEMA_DEF_FULL_LOAD_SUCCESS,
     data: response,
   };
 }
 
 export function loadSchemaDefFailure(error) {
   return {
-    type: types.LOAD_SCHEMA_DEF_FAILURE,
+    type: types.SCHEMA_DEF_FULL_LOAD_FAILURE,
     data: {
       httpCode: error.message,
       httpText: error.httpText,
@@ -39,14 +39,14 @@ export function loadSchemaDefFailure(error) {
 }
 
 export const deleteSchemaDefSuccess = id => ({
-  type: types.DELETE_SCHEMA_DEF_SUCCESS,
+  type: types.SCHEMA_DEF_DELETE_SUCCESS,
   data: {
     id,
   },
 });
 
 export const deleteSchemaDefFailure = error => ({
-  type: types.DELETE_SCHEMA_DEF_FAILURE,
+  type: types.SCHEMA_DEF_DELETE_FAILURE,
   data: {
     httpCode: error.message,
     httpText: error.httpText,

@@ -27,7 +27,7 @@ export function loginUser(credentials) {
       localStorage.setItem('auth-key', response.id);
       dispatch(loginSuccess(response));
     }).catch(() => {
-      dispatch(loginFailure())
+      dispatch(loginFailure());
     })
   );
 }

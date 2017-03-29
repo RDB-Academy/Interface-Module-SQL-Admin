@@ -3,7 +3,7 @@ import * as types from 'actionTypes';
 import { getSessionId } from 'store/sessionSelector';
 
 export const loadTableDefByIdSuccess = response => ({
-  type: types.TABLE_DEF_LOAD_SUCCESS,
+  type: types.TABLE_DEF_CREATE_SUCCESS,
   data: response,
 });
 

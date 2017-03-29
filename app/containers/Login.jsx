@@ -61,10 +61,10 @@ class Login extends Component {
                           value={this.state.email}
                           onChange={this.handleInputChange}
                           style={this.props.loginFailure ?
-                            {
-                              border: "1px solid #d43f3a",
-                              boxShadow: "0 0 10px #d43f3a",
-                            } :
+                          {
+                            border: '1px solid #d43f3a',
+                            boxShadow: '0 0 10px #d43f3a',
+                          } :
                             {}
                           }
                         />
@@ -81,13 +81,13 @@ class Login extends Component {
                           value={this.state.password}
                           onChange={this.handleInputChange}
                           style={this.props.loginFailure ?
-                            {
-                              border: "1px solid #d43f3a",
-                              boxShadow: "0 0 10px #d43f3a",
-                            } :
+                          {
+                            border: '1px solid #d43f3a',
+                            boxShadow: '0 0 10px #d43f3a',
+                          } :
                             {}
                           }
-                      />
+                        />
                       </Col>
                     </FormGroup>
                     <FormGroup check row>
@@ -108,6 +108,7 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: React.PropTypes.func.isRequired,
+  loginFailure: React.PropTypes.bool.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -119,7 +120,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     loginFailure: state.session.loginFailure,
-  }
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
