@@ -39,7 +39,7 @@ export default function tableDefReducer(state = initialState, action) {
     case types.INVALIDATE_STORE: {
       return initialState;
     }
-    
+
     default:
       return state;
   }

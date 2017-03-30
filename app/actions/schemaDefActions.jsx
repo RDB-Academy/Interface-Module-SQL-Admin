@@ -1,4 +1,4 @@
-import schemaDefApi from 'api/schemaDefApi';
+import { SchemaDefAPI } from 'api';
 import { SchemaDefActionTypes as types } from 'actionTypes';
 import { getSessionId } from 'store/sessionSelector';
 
@@ -85,11 +85,13 @@ class SchemaDefActionCreator {
  */
   static create = schemaDef => (
     (dispatch, getState) => (
-      schemaDefApi.createSchemaDef(schemaDef, getSessionId(getState())).then((response) => {
-        dispatch(SchemaDefActions.createSuccess(response));
-      }, (error) => {
-        dispatch(SchemaDefActions.createFailure(error));
-      })
+      SchemaDefAPI
+        .create(getSessionId(getState()), schemaDef)
+        .then((response) => {
+          dispatch(SchemaDefActions.createSuccess(response));
+        }, (error) => {
+          dispatch(SchemaDefActions.createFailure(error));
+        })
     )
   )
 /**
@@ -97,20 +99,20 @@ class SchemaDefActionCreator {
  */
   static readAll = () => (
     (dispatch, getState) => (
-      schemaDefApi
-        .loadSchemaDefList(getSessionId(getState()))
-          .then(response => (
-            dispatch(SchemaDefActions.readAllSuccess(response))
-          )).catch(error => (
-            dispatch(SchemaDefActions.readAllFailure(error))
-          ))
+      SchemaDefAPI
+        .readAll(getSessionId(getState()))
+        .then(response => (
+          dispatch(SchemaDefActions.readAllSuccess(response))
+        )).catch(error => (
+          dispatch(SchemaDefActions.readAllFailure(error))
+        ))
     )
   );
 
   static read = id => (
     (dispatch, getState) => (
-      schemaDefApi
-        .loadSchemaDef(id, getSessionId(getState()))
+      SchemaDefAPI
+        .read(getSessionId(getState()), id)
         .then((response) => {
           dispatch(SchemaDefActions.readSuccess(response));
         }, (error) => {
@@ -124,13 +126,13 @@ class SchemaDefActionCreator {
  */
   static update = (id, schemaDef) => (
     (dispatch, getState) => (
-      schemaDefApi
-        .updateSchemaDef(id, getSessionId(getState()), schemaDef)
-          .then(response => (
-            dispatch(SchemaDefActions.updateSuccess(response))
-          ), error => (
-            dispatch(SchemaDefActions.updateFailure(error))
-          ))
+      SchemaDefAPI
+        .update(getSessionId(getState()), id, schemaDef)
+        .then(response => (
+          dispatch(SchemaDefActions.updateSuccess(response))
+        ), error => (
+          dispatch(SchemaDefActions.updateFailure(error))
+        ))
     )
   );
 
@@ -139,11 +141,13 @@ class SchemaDefActionCreator {
  */
   static delete = id => (
     (dispatch, getState) => (
-      schemaDefApi.deleteSchemaDef(id, getSessionId(getState())).then(() => {
-        dispatch(SchemaDefActions.deleteSuccess({ id }));
-      }, (error) => {
-        dispatch(SchemaDefActions.deleteFailure(error));
-      })
+      SchemaDefAPI
+        .deleteSchemaDef(getSessionId(getState()), id)
+        .then(() => {
+          dispatch(SchemaDefActions.deleteSuccess({ id }));
+        }, (error) => {
+          dispatch(SchemaDefActions.deleteFailure(error));
+        })
     )
   )
 }

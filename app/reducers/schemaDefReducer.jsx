@@ -10,6 +10,7 @@ const schemaDefReducer = (state = initialState, action) => {
      * Create
      */
     case types.CREATE_SUCCESS:
+    case types.UPDATE_SUCCESS:
     case types.READ_SUCCESS: {
       const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
       if (oldIndex === -1) {

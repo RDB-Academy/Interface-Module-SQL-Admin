@@ -1,4 +1,4 @@
-import tableDefApi from 'api/tableDefApi';
+import { TableDefAPI } from 'api';
 import { TableDefActionTypes as ActionTypes } from 'actionTypes';
 import { getSessionId } from 'store/sessionSelector';
 
@@ -15,9 +15,9 @@ class TableDefActions {
 }
 
 class TableDefActionCreators {
-  static createTableDef = tableDef => (
+  static create = tableDef => (
     (dispatch, getState) => (
-      tableDefApi.createTableDef(getSessionId(getState()), tableDef).then((response) => {
+      TableDefAPI.create(getSessionId(getState()), tableDef).then((response) => {
         dispatch(TableDefActions.createSuccess(response));
       }).catch((error) => {
         throw error;
@@ -25,9 +25,9 @@ class TableDefActionCreators {
     )
   );
 
-  static loadTableDefById = tableDefId => (
+  static read = tableDefId => (
     (dispatch, getState) => (
-      tableDefApi.loadTableDefById(getSessionId(getState()), tableDefId).then((response) => {
+      TableDefAPI.read(getSessionId(getState()), tableDefId).then((response) => {
         dispatch(TableDefActions.readSuccess(response));
       }).catch((error) => {
         throw error;
