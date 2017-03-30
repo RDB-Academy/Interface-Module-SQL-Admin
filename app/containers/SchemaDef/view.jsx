@@ -24,7 +24,8 @@ class SchemaDefView extends Component {
       }).isRequired,
     }).isRequired,
     createTableDef: PropTypes.func.isRequired,
-    loadSchemaDef: PropTypes.func.isRequired,
+    readSchemaDef: PropTypes.func.isRequired,
+    deleteSchemaDef: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -36,7 +37,7 @@ class SchemaDefView extends Component {
 
     const { schemaDef, match } = this.props;
     if (schemaDef === null || schemaDef.relations === undefined) {
-      this.props.loadSchemaDef(match.params.id);
+      this.props.readSchemaDef(match.params.id);
     }
 
     this.state = { collapseTableDefForm: false };
@@ -89,7 +90,7 @@ class SchemaDefView extends Component {
               <div className="d-flex">
                 <OcticonButton
                   color="info"
-                  onClick={() => this.props.loadSchemaDef(this.props.match.params.id)}
+                  onClick={() => this.props.readSchemaDef(this.props.match.params.id)}
                   octiconName="sync"
                 >
                   Refresh
@@ -103,7 +104,7 @@ class SchemaDefView extends Component {
                 </OcticonButton>
                 <OcticonButton
                   color="danger"
-                  onClick={() => { console.log('delete'); }}
+                  onClick={() => this.props.deleteSchemaDef(this.props.match.params.id)}
                   octiconName="x"
                 >
                   Delete
@@ -157,7 +158,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => ({
   createTableDef: bindActionCreators(TableDefActions.create, dispatch),
-  loadSchemaDef: bindActionCreators(SchemaDefActions.read, dispatch),
+  readSchemaDef: bindActionCreators(SchemaDefActions.read, dispatch),
+  deleteSchemaDef: bindActionCreators(SchemaDefActions.delete, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefView);
