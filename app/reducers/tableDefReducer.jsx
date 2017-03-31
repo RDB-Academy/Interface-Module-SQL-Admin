@@ -7,7 +7,7 @@ const initialState = {
 export default function tableDefReducer(state = initialState, action) {
   switch (action.type) {
     /**
-     * Special Funciton
+     * Special Function
      */
     case SchemaDefActionTypes.READ_SUCCESS: {
       const tableDefList = Object.assign({}, state.tableDefList);
@@ -23,6 +23,9 @@ export default function tableDefReducer(state = initialState, action) {
         tableDefList,
       };
     }
+    /**
+     * Create
+     */
     case types.CREATE_SUCCESS: {
       const tableDefList = [
         ...state.tableDefList[action.data.schemaDefId],
@@ -35,6 +38,13 @@ export default function tableDefReducer(state = initialState, action) {
           [action.data.schemaDefId]: tableDefList,
         },
       };
+    }
+    /**
+     * Read
+     */
+    case types.READ_SUCCESS: {
+      console.log(action);
+      return state;
     }
     case types.INVALIDATE_STORE: {
       return initialState;

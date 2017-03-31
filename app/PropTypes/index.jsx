@@ -16,6 +16,14 @@ const TableDefBaseShape = {
   modifiedAt: PropTypes.string.isRequired,
 };
 
+const ColumnDefBaseShape = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  columnDefId: PropTypes.number.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  modifiedAt: PropTypes.string.isRequired,
+};
+
 const SchemaDefExtendedShape = {
   ...SchemaDefBaseShape,
   relations: PropTypes.shape({
@@ -44,6 +52,10 @@ export const SchemaDefExtended = PropTypes.shape(
 
 export const TableDefBase = PropTypes.shape(
   TableDefBaseShape,
+);
+
+export const ColumnDefBase = PropTypes.shape(
+  ColumnDefBaseShape,
 );
 
 export const Task = PropTypes.shape({

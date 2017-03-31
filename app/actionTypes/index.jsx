@@ -41,3 +41,15 @@ export class TableDefActionTypes extends BaseActionTypes {
   static READ_SUCCESS = 'TABLE_DEF_READ_SUCCESS';
   static READ_FAILURE = 'TABLE_DEF_READ_FAILURE';
 }
+
+/**
+ * TableDef Actions
+ */
+export class ColumnDefActionTypes extends BaseActionTypes {
+  // Create
+  static CREATE_SUCCESS = 'COLUMN_DEF_CREATE_SUCCESS';
+  static CREATE_FAILURE = 'COLUMN_DEF_CREATE_FAILURE';
+  // Read
+  static READ_SUCCESS = 'COLUMN_DEF_READ_SUCCESS';
+  static READ_FAILURE = 'COLUMN_DEF_READ_FAILURE';
+}
