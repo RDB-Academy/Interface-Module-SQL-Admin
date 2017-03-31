@@ -22,3 +22,5 @@ export default function configureStore(initialState) {
 
   return store;
 }
+
+export { default as ColumnDefSelector } from './columnDefSelector';
