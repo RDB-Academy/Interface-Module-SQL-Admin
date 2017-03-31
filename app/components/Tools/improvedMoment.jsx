@@ -12,7 +12,13 @@ const nextID = () => {
 class ImprovedMoment extends Component {
   static propTypes = {
     children: PropTypes.string.isRequired,
+    position: PropTypes.string,
   }
+
+  static defaultProps = {
+    position: 'right',
+  }
+
   constructor(props) {
     super(props);
 
@@ -30,14 +36,14 @@ class ImprovedMoment extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, position } = this.props;
     const { componentId, tooltipOpen } = this.state;
     return (
       <div>
         <Moment fromNow id={componentId}>
           {children}
         </Moment>
-        <Tooltip placement="right" isOpen={tooltipOpen} target={componentId} toggle={this.toggle}>
+        <Tooltip placement={position} isOpen={tooltipOpen} target={componentId} toggle={this.toggle}>
           {children}
         </Tooltip>
       </div>
