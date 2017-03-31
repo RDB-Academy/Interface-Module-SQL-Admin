@@ -42,12 +42,10 @@ class TableDefForm extends Component {
   render() {
     const { name } = this.state;
     return (
-      <ListGroupItem>
-        <form onSubmit={this.handleSubmit}>
-          <input placeholder="table name" value={name} onChange={this.handleChange} />
-          <OcticonButton color="success" size="sm" octiconName="plus">Add</OcticonButton>
-        </form>
-      </ListGroupItem>
+      <form onSubmit={this.handleSubmit}>
+        <input placeholder="table name" value={name} onChange={this.handleChange} />
+        <OcticonButton color="success" size="sm" octiconName="plus">Add</OcticonButton>
+      </form>
     );
   }
 }

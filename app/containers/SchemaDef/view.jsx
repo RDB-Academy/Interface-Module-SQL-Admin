@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardBlock, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
+import { Card, CardBlock, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -134,10 +134,12 @@ class SchemaDefView extends Component {
                   { tableDefList.map(tableDef => (
                     <TableDefEntry key={tableDef.id} tableDef={tableDef} />
                   ))}
-                  <Collapse isOpen={this.state.collapseTableDefForm}>
-                    <TableDefForm submitAction={this.submitTableDef} />
-                  </Collapse>
                 </ListGroup>
+                <Collapse isOpen={this.state.collapseTableDefForm}>
+                  <CardFooter>
+                    <TableDefForm submitAction={this.submitTableDef} />
+                  </CardFooter>
+                </Collapse>
               </Card>
             </CardBlock>
           </Card>
