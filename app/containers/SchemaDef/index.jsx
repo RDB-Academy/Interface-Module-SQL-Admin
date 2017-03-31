@@ -22,3 +22,5 @@ SchemaDefPage.propTypes = {
 };
 
 export default SchemaDefPage;
+
+export { default as SchemaDefForm } from './createForm';
