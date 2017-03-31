@@ -19,6 +19,9 @@ class TaskView extends Component {
 
   render() {
     const { task } = this.props;
+    if (task === null) {
+      return <h1>Loading</h1>;
+    }
     return (
       <div>
         <Helmet
@@ -61,7 +64,7 @@ class TaskView extends Component {
 
 const mapStateToProps = (state, props) => (
   {
-    task: getTaskById(state, parseInt(props.params.id, 10)),
+    task: getTaskById(state, parseInt(props.match.params.id, 10)),
   }
 );
 
