@@ -1,43 +1,73 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { Collapse, ListGroupItem } from 'reactstrap';
 
-import { Button, Card, CardBlock, Collapse, ListGroupItem } from 'reactstrap';
-import { TableDefBase } from 'PropTypes';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-class TableDefEntry extends Component {
+import { TableDefActions } from 'actions';
+import { ImprovedMoment } from 'components/Tools';
+import { TableDefBase, ColumnDefBase } from 'PropTypes';
+import { ColumnDefSelector } from 'store';
+
+
+export class TableDefEntry extends Component {
   static propTypes = {
     tableDef: TableDefBase.isRequired,
+    columnDefBaseList: PropTypes.arrayOf(
+      ColumnDefBase,
+    ),
+    readTableDef: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    columnDefBaseList: null,
   }
 
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
-    this.state = { collapse: false };
+    this.state = {
+      collapse: false,
+    };
   }
 
   toggle() {
+    if (!this.state.collapse && this.props.columnDefBaseList === null) {
+      this.props.readTableDef(this.props.tableDef.id);
+    }
     this.setState({ collapse: !this.state.collapse });
   }
 
   render() {
-    const { tableDef } = this.props;
+    const { tableDef, columnDefBaseList } = this.props;
+    console.log(columnDefBaseList);
     return (
-      <div>
-        <ListGroupItem>
-          <Button color="link" onClick={this.toggle} style={{ margin: '0', padding: '0', border: 'none' }}>
-            #{tableDef.id}-{tableDef.name}
-          </Button>
-        </ListGroupItem>
-        <Collapse isOpen={this.state.collapse}>
-          <Card>
-            <CardBlock>
-              <p>Ich bin ein Block</p>
-            </CardBlock>
-          </Card>
-        </Collapse>
-      </div>
+      <ListGroupItem tag="a" onClick={this.toggle} className="flex-column align-items-start">
+        <div className="d-flex w-100 justify-content-between">
+          <h5 className="mb-1">#{tableDef.id}-{tableDef.name}</h5>
+          <small className="text-muted">
+            <ImprovedMoment position={'left'}>{tableDef.modifiedAt}</ImprovedMoment>
+          </small>
+        </div>
+        <div className="d-flex flex-column w-100">
+          <Collapse isOpen={this.state.collapse} >
+            <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+            <p>Ich bin ein Block</p>
+            <small>Donec id elit non mi porta.</small>
+          </Collapse>
+        </div>
+      </ListGroupItem>
     );
   }
 }
 
-export default TableDefEntry;
+const mapStateToProps = (state, props) => ({
+  columnDefBaseList: ColumnDefSelector.getList(state, props.tableDef.id),
+});
+
+const mapDispatchToProps = dispatch => ({
+  readTableDef: bindActionCreators(TableDefActions.read, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableDefEntry);

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardBlock, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
+import { Card, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ class SchemaDefView extends Component {
     schemaDef: SchemaDefExtended,
     tableDefList: PropTypes.arrayOf(
       TableDefBase,
-    ).isRequired,
+    ),
     match: PropTypes.shape({
       params: PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -30,6 +30,7 @@ class SchemaDefView extends Component {
 
   static defaultProps = {
     schemaDef: null,
+    tableDefList: null,
   }
 
   constructor(props) {
@@ -58,7 +59,7 @@ class SchemaDefView extends Component {
   }
 
   submitTableDef(tableDefData) {
-    const tableDef = { ...tableDefData };
+    const tableDef = tableDefData;
     tableDef.schemaDefId = this.props.schemaDef.id;
 
     this.props.createTableDef(tableDef);
@@ -67,7 +68,7 @@ class SchemaDefView extends Component {
 
   render() {
     const { schemaDef, tableDefList } = this.props;
-    if (schemaDef === null || schemaDef.relations === undefined) {
+    if (schemaDef === null || tableDefList === null || schemaDef.relations === undefined) {
       return (
         <div>
           <Jumbotron>
@@ -115,33 +116,29 @@ class SchemaDefView extends Component {
         </Jumbotron>
         <Container>
           <Card>
-            <CardBlock>
-              <Card>
-                <CardHeader>
-                  Tables:
-                  <div style={{ float: 'right' }}>
-                    <OcticonButton
-                      size="sm"
-                      color="success"
-                      onClick={this.toggleTableDefForm}
-                      octiconName="plus"
-                    >
-                      Add
-                    </OcticonButton>
-                  </div>
-                </CardHeader>
-                <ListGroup className="list-group-flush">
-                  { tableDefList.map(tableDef => (
-                    <TableDefEntry key={tableDef.id} tableDef={tableDef} />
-                  ))}
-                </ListGroup>
-                <Collapse isOpen={this.state.collapseTableDefForm}>
-                  <CardFooter>
-                    <TableDefForm submitAction={this.submitTableDef} />
-                  </CardFooter>
-                </Collapse>
-              </Card>
-            </CardBlock>
+            <CardHeader className="d-flex w-100 justify-content-between">
+              Tables:
+              <div className>
+                <OcticonButton
+                  size="sm"
+                  color="success"
+                  onClick={this.toggleTableDefForm}
+                  octiconName="plus"
+                >
+                  Add
+                </OcticonButton>
+              </div>
+            </CardHeader>
+            <ListGroup className="list-group-flush">
+              { tableDefList.map(tableDef => (
+                <TableDefEntry key={tableDef.id} tableDef={tableDef} />
+              ))}
+            </ListGroup>
+            <Collapse isOpen={this.state.collapseTableDefForm}>
+              <CardFooter>
+                <TableDefForm submitAction={this.submitTableDef} />
+              </CardFooter>
+            </Collapse>
           </Card>
         </Container>
       </div>
@@ -159,9 +156,10 @@ const mapStateToProps = (state, props) => {
 
 
 const mapDispatchToProps = dispatch => ({
-  createTableDef: bindActionCreators(TableDefActions.create, dispatch),
   readSchemaDef: bindActionCreators(SchemaDefActions.read, dispatch),
   deleteSchemaDef: bindActionCreators(SchemaDefActions.delete, dispatch),
+
+  createTableDef: bindActionCreators(TableDefActions.create, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefView);
