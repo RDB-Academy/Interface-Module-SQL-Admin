@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { ListGroupItem } from 'reactstrap';
 import { OcticonButton } from 'components/Tools';
 
-class TableDefForm extends Component {
+class SchemaDefForm extends Component {
   static propTypes = {
     submitAction: PropTypes.func.isRequired,
   }
@@ -21,11 +21,11 @@ class TableDefForm extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    const tableDef = {
+    const schemaDef = {
       name: this.state.name.trim(),
     };
 
-    this.props.submitAction(tableDef);
+    this.props.submitAction(schemaDef);
 
     this.setState({
       name: '',
@@ -44,10 +44,10 @@ class TableDefForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input placeholder="table name" value={name} onChange={this.handleChange} />
-        <OcticonButton color="success" size="sm" octiconName="plus">Addd</OcticonButton>
+        <OcticonButton color="success" size="sm" octiconName="plus">Add</OcticonButton>
       </form>
     );
   }
 }
 
-export default TableDefForm;
+export default SchemaDefForm;
