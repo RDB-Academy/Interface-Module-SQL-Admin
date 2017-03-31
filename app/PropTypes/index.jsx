@@ -19,7 +19,7 @@ const TableDefBaseShape = {
 const ColumnDefBaseShape = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  columnDefId: PropTypes.number.isRequired,
+  tableDefId: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
   modifiedAt: PropTypes.string.isRequired,
 };
