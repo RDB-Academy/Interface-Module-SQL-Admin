@@ -9,7 +9,7 @@ class TableDefActions {
   });
 
   static readSuccess = data => ({
-    type: ActionTypes.CREATE_SUCCESS,
+    type: ActionTypes.READ_SUCCESS,
     data,
   });
 }
