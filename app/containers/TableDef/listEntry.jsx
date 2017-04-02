@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { TableDefActions } from 'actions';
 import { ImprovedMoment } from 'components/Tools';
 import { TableDefBase, ColumnDefBase } from 'PropTypes';
-import { ColumnDefSelector } from 'store';
+import { ColumnDefSelector } from 'selectors';
 
 
 export class TableDefEntry extends Component {

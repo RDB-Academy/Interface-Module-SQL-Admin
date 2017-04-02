@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 
 import { Task } from 'PropTypes';
-import { getTaskById } from 'store/taskSelector';
+import { getTaskById } from 'selectors/taskSelector';
 
 class TaskView extends Component {
   static propTypes = {

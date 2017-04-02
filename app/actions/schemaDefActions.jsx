@@ -1,6 +1,6 @@
 import { SchemaDefAPI } from 'api';
 import { SchemaDefActionTypes as types } from 'actionTypes';
-import { getSessionId } from 'store/sessionSelector';
+import { SessionSelector } from 'selectors';
 
 
 class SchemaDefActions {
@@ -86,7 +86,7 @@ class SchemaDefActionCreator {
   static create = schemaDef => (
     (dispatch, getState) => (
       SchemaDefAPI
-        .create(getSessionId(getState()), schemaDef)
+        .create(SessionSelector.getId(getState()), schemaDef)
         .then((response) => {
           dispatch(SchemaDefActions.createSuccess(response));
         }, (error) => {
@@ -100,7 +100,7 @@ class SchemaDefActionCreator {
   static readAll = () => (
     (dispatch, getState) => (
       SchemaDefAPI
-        .readAll(getSessionId(getState()))
+        .readAll(SessionSelector.getId(getState()))
         .then(response => (
           dispatch(SchemaDefActions.readAllSuccess(response))
         )).catch(error => (
@@ -112,7 +112,7 @@ class SchemaDefActionCreator {
   static read = id => (
     (dispatch, getState) => (
       SchemaDefAPI
-        .read(getSessionId(getState()), id)
+        .read(SessionSelector.getId(getState()), id)
         .then((response) => {
           dispatch(SchemaDefActions.readSuccess(response));
         }, (error) => {
@@ -127,7 +127,7 @@ class SchemaDefActionCreator {
   static update = (id, schemaDef) => (
     (dispatch, getState) => (
       SchemaDefAPI
-        .update(getSessionId(getState()), id, schemaDef)
+        .update(SessionSelector.getId(getState()), id, schemaDef)
         .then(response => (
           dispatch(SchemaDefActions.updateSuccess(response))
         ), error => (
@@ -142,7 +142,7 @@ class SchemaDefActionCreator {
   static delete = id => (
     (dispatch, getState) => (
       SchemaDefAPI
-        .deleteSchemaDef(getSessionId(getState()), id)
+        .deleteSchemaDef(SessionSelector.getId(getState()), id)
         .then(() => {
           dispatch(SchemaDefActions.deleteSuccess({ id }));
         }, (error) => {

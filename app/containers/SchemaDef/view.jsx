@@ -9,8 +9,7 @@ import { TableDefEntry, TableDefForm } from 'containers/TableDef';
 import { SchemaDefActions, TableDefActions } from 'actions';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefExtended, TableDefBase } from 'PropTypes';
-import { getSchemaDefById } from 'store/schemaDefSelector';
-import { getTableDefList } from 'store/tableDefSelector';
+import { SchemaDefSelector, TableDefSelector } from 'selectors';
 
 class SchemaDefView extends Component {
   static propTypes = {
@@ -149,8 +148,8 @@ class SchemaDefView extends Component {
 const mapStateToProps = (state, props) => {
   const schemaDefId = parseInt(props.match.params.id, 10);
   return {
-    schemaDef: getSchemaDefById(state, schemaDefId),
-    tableDefList: getTableDefList(state, schemaDefId),
+    schemaDef: SchemaDefSelector.getById(state, schemaDefId),
+    tableDefList: TableDefSelector.getList(state, schemaDefId),
   };
 };
 

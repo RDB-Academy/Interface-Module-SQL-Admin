@@ -1,6 +1,6 @@
 import { TableDefAPI } from 'api';
 import { TableDefActionTypes as ActionTypes } from 'actionTypes';
-import { getSessionId } from 'store/sessionSelector';
+import { SessionSelector } from 'selectors';
 
 class TableDefActions {
   static createSuccess = data => ({
@@ -17,21 +17,25 @@ class TableDefActions {
 class TableDefActionCreators {
   static create = tableDef => (
     (dispatch, getState) => (
-      TableDefAPI.create(getSessionId(getState()), tableDef).then((response) => {
-        dispatch(TableDefActions.createSuccess(response));
-      }).catch((error) => {
-        throw error;
-      })
+      TableDefAPI
+        .create(SessionSelector.getId(getState()), tableDef)
+        .then((response) => {
+          dispatch(TableDefActions.createSuccess(response));
+        }).catch((error) => {
+          throw error;
+        })
     )
   );
 
   static read = tableDefId => (
     (dispatch, getState) => (
-      TableDefAPI.read(getSessionId(getState()), tableDefId).then((response) => {
-        dispatch(TableDefActions.readSuccess(response));
-      }).catch((error) => {
-        throw error;
-      })
+      TableDefAPI
+        .read(SessionSelector.getId(getState()), tableDefId)
+        .then((response) => {
+          dispatch(TableDefActions.readSuccess(response));
+        }).catch((error) => {
+          throw error;
+        })
     )
   );
 }

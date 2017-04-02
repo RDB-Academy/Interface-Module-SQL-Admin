@@ -9,7 +9,7 @@ import { SchemaDefList } from 'components/SchemaDef';
 import { SchemaDefForm } from 'containers/SchemaDef';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefBase } from 'PropTypes';
-import { getSchemaDefList } from 'store/schemaDefSelector';
+import { SchemaDefSelector } from 'selectors';
 
 class SchemaDefListContainer extends Component {
   static propTypes = {
@@ -106,7 +106,7 @@ class SchemaDefListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  schemaDefList: getSchemaDefList(state),
+  schemaDefList: SchemaDefSelector.getList(state),
 });
 
 const mapDispatchToProps = dispatch => ({

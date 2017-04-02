@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-import { ListGroupItem } from 'reactstrap';
 import { OcticonButton } from 'components/Tools';
 
 class SchemaDefForm extends Component {

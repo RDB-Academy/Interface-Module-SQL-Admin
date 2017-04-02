@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { loadTaskList } from 'actions/taskActions';
 import { TaskTable } from 'components/Task';
 import { Task } from 'PropTypes';
-import { getTaskList } from 'store/taskSelector';
+import { getTaskList } from 'selectors/taskSelector';
 
 class TaskList extends Component {
   static propTypes = {

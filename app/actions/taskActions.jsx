@@ -1,6 +1,6 @@
 import taskApi from 'api/taskApi';
 import * as types from 'actionTypes';
-import { getSessionId } from 'store/sessionSelector';
+import { SessionSelector } from 'selectors';
 
 export function loadTaskListSuccess(response) {
   return {
@@ -11,10 +11,12 @@ export function loadTaskListSuccess(response) {
 
 export function loadTaskList() {
   return (dispatch, getState) => (
-    taskApi.loadTaskList(getSessionId(getState())).then((response) => {
-      dispatch(loadTaskListSuccess(response));
-    }).catch((error) => {
-      throw error;
-    })
+    taskApi
+      .loadTaskList(SessionSelector.getId(getState()))
+      .then((response) => {
+        dispatch(loadTaskListSuccess(response));
+      }).catch((error) => {
+        throw error;
+      })
   );
 }
