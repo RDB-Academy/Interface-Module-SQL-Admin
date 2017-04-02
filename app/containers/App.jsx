@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Container } from 'reactstrap';
 
 import Helmet from 'react-helmet';
@@ -12,11 +12,18 @@ import 'styles/main.css';
 import { logoutUser } from 'actions/sessionActions';
 import Navbar from 'components/Navbar';
 
+import { SessionSelector } from 'selectors';
+
 import Login from './Login';
 import SchemaDefPage from './SchemaDef';
 import TaskPage from './Task';
 
 class App extends Component {
+  static propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    logoutUser: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -74,14 +81,9 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  isLoggedIn: React.PropTypes.bool.isRequired,
-  logoutUser: React.PropTypes.func.isRequired,
-};
-
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.session.sessionId !== null,
+    isLoggedIn: SessionSelector.getId(state) !== null,
   };
 }
 

@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Button, Card, CardBlock, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
-
-import { loginUser } from 'actions/sessionActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { loginUser } from 'actions/sessionActions';
+import { SessionSelector } from 'selectors';
+
 class Login extends Component {
+  static propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    loginFailure: PropTypes.bool.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -106,11 +112,6 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginUser: React.PropTypes.func.isRequired,
-  loginFailure: React.PropTypes.bool.isRequired,
-};
-
 function mapDispatchToProps(dispatch) {
   return {
     loginUser: bindActionCreators(loginUser, dispatch),
@@ -119,7 +120,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    loginFailure: state.session.loginFailure,
+    loginFailure: SessionSelector.getLoginFailureField(state),
   };
 }
 

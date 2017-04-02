@@ -6,8 +6,10 @@ import { bindActionCreators } from 'redux';
 
 import { TableDefActions } from 'actions';
 import { ImprovedMoment } from 'components/Tools';
+import Moment from 'react-moment';
 import { TableDefBase, ColumnDefBase } from 'PropTypes';
 import { ColumnDefSelector } from 'selectors';
+import Octicon from 'react-octicon';
 
 
 export class TableDefEntry extends Component {
@@ -41,11 +43,18 @@ export class TableDefEntry extends Component {
 
   render() {
     const { tableDef, columnDefBaseList } = this.props;
-    console.log(columnDefBaseList);
     return (
-      <ListGroupItem tag="a" onClick={this.toggle} className="flex-column align-items-start">
+      <ListGroupItem
+        tag="a"
+        onClick={this.toggle}
+        className="flex-column align-items-start"
+      >
         <div className="d-flex w-100 justify-content-between">
-          <h5 className="mb-1">#{tableDef.id}-{tableDef.name}</h5>
+          <h5 className="mb-1">
+            <Octicon name="database" className="mr-2" />
+            {tableDef.name}
+            <small className="ml-2">{tableDef.columnDefListSize} columns</small>
+          </h5>
           <small className="text-muted">
             <ImprovedMoment position={'left'}>{tableDef.modifiedAt}</ImprovedMoment>
           </small>
@@ -53,8 +62,22 @@ export class TableDefEntry extends Component {
         <div className="d-flex flex-column w-100">
           <Collapse isOpen={this.state.collapse} >
             <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            <p>Ich bin ein Block</p>
-            <small>Donec id elit non mi porta.</small>
+            {(columnDefBaseList !== null) ? (
+              columnDefBaseList.map(columnDefBase => (
+                <p className="mb-1" key={columnDefBase.id}>{columnDefBase.name}</p>
+              ))
+            ) : (
+              <p className="mb-1">loading</p>
+            )}
+            <small>
+              Created at:{' '}
+              <Moment fromNow>{tableDef.createdAt}</Moment>
+            </small>
+            <br />
+            <small>
+              Modified at:
+              <Moment fromNow>{tableDef.modifiedAt}</Moment>
+            </small>
           </Collapse>
         </div>
       </ListGroupItem>
