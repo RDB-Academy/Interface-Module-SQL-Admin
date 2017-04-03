@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { ListGroup } from 'reactstrap';
 
 import { SchemaDefBase } from 'PropTypes';
 
@@ -10,7 +9,7 @@ const SchemaDefList = ({ schemaDefList, deleteSchemaDef, updateAvailable }) => (
     {(schemaDefList.length === 0) ? (
       <p>List is Empty</p>
     ) : (
-      <ListGroup className="list-group-flush">
+      <div>
         { schemaDefList.map(schemaDef => (
           <SchemaDefListEntry
             key={schemaDef.id}
@@ -19,7 +18,7 @@ const SchemaDefList = ({ schemaDefList, deleteSchemaDef, updateAvailable }) => (
             deleteSchemaDef={deleteSchemaDef}
           />
         ))}
-      </ListGroup>
+      </div>
     )}
   </div>
 );

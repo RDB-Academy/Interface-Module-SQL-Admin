@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardFooter, CardHeader, Container, Collapse, Jumbotron } from 'reactstrap';
+import { Card, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -47,7 +47,6 @@ class SchemaDefListContainer extends Component {
     const schemaDef = schemaDefData;
 
     this.props.createSchemaDef(schemaDef);
-    this.toggleSchemaDefForm();
   }
 
   deleteSchemaDef(id) {
@@ -72,14 +71,6 @@ class SchemaDefListContainer extends Component {
               <div style={{ float: 'right' }}>
                 <OcticonButton
                   size="sm"
-                  color="success"
-                  onClick={this.toggleSchemaDefForm}
-                  octiconName="plus"
-                >
-                  Add
-                </OcticonButton>
-                <OcticonButton
-                  size="sm"
                   color="info"
                   onClick={this.props.loadSchemaDefList}
                   octiconName="sync"
@@ -88,16 +79,29 @@ class SchemaDefListContainer extends Component {
                 </OcticonButton>
               </div>
             </CardHeader>
-            <SchemaDefList
-              schemaDefList={schemaDefList}
-              deleteSchemaDef={this.deleteSchemaDef}
-              updateAvailable={this.props.updateSchemaDef}
-            />
-            <Collapse isOpen={this.state.collapseSchemaDefForm}>
-              <CardFooter>
-                <SchemaDefForm submitAction={this.submitSchemaDef} />
-              </CardFooter>
-            </Collapse>
+            <ListGroup className="list-group-flush">
+              <SchemaDefList
+                schemaDefList={schemaDefList}
+                deleteSchemaDef={this.deleteSchemaDef}
+                updateAvailable={this.props.updateSchemaDef}
+              />
+              <Collapse isOpen={this.state.collapseSchemaDefForm}>
+                <SchemaDefForm
+                  submitAction={this.submitSchemaDef}
+                  toggleSchemaDefForm={this.toggleSchemaDefForm}
+                />
+              </Collapse>
+            </ListGroup>
+            <CardFooter>
+              <OcticonButton
+                size="sm"
+                color="success"
+                onClick={this.toggleSchemaDefForm}
+                octiconName="plus"
+              >
+                Add
+              </OcticonButton>
+            </CardFooter>
           </Card>
         </Container>
       </div>
