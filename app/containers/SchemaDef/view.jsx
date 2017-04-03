@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
+import Octicon from 'react-octicon';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -67,7 +68,7 @@ class SchemaDefView extends Component {
 
   render() {
     const { schemaDef, tableDefList } = this.props;
-    if (schemaDef === null || tableDefList === null || schemaDef.relations === undefined) {
+    if (schemaDef === null) {
       return (
         <div>
           <Jumbotron>
@@ -114,31 +115,35 @@ class SchemaDefView extends Component {
           </Container>
         </Jumbotron>
         <Container>
-          <Card>
-            <CardHeader className="d-flex w-100 justify-content-between">
-              Tables:
-              <div className>
-                <OcticonButton
-                  size="sm"
-                  color="success"
-                  onClick={this.toggleTableDefForm}
-                  octiconName="plus"
-                >
-                  Add
-                </OcticonButton>
-              </div>
-            </CardHeader>
-            <ListGroup className="list-group-flush">
-              { tableDefList.map(tableDef => (
-                <TableDefEntry key={tableDef.id} tableDef={tableDef} />
-              ))}
-            </ListGroup>
-            <Collapse isOpen={this.state.collapseTableDefForm}>
-              <CardFooter>
-                <TableDefForm submitAction={this.submitTableDef} />
-              </CardFooter>
-            </Collapse>
-          </Card>
+          { tableDefList !== null ? (
+            <Card>
+              <CardHeader className="d-flex w-100 justify-content-between">
+                Tables:
+                <div className>
+                  <OcticonButton
+                    size="sm"
+                    color="success"
+                    onClick={this.toggleTableDefForm}
+                    octiconName="plus"
+                  >
+                    Add
+                  </OcticonButton>
+                </div>
+              </CardHeader>
+              <ListGroup className="list-group-flush">
+                { tableDefList.map(tableDef => (
+                  <TableDefEntry key={tableDef.id} tableDef={tableDef} />
+                ))}
+              </ListGroup>
+              <Collapse isOpen={this.state.collapseTableDefForm}>
+                <CardFooter>
+                  <TableDefForm submitAction={this.submitTableDef} />
+                </CardFooter>
+              </Collapse>
+            </Card>
+          ) : (
+            <Octicon name="sync" mega spin />
+          ) }
         </Container>
       </div>
     );

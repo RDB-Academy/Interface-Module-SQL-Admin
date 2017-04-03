@@ -23,7 +23,7 @@ class App extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     logoutUser: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired, // eslint-disable-line
   };
 
   constructor(props) {
@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     const { isLoggedIn, history } = this.props;
     return (
-      <ConnectedRouter history={history} basename="/admin">
+      <ConnectedRouter history={history}>
         <div>
           <Helmet
             title="SQL Admin-Tool"

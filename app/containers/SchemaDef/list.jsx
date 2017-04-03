@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
-
+import { Button, Card, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
+import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -59,15 +59,13 @@ class SchemaDefList extends Component {
       <div>
         <Jumbotron>
           <Container>
-            <div className="d-flex w-100 justify-content-between">
-              <h1>SchemaDef List</h1>
-            </div>
+            <h1>SchemaDef List</h1>
           </Container>
         </Jumbotron>
         <Container>
           <Card>
             <CardHeader>
-              Schemas:
+              Schema List
               <div style={{ float: 'right' }}>
                 <OcticonButton
                   size="sm"
@@ -79,6 +77,7 @@ class SchemaDefList extends Component {
                 </OcticonButton>
               </div>
             </CardHeader>
+
             <ListGroup className="list-group-flush">
               <SchemaDefListComponent
                 schemaDefList={schemaDefList}
@@ -87,20 +86,20 @@ class SchemaDefList extends Component {
               />
               <Collapse isOpen={this.state.collapseSchemaDefForm}>
                 <SchemaDefForm
-                  submitAction={this.submitSchemaDef}
-                  toggleSchemaDefForm={this.toggleSchemaDefForm}
+                  onSubmit={this.submitSchemaDef}
+                  toggleAction={this.toggleSchemaDefForm}
                 />
               </Collapse>
             </ListGroup>
-            <CardFooter>
-              <OcticonButton
-                size="sm"
-                color="success"
+
+            <CardFooter className="p-0">
+              <Button
+                className="btn btn-success btn-block border-0 rounded-bottom"
+                style={{ borderTopLeftRadius: '0', borderTopRightRadius: '0' }}
                 onClick={this.toggleSchemaDefForm}
-                octiconName="plus"
               >
-                Add
-              </OcticonButton>
+                <Octicon name="plus" mega />
+              </Button>
             </CardFooter>
           </Card>
         </Container>

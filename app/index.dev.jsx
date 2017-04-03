@@ -9,7 +9,7 @@ import configureStore from './store';
 
 const appMount = document.getElementById('root');
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({ basename: '/admin' });
 const store = configureStore(history);
 
 ReactDOM.render(

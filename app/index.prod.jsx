@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import App from 'containers/App';
 import configureStore from './store';
 
 const appMount = document.getElementById('root');
 
-const history = createHistory();
+const history = createBrowserHistory({ basename: '/admin' });
 const store = configureStore(history);
 
 
