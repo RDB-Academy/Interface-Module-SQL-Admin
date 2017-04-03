@@ -10,7 +10,7 @@ import Moment from 'react-moment';
 import { TableDefBase, ColumnDefBase } from 'PropTypes';
 import { ColumnDefSelector } from 'selectors';
 import Octicon from 'react-octicon';
-
+import ColumnDefListEntry from 'containers/ColumnDef/listEntry';
 
 export class TableDefEntry extends Component {
   static propTypes = {
@@ -64,10 +64,8 @@ export class TableDefEntry extends Component {
             {(columnDefBaseList !== null) ? (
               <Card>
                 <ListGroup className="list-group-flush">
-                  { columnDefBaseList.map(columnDefBase => (
-                    <ListGroupItem key={columnDefBase.id}>
-                      <p className="mb-1">{columnDefBase.name}</p>
-                    </ListGroupItem>
+                  { columnDefBaseList.map(columnDef => (
+                    <ColumnDefListEntry key={columnDef.id} columnDef={columnDef} />
                   ))}
                 </ListGroup>
               </Card>

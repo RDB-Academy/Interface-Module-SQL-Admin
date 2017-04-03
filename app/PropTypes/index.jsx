@@ -42,6 +42,14 @@ const SchemaDefExtendedShape = {
   }),
 };
 
+const ColumnDefExtendedShape = {
+  ...ColumnDefBaseShape,
+  dataType: PropTypes.string.isRequired,
+  isPrimaryKey: PropTypes.bool.isRequired,
+  isNotNull: PropTypes.bool.isRequired,
+  MetaValueSet: PropTypes.string.isRequired,
+};
+
 export const SchemaDefBase = PropTypes.shape(
   SchemaDefBaseShape,
 );
@@ -56,6 +64,10 @@ export const TableDefBase = PropTypes.shape(
 
 export const ColumnDefBase = PropTypes.shape(
   ColumnDefBaseShape,
+);
+
+export const ColumnDefExtended = PropTypes.shape(
+  ColumnDefExtendedShape,
 );
 
 export const Task = PropTypes.shape({
