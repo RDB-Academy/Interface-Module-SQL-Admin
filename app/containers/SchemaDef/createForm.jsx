@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Button, Form, Input, ListGroupItem } from 'reactstrap';
 import Octicon from 'react-octicon';
 
-import { OcticonButton } from 'components/Tools';
-
 class SchemaDefForm extends Component {
   static propTypes = {
     toggleAction: PropTypes.func.isRequired,
@@ -58,7 +56,7 @@ class SchemaDefForm extends Component {
         <Form inline onSubmit={this.handleSubmit}>
           <Input
             size="sm"
-            className="rounded-0 my-1 mr-3"
+            className="rounded-0 mr-3"
             style={{
               fontSize: '1.25em',
               borderTop: 0,
@@ -70,21 +68,21 @@ class SchemaDefForm extends Component {
             onChange={this.handleChange}
           />
           <Button
-            size="sm"
             color="success"
-            className="rounded-0"
+            outline
+            className="rounded-0 border-0"
             type="submit"
           >
             <Octicon name="diff-added" />
           </Button>
-          <OcticonButton
+          <Button
             color="danger"
+            outline
+            className="rounded-0 border-0"
             onClick={this.handleCancel}
-            size="sm"
-            octiconName="x"
           >
-            Cancel
-          </OcticonButton>
+            <Octicon name="x" />
+          </Button>
         </Form>
       </ListGroupItem>
     );

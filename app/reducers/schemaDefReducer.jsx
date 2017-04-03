@@ -2,6 +2,7 @@ import { SchemaDefActionTypes as types } from 'actionTypes';
 
 const initialState = {
   schemaDefList: [],
+  error: null,
 };
 
 const schemaDefReducer = (state = initialState, action) => {

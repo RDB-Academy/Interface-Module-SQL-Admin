@@ -94,11 +94,13 @@ class SchemaDefList extends Component {
 
             <CardFooter className="p-0">
               <Button
-                className="btn btn-success btn-block border-0 rounded-bottom"
+                className="border-0 rounded-bottom"
+                color={this.state.collapseSchemaDefForm ? ('warning') : ('success')}
+                block
                 style={{ borderTopLeftRadius: '0', borderTopRightRadius: '0' }}
                 onClick={this.toggleSchemaDefForm}
               >
-                <Octicon name="plus" mega />
+                <Octicon name={this.state.collapseSchemaDefForm ? ('x') : ('plus')} mega />
               </Button>
             </CardFooter>
           </Card>
