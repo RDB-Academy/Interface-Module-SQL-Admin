@@ -1,7 +1,9 @@
 {
   "plugins": ["react-hot-loader/babel", "lodash"],
   "presets": [
-    ["latest", { "es2015": { "modules": false } }],
+    ["env", {
+      "modules": false
+    }],
     "react",
     "stage-2"
   ]
