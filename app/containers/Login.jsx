@@ -112,16 +112,12 @@ class Login extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loginUser: bindActionCreators(loginUser, dispatch),
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  loginUser: bindActionCreators(loginUser, dispatch),
+});
 
-function mapStateToProps(state) {
-  return {
-    loginFailure: SessionSelector.getLoginFailureField(state),
-  };
-}
+const mapStateToProps = state => ({
+  loginFailure: SessionSelector.getLoginFailureField(state),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

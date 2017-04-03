@@ -15,7 +15,7 @@ import Navbar from 'components/Navbar';
 import { SessionSelector } from 'selectors';
 
 import Login from './Login';
-import SchemaDefPage from './SchemaDef';
+import { SchemaDefPage } from './SchemaDef';
 import TaskPage from './Task';
 
 class App extends Component {
@@ -51,11 +51,6 @@ class App extends Component {
                 <Route path="/tasks" component={TaskPage} />
                 <Route path="/task-trials" exact render={() => (<h1>taskTrials</h1>)} />
                 <Route path="/status" exact render={() => (<h1>status</h1>)} />
-                <Route
-                  render={() => (
-                    <Redirect to="/" />
-                  )}
-                />
               </div>
             ) : (
               <div>
@@ -81,16 +76,12 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    isLoggedIn: SessionSelector.getId(state) !== null,
-  };
-}
+const mapStateToProps = state => ({
+  isLoggedIn: SessionSelector.getId(state) !== null,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    logoutUser: bindActionCreators(logoutUser, dispatch),
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  logoutUser: bindActionCreators(logoutUser, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
