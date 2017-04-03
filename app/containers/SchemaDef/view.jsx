@@ -1,29 +1,24 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardFooter, CardHeader, Container, Collapse, Jumbotron, ListGroup } from 'reactstrap';
-import Octicon from 'react-octicon';
+import { Container, Jumbotron } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { TableDefEntry, TableDefForm } from 'containers/TableDef';
-import { SchemaDefActions, TableDefActions } from 'actions';
+import { TableDefList } from 'containers/TableDef';
+import { SchemaDefActions } from 'actions';
 import { OcticonButton } from 'components/Tools';
-import { SchemaDefExtended, TableDefBase } from 'PropTypes';
-import { SchemaDefSelector, TableDefSelector } from 'selectors';
+import { SchemaDefExtended } from 'PropTypes';
+import { SchemaDefSelector } from 'selectors';
 
 class SchemaDefView extends Component {
   static propTypes = {
     schemaDef: SchemaDefExtended,
-    tableDefList: PropTypes.arrayOf(
-      TableDefBase,
-    ),
     match: PropTypes.shape({
       params: PropTypes.shape({
         id: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
-    createTableDef: PropTypes.func.isRequired,
     readSchemaDef: PropTypes.func.isRequired,
     deleteSchemaDef: PropTypes.func.isRequired,
   }
@@ -43,9 +38,6 @@ class SchemaDefView extends Component {
 
     this.state = { collapseTableDefForm: false };
 
-    this.toggleTableDefForm = this.toggleTableDefForm.bind(this);
-
-    this.submitTableDef = this.submitTableDef.bind(this);
     this.setAvailable = this.setAvailable.bind(this);
   }
 
@@ -54,20 +46,8 @@ class SchemaDefView extends Component {
     event.stopPropagation();
   }
 
-  toggleTableDefForm() {
-    this.setState({ collapseTableDefForm: !this.state.collapseTableDefForm });
-  }
-
-  submitTableDef(tableDefData) {
-    const tableDef = tableDefData;
-    tableDef.schemaDefId = this.props.schemaDef.id;
-
-    this.props.createTableDef(tableDef);
-    this.toggleTableDefForm();
-  }
-
   render() {
-    const { schemaDef, tableDefList } = this.props;
+    const { schemaDef } = this.props;
     if (schemaDef === null) {
       return (
         <div>
@@ -115,35 +95,7 @@ class SchemaDefView extends Component {
           </Container>
         </Jumbotron>
         <Container>
-          { tableDefList !== null ? (
-            <Card>
-              <CardHeader className="d-flex w-100 justify-content-between">
-                Tables:
-                <div className>
-                  <OcticonButton
-                    size="sm"
-                    color="success"
-                    onClick={this.toggleTableDefForm}
-                    octiconName="plus"
-                  >
-                    Add
-                  </OcticonButton>
-                </div>
-              </CardHeader>
-              <ListGroup className="list-group-flush">
-                { tableDefList.map(tableDef => (
-                  <TableDefEntry key={tableDef.id} tableDef={tableDef} />
-                ))}
-              </ListGroup>
-              <Collapse isOpen={this.state.collapseTableDefForm}>
-                <CardFooter>
-                  <TableDefForm submitAction={this.submitTableDef} />
-                </CardFooter>
-              </Collapse>
-            </Card>
-          ) : (
-            <Octicon name="sync" mega spin />
-          ) }
+          <TableDefList schemaDef={schemaDef} />
         </Container>
       </div>
     );
@@ -154,7 +106,6 @@ const mapStateToProps = (state, props) => {
   const schemaDefId = parseInt(props.match.params.id, 10);
   return {
     schemaDef: SchemaDefSelector.getById(state, schemaDefId),
-    tableDefList: TableDefSelector.getList(state, schemaDefId),
   };
 };
 
@@ -162,8 +113,6 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => ({
   readSchemaDef: bindActionCreators(SchemaDefActions.read, dispatch),
   deleteSchemaDef: bindActionCreators(SchemaDefActions.delete, dispatch),
-
-  createTableDef: bindActionCreators(TableDefActions.create, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefView);

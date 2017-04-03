@@ -26,7 +26,7 @@ class SchemaDefList extends Component {
     super(props);
     this.state = {
       modal: false,
-      collapseSchemaDefForm: false,
+      collapseForm: false,
     };
 
     const { schemaDefList } = this.props;
@@ -35,12 +35,12 @@ class SchemaDefList extends Component {
     }
 
     this.deleteSchemaDef = this.deleteSchemaDef.bind(this);
-    this.toggleSchemaDefForm = this.toggleSchemaDefForm.bind(this);
     this.submitSchemaDef = this.submitSchemaDef.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
   }
 
-  toggleSchemaDefForm() {
-    this.setState({ collapseSchemaDefForm: !this.state.collapseSchemaDefForm });
+  toggleForm() {
+    this.setState({ collapseForm: !this.state.collapseForm });
   }
 
   submitSchemaDef(schemaDefData) {
@@ -84,10 +84,10 @@ class SchemaDefList extends Component {
                 deleteSchemaDef={this.deleteSchemaDef}
                 updateAvailable={this.props.updateSchemaDef}
               />
-              <Collapse isOpen={this.state.collapseSchemaDefForm}>
+              <Collapse isOpen={this.state.collapseForm}>
                 <SchemaDefForm
                   onSubmit={this.submitSchemaDef}
-                  toggleAction={this.toggleSchemaDefForm}
+                  toggleAction={this.toggleForm}
                 />
               </Collapse>
             </ListGroup>
@@ -95,12 +95,12 @@ class SchemaDefList extends Component {
             <CardFooter className="p-0">
               <Button
                 className="border-0 rounded-bottom"
-                color={this.state.collapseSchemaDefForm ? ('warning') : ('success')}
+                color={this.state.collapseForm ? ('warning') : ('success')}
                 block
                 style={{ borderTopLeftRadius: '0', borderTopRightRadius: '0' }}
-                onClick={this.toggleSchemaDefForm}
+                onClick={this.toggleForm}
               >
-                <Octicon name={this.state.collapseSchemaDefForm ? ('x') : ('plus')} mega />
+                <Octicon name={this.state.collapseForm ? ('x') : ('plus')} mega />
               </Button>
             </CardFooter>
           </Card>

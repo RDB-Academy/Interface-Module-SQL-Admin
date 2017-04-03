@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-
-import { OcticonButton } from 'components/Tools';
+import { Button, Form, Input, ListGroupItem } from 'reactstrap';
+import Octicon from 'react-octicon';
 
 class TableDefForm extends Component {
   static propTypes = {
-    submitAction: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -24,7 +24,7 @@ class TableDefForm extends Component {
       name: this.state.name.trim(),
     };
 
-    this.props.submitAction(tableDef);
+    this.props.onSubmit(tableDef);
 
     this.setState({
       name: '',
@@ -41,10 +41,39 @@ class TableDefForm extends Component {
   render() {
     const { name } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input placeholder="table name" value={name} onChange={this.handleChange} />
-        <OcticonButton color="success" size="sm" octiconName="plus">Addd</OcticonButton>
-      </form>
+      <ListGroupItem>
+        <Form inline onSubmit={this.handleSubmit}>
+          <Input
+            size="sm"
+            className="rounded-0 mr-3"
+            style={{
+              fontSize: '1em',
+              borderTop: 0,
+              borderLeft: 0,
+              borderRight: 0,
+            }}
+            placeholder="table name"
+            value={name}
+            onChange={this.handleChange}
+          />
+          <Button
+            color="success"
+            outline
+            className="rounded-0 border-0"
+            type="submit"
+          >
+            <Octicon name="diff-added" />
+          </Button>
+          <Button
+            color="danger"
+            outline
+            className="rounded-0 border-0"
+            onClick={this.handleCancel}
+          >
+            <Octicon name="x" />
+          </Button>
+        </Form>
+      </ListGroupItem>
     );
   }
 }
