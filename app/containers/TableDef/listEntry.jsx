@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Collapse, ListGroupItem } from 'reactstrap';
+import { Card, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -61,11 +61,16 @@ export class TableDefEntry extends Component {
         </div>
         <div className="d-flex flex-column w-100">
           <Collapse isOpen={this.state.collapse} >
-            <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             {(columnDefBaseList !== null) ? (
-              columnDefBaseList.map(columnDefBase => (
-                <p className="mb-1" key={columnDefBase.id}>{columnDefBase.name}</p>
-              ))
+              <Card>
+                <ListGroup className="list-group-flush">
+                  { columnDefBaseList.map(columnDefBase => (
+                    <ListGroupItem key={columnDefBase.id}>
+                      <p className="mb-1">{columnDefBase.name}</p>
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
+              </Card>
             ) : (
               <p className="mb-1">loading</p>
             )}
