@@ -116,6 +116,22 @@ if (APP.isProduction) {
     new ZipPlugin({
       filename: 'rdb-academy-sql-admin.zip',
     }));
+  webpackConfig.devServer = {
+    hot: true,
+    contentBase: APP.buildPath,
+    publicPath: '/admin/',
+    historyApiFallback: {
+      index: '/admin/index.html',
+    },
+    proxy: {
+      '/admin/api': {
+        target: 'http://localhost:9000',
+      },
+      '/api': {
+        target: 'http://localhost:9000',
+      },
+    },
+  };
 } else {
   webpackConfig.entry.app.unshift(
     'react-hot-loader/patch',

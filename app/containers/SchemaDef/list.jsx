@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { SchemaDefActions } from 'actions';
-import { SchemaDefList } from 'components/SchemaDef';
+import { SchemaDefListComponent } from 'components/SchemaDef';
 import { SchemaDefForm } from 'containers/SchemaDef';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefBase } from 'PropTypes';
 import { SchemaDefSelector } from 'selectors';
 
-class SchemaDefListContainer extends Component {
+class SchemaDefList extends Component {
   static propTypes = {
     schemaDefList: React.PropTypes.arrayOf(
       SchemaDefBase.isRequired,
@@ -80,7 +80,7 @@ class SchemaDefListContainer extends Component {
               </div>
             </CardHeader>
             <ListGroup className="list-group-flush">
-              <SchemaDefList
+              <SchemaDefListComponent
                 schemaDefList={schemaDefList}
                 deleteSchemaDef={this.deleteSchemaDef}
                 updateAvailable={this.props.updateSchemaDef}
@@ -120,4 +120,4 @@ const mapDispatchToProps = dispatch => ({
   deleteSchemaDef: bindActionCreators(SchemaDefActions.delete, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefList);

@@ -1,17 +1,18 @@
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import Route from 'react-router-dom/Route';
+import { Route, Switch } from 'react-router-dom';
 
-import SchemaDefListContainer from './list';
-import SchemaDefView from './view';
+import { SchemaDefList, SchemaDefView } from 'containers/SchemaDef';
 
 const SchemaDefPage = ({ match }) => (
   <div>
     <Helmet
       title="SchemaDef"
     />
-    <Route path={`${match.path}`} exact component={SchemaDefListContainer} />
-    <Route path={`${match.path}/:id`} exact component={SchemaDefView} />
+    <Switch>
+      <Route path={`${match.path}`} exact component={SchemaDefList} />
+      <Route path={`${match.path}/:id`} exact component={SchemaDefView} />
+    </Switch>
   </div>
 );
 

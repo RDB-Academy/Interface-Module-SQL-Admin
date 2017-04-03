@@ -3,7 +3,8 @@ import { Container } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,11 +23,11 @@ class App extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     logoutUser: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   constructor(props) {
     super(props);
-
     this.logout = this.logout.bind(this);
   }
 
@@ -35,9 +36,9 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, history } = this.props;
     return (
-      <BrowserRouter basename="/admin">
+      <ConnectedRouter history={history} basename="/admin">
         <div>
           <Helmet
             title="SQL Admin-Tool"
@@ -45,22 +46,27 @@ class App extends Component {
           <Navbar isLoggedIn={isLoggedIn} logout={this.logout} />
           <main>
             { isLoggedIn ? (
-              <div>
+              <Switch>
                 <Route path="/" exact render={() => (<h1>Index</h1>)} />
                 <Route path="/schema-defs" component={SchemaDefPage} />
                 <Route path="/tasks" component={TaskPage} />
                 <Route path="/task-trials" exact render={() => (<h1>taskTrials</h1>)} />
                 <Route path="/status" exact render={() => (<h1>status</h1>)} />
-              </div>
+                <Route
+                  render={() => (
+                    <Redirect to="/" />
+                  )}
+                />
+              </Switch>
             ) : (
-              <div>
+              <Switch>
                 <Route path="/login" exactly component={Login} />
                 <Route
                   render={() => (
                     <Redirect to="/login" />
                   )}
                 />
-              </div>
+              </Switch>
             )}
             <div className="push" />
           </main>
@@ -71,7 +77,7 @@ class App extends Component {
             </Container>
           </footer>
         </div>
-      </BrowserRouter>
+      </ConnectedRouter>
     );
   }
 }
