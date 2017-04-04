@@ -88,7 +88,7 @@ const webpackConfig = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'SQL-Module Admin',
-      template: 'index.ejs',
+      template: 'htmlTemplate/index.ejs',
     }),
     new webpack.DefinePlugin({
       'process.env': {

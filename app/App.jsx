@@ -15,11 +15,11 @@ import Navbar from 'components/Navbar';
 
 import { SessionSelector } from 'selectors';
 
-import Login from './Login';
-import { SchemaDefPage } from './SchemaDef';
-import TaskPage from './Task';
+import { SchemaDefPage, LoginPage } from 'pages';
 
-class App extends Component {
+import TaskPage from 'containers/Task';
+
+class Application extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     logoutUser: PropTypes.func.isRequired,
@@ -60,7 +60,7 @@ class App extends Component {
               </Switch>
             ) : (
               <Switch>
-                <Route path="/login" exactly component={Login} />
+                <Route path="/login" exactly component={LoginPage} />
                 <Route
                   render={() => (
                     <Redirect to="/login" />
@@ -90,4 +90,4 @@ const mapDispatchToProps = dispatch => ({
   logoutUser: bindActionCreators(logoutUser, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Application);

@@ -55,10 +55,6 @@ class SchemaDefListEntry extends Component {
       <OcticonButton outline color={schemaDef.available ? 'success' : 'danger'} onClick={this.setAvailable} octiconName="radio-tower" />
     );
 
-    const renderEdit = () => (
-      <OcticonButton outline color="warning" onClick={() => { console.log('test'); }} octiconName="pencil" />
-    );
-
     const renderDelete = () => (
       <OcticonButton outline color="danger" onClick={this.delete} octiconName="x" />
     );
@@ -75,7 +71,6 @@ class SchemaDefListEntry extends Component {
             <small>
               <Badge color="info">{schemaDef.available ? 'public' : 'private'}</Badge>
               { collapse && renderAvailable() }
-              { collapse && renderEdit() }
               { collapse && renderDelete() }
               <OcticonButton octiconName={collapse ? 'chevron-down' : 'chevron-up'} />
             </small>
@@ -87,7 +82,6 @@ class SchemaDefListEntry extends Component {
         </div>
         <div className="schemadef-list-entry-footer" hidden={collapse}>
           { renderAvailable() }
-          { renderEdit() }
           { renderDelete() }
         </div>
       </ListGroupItem>

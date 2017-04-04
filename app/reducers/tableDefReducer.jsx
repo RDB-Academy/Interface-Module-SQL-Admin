@@ -43,7 +43,6 @@ export default function tableDefReducer(state = initialState, action) {
      * Read
      */
     case types.READ_SUCCESS: {
-      console.log(action);
       return state;
     }
     case types.INVALIDATE_STORE: {

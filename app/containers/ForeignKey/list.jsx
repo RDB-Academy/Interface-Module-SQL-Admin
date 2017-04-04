@@ -2,25 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import { Button, Card, CardHeader, CardFooter, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
 import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { TableDefActions } from 'actions';
-import { TableDefSelector } from 'selectors';
 
-import { TableDefBase, SchemaDefBase } from 'PropTypes';
+import { SchemaDefBase, ForeignKeyBase } from 'PropTypes';
+import { ForeignKeySelector } from 'selectors';
+import { ForeignKeyForm, ForeignKeyListEntry } from 'containers/ForeignKey';
 
-import { TableDefForm, TableDefListEntry } from 'containers/TableDef';
-
-class TableDefList extends Component {
+class ForeignKeyList extends Component {
   static propTypes = {
     schemaDef: SchemaDefBase.isRequired,
-    tableDefList: PropTypes.arrayOf(
-      TableDefBase,
+    foreignKeyList: PropTypes.arrayOf(
+      ForeignKeyBase,
     ),
-    createTableDef: PropTypes.func.isRequired,
+    createForeignKey: PropTypes.func,
   }
 
   static defaultProps = {
-    tableDefList: null,
+    foreignKeyList: null,
+    createForeignKey: null,
   }
 
   constructor(props) {
@@ -29,30 +27,30 @@ class TableDefList extends Component {
     this.state = { collapseForm: false };
 
     this.toggleForm = this.toggleForm.bind(this);
-    this.submitTableDef = this.submitTableDef.bind(this);
+    this.submitForeignKey = this.submitForeignKey.bind(this);
   }
 
   toggleForm() {
     this.setState({ collapseForm: !this.state.collapseForm });
   }
 
-  submitTableDef(tableDefData) {
-    const tableDef = tableDefData;
-    tableDef.schemaDefId = this.props.schemaDef.id;
+  submitForeignKey(foreignKeyData) {
+    const foreignKey = foreignKeyData;
+    foreignKey.schemaDefId = this.props.schemaDef.id;
 
-    this.props.createTableDef(tableDef);
+    this.props.createForeignKey(foreignKey);
     this.toggleForm();
   }
 
   render() {
-    const { tableDefList } = this.props;
+    const { foreignKeyList } = this.props;
     return (
       <Card className="mb-3">
-        <CardHeader className="d-flex w-100 justify-content-between">
-          Tables:
+        <CardHeader>
+          ForeignKeys
         </CardHeader>
         <ListGroup className="list-group-flush">
-          { tableDefList === null ? (
+          { foreignKeyList === null ? (
             <ListGroupItem>
               <div className="w-100 text-center">
                 <Octicon name="sync" mega spin />
@@ -60,14 +58,14 @@ class TableDefList extends Component {
             </ListGroupItem>
           ) : (
             <div>
-              { tableDefList.map(tableDef => (
-                <TableDefListEntry key={tableDef.id} tableDef={tableDef} />
+              { foreignKeyList.map(foreignKey => (
+                <ForeignKeyListEntry key={foreignKey.id} foreignKey={foreignKey} />
               ))}
             </div>
           )}
           <Collapse isOpen={this.state.collapseForm}>
-            <TableDefForm
-              onSubmit={this.submitTableDef}
+            <ForeignKeyForm
+              onSubmit={this.submitForeignKey}
               toggleAction={this.toggleForm}
             />
           </Collapse>
@@ -89,12 +87,8 @@ class TableDefList extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  tableDefList: TableDefSelector.getList(state, props.schemaDef.id),
+  foreignKeyList: ForeignKeySelector.getList(state, props.schemaDef.id),
 });
 
 
-const mapDispatchToProps = dispatch => ({
-  createTableDef: bindActionCreators(TableDefActions.create, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TableDefList);
+export default connect(mapStateToProps, null)(ForeignKeyList);

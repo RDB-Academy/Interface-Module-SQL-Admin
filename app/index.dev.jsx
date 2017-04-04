@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { AppContainer } from 'react-hot-loader'; // eslint-disable-line
 
-import App from 'containers/App';
+import App from 'App';
 import configureStore from './store';
 
 const appMount = document.getElementById('root');
@@ -21,8 +21,8 @@ ReactDOM.render(
   appMount);
 
 if (module.hot) {
-  module.hot.accept('./containers/App', () => {
-    const NewApp = require('./containers/App').default; // eslint-disable-line
+  module.hot.accept('App', () => {
+    const NewApp = require('App').default; // eslint-disable-line
     ReactDOM.render(
       <AppContainer>
         <Provider store={store}>

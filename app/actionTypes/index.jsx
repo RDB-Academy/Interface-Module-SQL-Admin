@@ -53,3 +53,15 @@ export class ColumnDefActionTypes extends BaseActionTypes {
   static READ_SUCCESS = 'COLUMN_DEF_READ_SUCCESS';
   static READ_FAILURE = 'COLUMN_DEF_READ_FAILURE';
 }
+
+/**
+ * TableDef Actions
+ */
+export class ForeignKeyActionTypes extends BaseActionTypes {
+  // Create
+  static CREATE_SUCCESS = 'FOREIGN_KEY_CREATE_SUCCESS';
+  static CREATE_FAILURE = 'FOREIGN_KEY_CREATE_FAILURE';
+  // Read
+  static READ_SUCCESS = 'FOREIGN_KEY_READ_SUCCESS';
+  static READ_FAILURE = 'FOREIGN_KEY_READ_FAILURE';
+}

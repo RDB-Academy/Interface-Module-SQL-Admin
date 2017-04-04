@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { loginUser } from 'actions/sessionActions';
 import { SessionSelector } from 'selectors';
 
-class Login extends Component {
+class LoginPage extends Component {
   static propTypes = {
     loginUser: PropTypes.func.isRequired,
     loginFailure: PropTypes.bool.isRequired,
@@ -120,4 +120,4 @@ const mapStateToProps = state => ({
   loginFailure: SessionSelector.getLoginFailureField(state),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

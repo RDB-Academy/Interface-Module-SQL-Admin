@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { Container, Jumbotron } from 'reactstrap';
+import { Card, CardBlock, CardHeader, CardText, Container, Jumbotron } from 'reactstrap';
 
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TableDefList } from 'containers/TableDef';
+import { ForeignKeyList } from 'containers/ForeignKey';
 import { SchemaDefActions } from 'actions';
 import { OcticonButton } from 'components/Tools';
 import { SchemaDefExtended } from 'PropTypes';
@@ -95,7 +96,35 @@ class SchemaDefView extends Component {
           </Container>
         </Jumbotron>
         <Container>
+          <Card className="mb-3">
+            <CardHeader>
+              Properties:
+            </CardHeader>
+            <CardBlock>
+              <CardText>
+                ID: {schemaDef.id} <br />
+                Name: {schemaDef.name}
+              </CardText>
+              <CardText>
+                {schemaDef.tableCount} tables<br />
+                {schemaDef.foreignKeyCount} foreignKeys<br />
+                {schemaDef.tasksCount} tasks
+              </CardText>
+              <CardText>
+                createdAt: {schemaDef.createdAt} <br />
+                modifiedAt: {schemaDef.modifiedAt}
+              </CardText>
+            </CardBlock>
+          </Card>
           <TableDefList schemaDef={schemaDef} />
+          <ForeignKeyList schemaDef={schemaDef} />
+          {/*  <TaskList>  */}
+          <Card>
+            <CardHeader>
+              Tasks
+            </CardHeader>
+          </Card>
+          {/*  </TaskList>  */}
         </Container>
       </div>
     );

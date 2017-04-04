@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
-import App from 'containers/App';
+import App from 'App';
 import configureStore from './store';
 
 const appMount = document.getElementById('root');

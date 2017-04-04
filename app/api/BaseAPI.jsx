@@ -34,7 +34,9 @@ class BaseAPI {
             return response.json();
           }
           return response.text();
-        }, error => error);
+        }, (error) => {
+          throw error;
+        });
   };
 }
 

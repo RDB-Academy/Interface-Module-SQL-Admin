@@ -8,13 +8,22 @@ const SchemaDefBaseShape = {
   modifiedAt: PropTypes.string.isRequired,
 };
 
+export const SchemaDefBase = PropTypes.shape(
+  SchemaDefBaseShape,
+);
+
 const TableDefBaseShape = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   schemaDefId: PropTypes.number.isRequired,
+  columnDefListSize: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
   modifiedAt: PropTypes.string.isRequired,
 };
+
+export const TableDefBase = PropTypes.shape(
+  TableDefBaseShape,
+);
 
 const ColumnDefBaseShape = {
   id: PropTypes.number.isRequired,
@@ -24,23 +33,53 @@ const ColumnDefBaseShape = {
   modifiedAt: PropTypes.string.isRequired,
 };
 
+export const ColumnDefBase = PropTypes.shape(
+  ColumnDefBaseShape,
+);
+
+const ForeignKeyBaseShape = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  schemaDefId: PropTypes.number.isRequired,
+  foreignKeyRelationListSize: PropTypes.number.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  modifiedAt: PropTypes.string.isRequired,
+};
+
+export const ForeignKeyBase = PropTypes.shape(
+  ForeignKeyBaseShape,
+);
+
+const ForeignKeyRelationBaseShape = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  foreignKeyId: PropTypes.number.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  modifiedAt: PropTypes.string.isRequired,
+};
+
+export const ForeignKeyRelationBase = PropTypes.shape(
+  ForeignKeyRelationBaseShape,
+);
+
 const SchemaDefExtendedShape = {
   ...SchemaDefBaseShape,
   relations: PropTypes.shape({
     tableDefList: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-      }),
+      TableDefBase,
     ).isRequired,
     foreignKeyList: PropTypes.arrayOf(
-      PropTypes.number,
+      ForeignKeyBase,
     ).isRequired,
     taskList: PropTypes.arrayOf(
       PropTypes.number,
     ).isRequired,
   }),
 };
+
+export const SchemaDefExtended = PropTypes.shape(
+  SchemaDefExtendedShape,
+);
 
 const ColumnDefExtendedShape = {
   ...ColumnDefBaseShape,
@@ -49,22 +88,6 @@ const ColumnDefExtendedShape = {
   isNotNull: PropTypes.bool.isRequired,
   MetaValueSet: PropTypes.string.isRequired,
 };
-
-export const SchemaDefBase = PropTypes.shape(
-  SchemaDefBaseShape,
-);
-
-export const SchemaDefExtended = PropTypes.shape(
-  SchemaDefExtendedShape,
-);
-
-export const TableDefBase = PropTypes.shape(
-  TableDefBaseShape,
-);
-
-export const ColumnDefBase = PropTypes.shape(
-  ColumnDefBaseShape,
-);
 
 export const ColumnDefExtended = PropTypes.shape(
   ColumnDefExtendedShape,
