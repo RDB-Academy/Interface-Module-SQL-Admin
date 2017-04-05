@@ -13,7 +13,7 @@ import { ForeignKeyBase, ForeignKeyRelationBase } from 'PropTypes';
 import { ForeignKeyRelationSelector } from 'selectors';
 import Octicon from 'react-octicon';
 
-export class ForeignKeyListEntry extends Component {
+export class ForeignKeyListItem extends Component {
   static propTypes = {
     foreignKey: ForeignKeyBase.isRequired,
     foreignKeyRelationList: PropTypes.arrayOf(
@@ -94,4 +94,4 @@ const mapDispatchToProps = dispatch => ({
   readForeignKey: bindActionCreators(ForeignKeyActions.read, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForeignKeyListEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(ForeignKeyListItem);

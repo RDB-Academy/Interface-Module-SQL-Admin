@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Card, CardFooter, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
-import { ForeignKeyRelationForm, ForeignKeyRelationListEntry } from 'containers/ForeignKeyRelation';
+import { ForeignKeyRelationForm, ForeignKeyRelationListItem } from 'containers/ForeignKeyRelation';
 import Octicon from 'react-octicon';
 import { ForeignKeyBase, ForeignKeyRelationBase } from 'PropTypes';
 
@@ -49,7 +49,7 @@ class ForeignKeyRelationList extends Component {
           ) : (
             <div>
               { foreignKeyRelationList.map(foreignKeyRelation => (
-                <ForeignKeyRelationListEntry
+                <ForeignKeyRelationListItem
                   key={foreignKeyRelation.id}
                   foreignKeyRelation={foreignKeyRelation}
                 />

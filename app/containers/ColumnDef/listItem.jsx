@@ -9,7 +9,7 @@ import { ColumnDefActions } from 'actions';
 import { ColumnDefSelector } from 'selectors';
 import { ColumnDefBase, ColumnDefExtended } from 'PropTypes';
 
-class ColumnDefListEntry extends Component {
+class ColumnDefListItem extends Component {
   static propTypes = {
     columnDef: ColumnDefBase.isRequired,
     columnDefExtended: ColumnDefExtended,
@@ -74,4 +74,4 @@ const mapDispatchToProps = dispatch => ({
   readColumnDef: bindActionCreators(ColumnDefActions.read, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ColumnDefListEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(ColumnDefListItem);

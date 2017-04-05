@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ForeignKeyRelationListEntry extends Component {
+class ForeignKeyRelationListItem extends Component {
   render() {
     return (
       <h1>ListEntry</h1>
@@ -8,4 +8,4 @@ class ForeignKeyRelationListEntry extends Component {
   }
 }
 
-export default ForeignKeyRelationListEntry;
+export default ForeignKeyRelationListItem;

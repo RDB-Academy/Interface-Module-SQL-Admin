@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { SchemaDefBase, ForeignKeyBase } from 'PropTypes';
 import { ForeignKeySelector } from 'selectors';
-import { ForeignKeyForm, ForeignKeyListEntry } from 'containers/ForeignKey';
+import { ForeignKeyForm, ForeignKeyListItem } from 'containers/ForeignKey';
 
 class ForeignKeyList extends Component {
   static propTypes = {
@@ -59,7 +59,7 @@ class ForeignKeyList extends Component {
           ) : (
             <div>
               { foreignKeyList.map(foreignKey => (
-                <ForeignKeyListEntry key={foreignKey.id} foreignKey={foreignKey} />
+                <ForeignKeyListItem key={foreignKey.id} foreignKey={foreignKey} />
               ))}
             </div>
           )}
