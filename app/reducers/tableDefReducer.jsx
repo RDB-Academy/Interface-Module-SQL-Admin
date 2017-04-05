@@ -2,6 +2,7 @@ import { TableDefActionTypes as types, SchemaDefActionTypes } from 'actionTypes'
 
 const initialState = {
   tableDefList: [],
+  byId: {},
 };
 
 export default function tableDefReducer(state = initialState, action) {
@@ -43,7 +44,13 @@ export default function tableDefReducer(state = initialState, action) {
      * Read
      */
     case types.READ_SUCCESS: {
-      return state;
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.data.id]: action.data,
+        },
+      };
     }
     case types.INVALIDATE_STORE: {
       return initialState;

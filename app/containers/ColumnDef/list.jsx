@@ -26,14 +26,18 @@ class ColumnDefList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { collapseForm: false };
+    this.state = {
+      collapseForm: false,
+    };
 
     this.toggleForm = this.toggleForm.bind(this);
     this.submitColumnDef = this.submitColumnDef.bind(this);
   }
 
   toggleForm() {
-    this.setState({ collapseForm: !this.state.collapseForm });
+    this.setState({
+      collapseForm: !this.state.collapseForm,
+    });
   }
 
   submitColumnDef(columnDefData) {
@@ -61,7 +65,10 @@ class ColumnDefList extends Component {
           ) : (
             <div>
               { columnDefList.map(columnDef => (
-                <ColumnDefListItem key={columnDef.id} columnDef={columnDef} />
+                <ColumnDefListItem
+                  key={columnDef.id}
+                  columnDef={columnDef}
+                />
               ))}
             </div>
           )}
@@ -91,7 +98,6 @@ class ColumnDefList extends Component {
 const mapStateToProps = (state, props) => ({
   columnDefList: ColumnDefSelector.getList(state, props.tableDefId),
 });
-
 
 const mapDispatchToProps = dispatch => ({
   createColumnDef: bindActionCreators(ColumnDefActions.create, dispatch),

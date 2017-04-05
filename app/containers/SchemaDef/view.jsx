@@ -116,8 +116,12 @@ class SchemaDefView extends Component {
               </CardText>
             </CardBlock>
           </Card>
-          <TableDefList schemaDef={schemaDef} />
-          <ForeignKeyList schemaDef={schemaDef} />
+          <TableDefList
+            schemaDefId={schemaDef.id}
+          />
+          <ForeignKeyList
+            schemaDefId={schemaDef.id}
+          />
           {/*  <TaskList>  */}
           <Card>
             <CardHeader>

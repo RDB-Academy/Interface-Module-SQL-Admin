@@ -64,7 +64,7 @@ export class ForeignKeyListItem extends Component {
           <Collapse isOpen={this.state.collapse} >
             {(foreignKeyRelationList !== null) ? (
               <ForeignKeyRelationList
-                foreignKey={foreignKey}
+                foreignKeyId={foreignKey.id}
                 foreignKeyRelationList={foreignKeyRelationList}
               />
             ) : (

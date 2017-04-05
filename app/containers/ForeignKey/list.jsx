@@ -3,13 +3,13 @@ import { Button, Card, CardHeader, CardFooter, Collapse, ListGroup, ListGroupIte
 import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 
-import { SchemaDefBase, ForeignKeyBase } from 'PropTypes';
+import { ForeignKeyBase } from 'PropTypes';
 import { ForeignKeySelector } from 'selectors';
 import { ForeignKeyForm, ForeignKeyListItem } from 'containers/ForeignKey';
 
 class ForeignKeyList extends Component {
   static propTypes = {
-    schemaDef: SchemaDefBase.isRequired,
+    schemaDefId: PropTypes.number.isRequired,
     foreignKeyList: PropTypes.arrayOf(
       ForeignKeyBase,
     ),
@@ -36,7 +36,7 @@ class ForeignKeyList extends Component {
 
   submitForeignKey(foreignKeyData) {
     const foreignKey = foreignKeyData;
-    foreignKey.schemaDefId = this.props.schemaDef.id;
+    foreignKey.schemaDefId = this.props.schemaDefId;
 
     this.props.createForeignKey(foreignKey);
     this.toggleForm();
@@ -87,8 +87,13 @@ class ForeignKeyList extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  foreignKeyList: ForeignKeySelector.getList(state, props.schemaDef.id),
+  foreignKeyList: ForeignKeySelector.getList(state, props.schemaDefId),
 });
 
+/*
+const mapDispatchToProps = dispatch => ({
+
+})
+*/
 
 export default connect(mapStateToProps, null)(ForeignKeyList);

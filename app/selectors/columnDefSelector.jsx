@@ -9,7 +9,7 @@ class ColumnDefSelector {
 
   static byId = (state, id) => (
     ColumnDefSelector.getStore(state).byId[id]
-  )
+  );
 }
 
 export default ColumnDefSelector;

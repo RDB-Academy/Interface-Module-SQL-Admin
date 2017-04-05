@@ -1,28 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import { Collapse, ListGroupItem } from 'reactstrap';
-
+import Octicon from 'react-octicon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TableDefActions } from 'actions';
+import { TableDefSelector } from 'selectors';
 import { ImprovedMoment } from 'components/Tools';
 import Moment from 'react-moment';
-import { TableDefBase, ColumnDefBase } from 'PropTypes';
-import { ColumnDefSelector } from 'selectors';
-import Octicon from 'react-octicon';
+import { TableDefBase, TableDefExtended } from 'PropTypes';
 import { ColumnDefList } from 'containers/ColumnDef';
 
 export class TableDefItem extends Component {
   static propTypes = {
     tableDef: TableDefBase.isRequired,
-    columnDefList: PropTypes.arrayOf(
-      ColumnDefBase,
-    ),
+    tableDefExtended: TableDefExtended,
     readTableDef: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
-    columnDefList: null,
+    tableDefExtended: null,
   }
 
   constructor(props) {
@@ -36,15 +33,24 @@ export class TableDefItem extends Component {
   }
 
   toggle(event) {
+    const { collapse } = this.state;
+    event.preventDefault();
     event.stopPropagation();
-    if (!this.state.collapse && this.props.columnDefList === null) {
-      this.props.readTableDef(this.props.tableDef.id);
+
+    if (!collapse) {
+      const { tableDef, tableDefExtended, readTableDef } = this.props;
+      if (tableDefExtended === null) {
+        readTableDef(tableDef.id);
+      }
     }
-    this.setState({ collapse: !this.state.collapse });
+
+    this.setState({
+      collapse: !this.state.collapse,
+    });
   }
 
   render() {
-    const { tableDef, columnDefList } = this.props;
+    const { tableDef, tableDefExtended } = this.props;
     return (
       <ListGroupItem
         tag="a"
@@ -63,13 +69,12 @@ export class TableDefItem extends Component {
         </div>
         <div className="d-flex flex-column w-100">
           <Collapse isOpen={this.state.collapse} >
-            {(columnDefList !== null) ? (
+            { tableDefExtended !== null ? (
               <ColumnDefList
                 tableDefId={tableDef.id}
-                columnDefList={columnDefList}
               />
             ) : (
-              <p className="mb-1">loading</p>
+              <p>Loading </p>
             )}
             <small>
               Created at:{' '}
@@ -88,7 +93,7 @@ export class TableDefItem extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  columnDefList: ColumnDefSelector.getList(state, props.tableDef.id),
+  tableDefExtended: TableDefSelector.byId(state, props.tableDef.id),
 });
 
 const mapDispatchToProps = dispatch => ({

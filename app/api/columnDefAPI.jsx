@@ -7,8 +7,8 @@ class ColumnDefAPI extends BaseAPI {
     BaseAPI.myFetch(ColumnDefAPI.objectUrl, sessionId, 'POST', columnDef)
   )
 
-  static read = (sessionId, id) => (
-    BaseAPI.myFetch(`${ColumnDefAPI.objectUrl}/${id}`, sessionId)
+  static read = (sessionId, columnDefId) => (
+    BaseAPI.myFetch(`${ColumnDefAPI.objectUrl}/${columnDefId}`, sessionId)
   )
 }
 

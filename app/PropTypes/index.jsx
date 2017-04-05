@@ -82,6 +82,17 @@ export const SchemaDefExtended = PropTypes.shape(
   SchemaDefExtendedShape,
 );
 
+const TableDefExtendedShape = {
+  ...TableDefBaseShape,
+  columnDefList: PropTypes.arrayOf(
+    ColumnDefBase,
+  ),
+};
+
+export const TableDefExtended = PropTypes.shape(
+  TableDefExtendedShape,
+);
+
 const ColumnDefExtendedShape = {
   ...ColumnDefBaseShape,
   dataType: PropTypes.string.isRequired,

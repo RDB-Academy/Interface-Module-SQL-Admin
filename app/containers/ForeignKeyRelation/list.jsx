@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { Button, Card, CardFooter, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
 import { ForeignKeyRelationForm, ForeignKeyRelationListItem } from 'containers/ForeignKeyRelation';
 import Octicon from 'react-octicon';
-import { ForeignKeyBase, ForeignKeyRelationBase } from 'PropTypes';
+import { ForeignKeyRelationBase } from 'PropTypes';
 
 class ForeignKeyRelationList extends Component {
   static propTypes = {
-    foreignKey: ForeignKeyBase.isRequired,
+    foreignKeyId: PropTypes.number.isRequired,
     foreignKeyRelationList: PropTypes.arrayOf(
       ForeignKeyRelationBase,
     ).isRequired,
@@ -30,7 +30,7 @@ class ForeignKeyRelationList extends Component {
 
   submitForeignKey(foreignKeyRelationData) {
     console.log(foreignKeyRelationData);
-    console.log(this.props.foreignKey);
+    console.log(this.props.foreignKeyId);
     // this.props.createForeignKeyRelation(foreignKeyRelationData, this.props.foreignKey.id);
     this.toggleForm();
   }

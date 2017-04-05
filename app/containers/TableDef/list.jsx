@@ -6,13 +6,13 @@ import { bindActionCreators } from 'redux';
 import { TableDefActions } from 'actions';
 import { TableDefSelector } from 'selectors';
 
-import { TableDefBase, SchemaDefBase } from 'PropTypes';
+import { TableDefBase } from 'PropTypes';
 
 import { TableDefForm, TableDefListItem } from 'containers/TableDef';
 
 class TableDefList extends Component {
   static propTypes = {
-    schemaDef: SchemaDefBase.isRequired,
+    schemaDefId: PropTypes.number.isRequired,
     tableDefList: PropTypes.arrayOf(
       TableDefBase,
     ),
@@ -38,7 +38,7 @@ class TableDefList extends Component {
 
   submitTableDef(tableDefData) {
     const tableDef = tableDefData;
-    tableDef.schemaDefId = this.props.schemaDef.id;
+    tableDef.schemaDefId = this.props.schemaDefId;
 
     this.props.createTableDef(tableDef);
     this.toggleForm();
@@ -61,7 +61,10 @@ class TableDefList extends Component {
           ) : (
             <div>
               { tableDefList.map(tableDef => (
-                <TableDefListItem key={tableDef.id} tableDef={tableDef} />
+                <TableDefListItem
+                  key={tableDef.id}
+                  tableDef={tableDef}
+                />
               ))}
             </div>
           )}
@@ -89,7 +92,7 @@ class TableDefList extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  tableDefList: TableDefSelector.getList(state, props.schemaDef.id),
+  tableDefList: TableDefSelector.getList(state, props.schemaDefId),
 });
 
 
