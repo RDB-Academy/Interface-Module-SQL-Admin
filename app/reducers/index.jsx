@@ -6,6 +6,7 @@ import schemaDef from './schemaDefReducer';
 import tableDef from './tableDefReducer';
 import columnDef from './columnDefReducer';
 import foreignKey from './foreignKeyReducer';
+import foreignKeyRelation from './foreignKeyRelationReducer';
 
 import task from './taskReducer';
 
@@ -15,6 +16,7 @@ export default combineReducers({
   tableDef,
   columnDef,
   foreignKey,
+  foreignKeyRelation,
   task,
   router: routerReducer,
 });

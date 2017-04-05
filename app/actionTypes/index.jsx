@@ -65,3 +65,12 @@ export class ForeignKeyActionTypes extends BaseActionTypes {
   static READ_SUCCESS = 'FOREIGN_KEY_READ_SUCCESS';
   static READ_FAILURE = 'FOREIGN_KEY_READ_FAILURE';
 }
+
+export class ForeignKeyRelationActionTypes extends BaseActionTypes {
+  // Create
+  static CREATE_SUCCESS = 'FOREIGN_KEY_RELATION_CREATE_SUCCESS';
+  static CREATE_FAILURE = 'FOREIGN_KEY_RELATION_CREATE_FAILURE';
+  // Read
+  static READ_SUCCESS = 'FOREIGN_KEY_RELATION_READ_SUCCESS';
+  static READ_FAILURE = 'FOREIGN_KEY_RELATION_READ_FAILURE';
+}

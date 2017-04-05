@@ -5,3 +5,4 @@ export { default as TableDefSelector } from './tableDefSelector';
 export { default as ColumnDefSelector } from './columnDefSelector';
 
 export { default as ForeignKeySelector } from './foreignKeySelector';
+export { default as ForeignKeyRelationSelector } from './foreignKeyRelationSelector';

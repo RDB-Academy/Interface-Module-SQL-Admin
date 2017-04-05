@@ -40,6 +40,8 @@ export const ColumnDefBase = PropTypes.shape(
 const ForeignKeyBaseShape = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  sourceTable: PropTypes.string.isRequired,
+  targetTable: PropTypes.string.isRequired,
   schemaDefId: PropTypes.number.isRequired,
   foreignKeyRelationListSize: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
@@ -52,7 +54,6 @@ export const ForeignKeyBase = PropTypes.shape(
 
 const ForeignKeyRelationBaseShape = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
   foreignKeyId: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
   modifiedAt: PropTypes.string.isRequired,

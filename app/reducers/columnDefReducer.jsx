@@ -5,7 +5,7 @@ const initialState = {
   byId: {},
 };
 
-export default function tableDefReducer(state = initialState, action) {
+export default function columnDefReducer(state = initialState, action) {
   switch (action.type) {
     /**
      * Special Function

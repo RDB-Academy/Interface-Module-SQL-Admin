@@ -1,14 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
+import { Collapse, ListGroupItem } from 'reactstrap';
+
+import { ForeignKeyRelationList } from 'containers/ForeignKeyRelation';
 
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 
-// import { TableDefActions } from 'actions';
+import { ForeignKeyActions } from 'actions';
 import { ImprovedMoment } from 'components/Tools';
 import Moment from 'react-moment';
 import { ForeignKeyBase, ForeignKeyRelationBase } from 'PropTypes';
-// import { ForeignKeyBaseSelector } from 'selectors';
+import { ForeignKeyRelationSelector } from 'selectors';
 import Octicon from 'react-octicon';
 
 export class ForeignKeyListEntry extends Component {
@@ -17,12 +19,11 @@ export class ForeignKeyListEntry extends Component {
     foreignKeyRelationList: PropTypes.arrayOf(
       ForeignKeyRelationBase,
     ),
-    readForeignKey: PropTypes.func,
+    readForeignKey: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     foreignKeyRelationList: null,
-    readForeignKey: null,
   }
 
   constructor(props) {
@@ -36,7 +37,7 @@ export class ForeignKeyListEntry extends Component {
 
   toggle() {
     if (!this.state.collapse && this.props.foreignKeyRelationList === null) {
-      // this.props.readForeignKey(this.props.foreignKey.id);
+      this.props.readForeignKey(this.props.foreignKey.id);
     }
     this.setState({ collapse: !this.state.collapse });
   }
@@ -62,18 +63,10 @@ export class ForeignKeyListEntry extends Component {
         <div className="d-flex flex-column w-100">
           <Collapse isOpen={this.state.collapse} >
             {(foreignKeyRelationList !== null) ? (
-              <Card>
-                <ListGroup className="list-group-flush">
-                  { foreignKeyRelationList.map(foreignKeyRelation => (
-                    {/*
-                    <ForeignKeyRelationListEntry
-                      key={foreignKeyRelation.id}
-                      foreignKeyRelation={foreignKeyRelation}
-                    />
-                    */}
-                  ))}
-                </ListGroup>
-              </Card>
+              <ForeignKeyRelationList
+                foreignKey={foreignKey}
+                foreignKeyRelationList={foreignKeyRelationList}
+              />
             ) : (
               <p className="mb-1">loading</p>
             )}
@@ -92,13 +85,13 @@ export class ForeignKeyListEntry extends Component {
     );
   }
 }
-/*
+
 const mapStateToProps = (state, props) => ({
-  columnDefBaseList: ColumnDefSelector.getList(state, props.tableDef.id),
+  foreignKeyRelationList: ForeignKeyRelationSelector.getList(state, props.foreignKey.id),
 });
 
 const mapDispatchToProps = dispatch => ({
-  readTableDef: bindActionCreators(TableDefActions.read, dispatch),
+  readForeignKey: bindActionCreators(ForeignKeyActions.read, dispatch),
 });
-*/
-export default connect(null, null)(ForeignKeyListEntry);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ForeignKeyListEntry);

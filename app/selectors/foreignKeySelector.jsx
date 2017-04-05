@@ -3,8 +3,8 @@ class ForeignKeySelector {
     state.foreignKey
   );
 
-  static getList = (state, schemaDefId) => (
-    ForeignKeySelector.getStore(state).foreignKeyList[schemaDefId]
+  static getList = (state, foreignKeyId) => (
+    ForeignKeySelector.getStore(state).foreignKeyList[foreignKeyId]
   );
 }
 
