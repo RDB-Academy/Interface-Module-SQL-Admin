@@ -52,7 +52,7 @@ class SchemaDefListEntry extends Component {
     const { collapse } = this.state;
 
     const renderAvailable = () => (
-      <OcticonButton outline color={schemaDef.available ? 'success' : 'danger'} onClick={this.setAvailable} octiconName="radio-tower" />
+      <OcticonButton outline color={schemaDef.available ? 'success' : 'danger'} onClick={this.setAvailable} octiconName="eye" />
     );
 
     const renderDelete = () => (
