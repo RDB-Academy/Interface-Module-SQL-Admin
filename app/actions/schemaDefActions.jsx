@@ -142,7 +142,7 @@ class SchemaDefActionCreator {
   static delete = id => (
     (dispatch, getState) => (
       SchemaDefAPI
-        .deleteSchemaDef(SessionSelector.getId(getState()), id)
+        .delete(SessionSelector.getId(getState()), id)
         .then(() => {
           dispatch(SchemaDefActions.deleteSuccess({ id }));
         }, (error) => {
