@@ -36,11 +36,10 @@ class TableDefList extends Component {
     this.setState({ collapseForm: !this.state.collapseForm });
   }
 
-  submitTableDef(tableDefData) {
-    const tableDef = tableDefData;
-    tableDef.schemaDefId = this.props.schemaDefId;
+  submitTableDef(tableDef) {
+    const { schemaDefId } = this.props;
 
-    this.props.createTableDef(tableDef);
+    this.props.createTableDef(schemaDefId, tableDef);
     this.toggleForm();
   }
 

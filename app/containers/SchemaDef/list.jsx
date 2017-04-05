@@ -25,7 +25,6 @@ class SchemaDefList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
       collapseForm: false,
     };
 
@@ -45,7 +44,6 @@ class SchemaDefList extends Component {
 
   submitSchemaDef(schemaDefData) {
     const schemaDef = schemaDefData;
-
     this.props.createSchemaDef(schemaDef);
   }
 

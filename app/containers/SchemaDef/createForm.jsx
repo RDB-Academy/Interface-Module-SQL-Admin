@@ -12,7 +12,9 @@ class SchemaDefForm extends Component {
     super(props);
 
     this.state = {
-      name: '',
+      schemaDef: {
+        name: '',
+      },
     };
 
     this.resetState = this.resetState.bind(this);
@@ -23,20 +25,21 @@ class SchemaDefForm extends Component {
 
   resetState() {
     this.setState({
-      name: '',
+      schemaDef: {
+        name: '',
+      },
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    const schemaDef = {
-      name: this.state.name.trim(),
-    };
+    const { schemaDef } = this.state;
+
+    schemaDef.name = schemaDef.name.trim();
 
     this.props.onSubmit(schemaDef);
     this.props.toggleAction();
-    this.resetState();
   }
 
   handleCancel() {
@@ -45,12 +48,15 @@ class SchemaDefForm extends Component {
   }
 
   handleChange(event) {
-    this.setState({ name: event.target.value });
+    this.setState({
+      schemaDef: {
+        name: event.target.value,
+      },
+    });
   }
 
-
   render() {
-    const { name } = this.state;
+    const { name } = this.state.schemaDef;
     return (
       <ListGroupItem className="border-0 py-0 px-3">
         <Form inline onSubmit={this.handleSubmit}>

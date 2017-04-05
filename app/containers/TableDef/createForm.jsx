@@ -11,7 +11,11 @@ class TableDefForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { name: '' };
+    this.state = {
+      tableDef: {
+        name: '',
+      },
+    };
 
     this.resetState = this.resetState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,16 +25,18 @@ class TableDefForm extends Component {
 
   resetState() {
     this.setState({
-      name: '',
+      tableDef: {
+        name: '',
+      },
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    const tableDef = {
-      name: this.state.name.trim(),
-    };
+    const { tableDef } = this.state;
+
+    tableDef.name = tableDef.name.trim();
 
     this.props.onSubmit(tableDef);
     this.props.toggleAction();
@@ -41,7 +47,11 @@ class TableDefForm extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    this.setState({ name: event.target.value });
+    this.setState({
+      tableDef: {
+        name: event.target.value,
+      },
+    });
   }
 
   handleCancel() {
@@ -50,7 +60,7 @@ class TableDefForm extends Component {
   }
 
   render() {
-    const { name } = this.state;
+    const { name } = this.state.tableDef;
     return (
       <ListGroupItem>
         <Form inline onSubmit={this.handleSubmit}>

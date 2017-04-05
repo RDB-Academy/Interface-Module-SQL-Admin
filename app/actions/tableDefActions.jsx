@@ -15,16 +15,19 @@ class TableDefActions {
 }
 
 class TableDefActionCreators {
-  static create = tableDef => (
-    (dispatch, getState) => (
-      TableDefAPI
+  static create = (schemaDefId, tableDefData) => (
+    (dispatch, getState) => {
+      const tableDef = tableDefData;
+      tableDef.schemaDefId = schemaDefId;
+
+      return TableDefAPI
         .create(SessionSelector.getId(getState()), tableDef)
         .then((response) => {
           dispatch(TableDefActions.createSuccess(response));
         }).catch((error) => {
           throw error;
-        })
-    )
+        });
+    }
   );
 
   static read = tableDefId => (

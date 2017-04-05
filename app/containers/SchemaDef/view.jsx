@@ -37,8 +37,6 @@ class SchemaDefView extends Component {
       this.props.readSchemaDef(match.params.id);
     }
 
-    this.state = { collapseTableDefForm: false };
-
     this.setAvailable = this.setAvailable.bind(this);
   }
 
