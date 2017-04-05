@@ -1,16 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, Card, CardFooter, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { TableDefActions } from 'actions';
+import { ColumnDefActions, TableDefActions } from 'actions';
 import { ImprovedMoment } from 'components/Tools';
 import Moment from 'react-moment';
 import { TableDefBase, ColumnDefBase } from 'PropTypes';
 import { ColumnDefSelector } from 'selectors';
 import Octicon from 'react-octicon';
 import ColumnDefListEntry from 'containers/ColumnDef/listEntry';
+
+import ColumnDefForm from 'containers/ColumnDef/createForm';
 
 export class TableDefEntry extends Component {
   static propTypes = {
@@ -19,6 +21,7 @@ export class TableDefEntry extends Component {
       ColumnDefBase,
     ),
     readTableDef: PropTypes.func.isRequired,
+    createColumnDef: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -29,16 +32,31 @@ export class TableDefEntry extends Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
     this.state = {
       collapse: false,
+      collapseForm: false,
     };
   }
 
-  toggle() {
+  toggle(event) {
+    event.stopPropagation();
     if (!this.state.collapse && this.props.columnDefBaseList === null) {
       this.props.readTableDef(this.props.tableDef.id);
     }
     this.setState({ collapse: !this.state.collapse });
+  }
+
+  toggleForm(event) {
+    event.stopPropagation();
+
+    this.setState({ collapseForm: !this.state.collapseForm });
+  }
+
+  submitColumnDef(columnDefData) {
+    const columnDef = columnDefData;
+
+    this.props.createColumnDef(columnDef);
   }
 
   render() {
@@ -67,7 +85,24 @@ export class TableDefEntry extends Component {
                   { columnDefBaseList.map(columnDef => (
                     <ColumnDefListEntry key={columnDef.id} columnDef={columnDef} />
                   ))}
+                  <Collapse isOpen={this.state.collapseForm}>
+                    <ColumnDefForm
+                      onSubmit={this.submitColumnDef}
+                      toggleAction={this.toggleForm}
+                    />
+                  </Collapse>
                 </ListGroup>
+                <CardFooter className="p-0">
+                  <Button
+                    className="border-0 rounded-bottom"
+                    color={this.state.collapseForm ? ('warning') : ('success')}
+                    block
+                    style={{ borderTopLeftRadius: '0', borderTopRightRadius: '0' }}
+                    onClick={this.toggleForm}
+                  >
+                    <Octicon name={this.state.collapseForm ? ('x') : ('plus')} mega />
+                  </Button>
+                </CardFooter>
               </Card>
             ) : (
               <p className="mb-1">loading</p>
@@ -94,6 +129,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => ({
   readTableDef: bindActionCreators(TableDefActions.read, dispatch),
+  createColumnDef: bindActionCreators(ColumnDefActions.create, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableDefEntry);
