@@ -5,6 +5,7 @@ import Octicon from 'react-octicon';
 class TableDefForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    toggleAction: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -12,23 +13,28 @@ class TableDefForm extends Component {
 
     this.state = { name: '' };
 
+    this.resetState = this.resetState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  resetState() {
+    this.setState({
+      name: '',
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    event.stopPropagation();
 
     const tableDef = {
       name: this.state.name.trim(),
     };
 
     this.props.onSubmit(tableDef);
-
-    this.setState({
-      name: '',
-    });
+    this.props.toggleAction();
+    this.resetState();
   }
 
   handleChange(event) {
@@ -36,6 +42,11 @@ class TableDefForm extends Component {
     event.stopPropagation();
 
     this.setState({ name: event.target.value });
+  }
+
+  handleCancel() {
+    this.props.toggleAction();
+    this.resetState();
   }
 
   render() {
