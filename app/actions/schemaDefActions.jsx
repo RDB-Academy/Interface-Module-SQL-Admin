@@ -21,12 +21,12 @@ class SchemaDefActions {
  * Read
  */
   static readAllSuccess = data => ({
-    type: types.READ_ALL_SUCCESS,
+    type: types.READ_LIST_SUCCESS,
     data,
   });
 
   static readAllFailure = error => ({
-    type: types.READ_ALL_FAILURE,
+    type: types.READ_LIST_FAILURE,
     error: {
       httpCode: error.message,
       httpText: error.httpText,

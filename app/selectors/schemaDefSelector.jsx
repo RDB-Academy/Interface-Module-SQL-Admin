@@ -4,16 +4,12 @@ class SchemaDefSelector {
   );
 
   static getList = state => (
-    SchemaDefSelector.getStore(state).schemaDefList
+    SchemaDefSelector.getStore(state).entities
   );
 
-  static getById = (state, id) => {
-    const schemaDef = SchemaDefSelector.getList(state).filter(i => i.id === id);
-    if (schemaDef.length === 0) {
-      return null;
-    }
-    return schemaDef[0];
-  };
+  static getById = (state, schemaDefId) => (
+    SchemaDefSelector.getStore(state).byId[schemaDefId]
+  );
 
 }
 

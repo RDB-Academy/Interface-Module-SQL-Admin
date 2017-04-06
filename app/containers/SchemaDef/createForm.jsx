@@ -39,6 +39,7 @@ class SchemaDefForm extends Component {
     schemaDef.name = schemaDef.name.trim();
 
     this.props.onSubmit(schemaDef);
+    this.resetState();
     this.props.toggleAction();
   }
 

@@ -29,6 +29,12 @@ class SchemaDefView extends Component {
     tableDefList: null,
   }
 
+  static setAvailable(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+
   constructor(props) {
     super(props);
 
@@ -37,12 +43,7 @@ class SchemaDefView extends Component {
       this.props.readSchemaDef(match.params.id);
     }
 
-    this.setAvailable = this.setAvailable.bind(this);
-  }
-
-  setAvailable(event) {
-    event.preventDefault();
-    event.stopPropagation();
+//    this.setAvailable = this.setAvailable.bind(this);
   }
 
   render() {

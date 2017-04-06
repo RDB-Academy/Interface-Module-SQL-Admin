@@ -5,21 +5,23 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { SchemaDefActions } from 'actions';
-import { SchemaDefListComponent } from 'components/SchemaDef';
-import { SchemaDefForm } from 'containers/SchemaDef';
+import { SchemaDefForm, SchemaDefListItem } from 'containers/SchemaDef';
 import { OcticonButton } from 'components/Tools';
-import { SchemaDefBase } from 'PropTypes';
 import { SchemaDefSelector } from 'selectors';
 
+/**
+ * This class defines the default Container for displaying SchemaDef Objects in a list.
+ *
+ * @class SchemaDefList
+ * @extends {Component}
+ */
 class SchemaDefList extends Component {
   static propTypes = {
-    schemaDefList: React.PropTypes.arrayOf(
-      SchemaDefBase.isRequired,
+    schemaDefIdList: React.PropTypes.arrayOf(
+      PropTypes.number.isRequired,
     ).isRequired,
     createSchemaDef: PropTypes.func.isRequired,
-    updateSchemaDef: PropTypes.func.isRequired,
     loadSchemaDefList: PropTypes.func.isRequired,
-    deleteSchemaDef: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -28,12 +30,8 @@ class SchemaDefList extends Component {
       collapseForm: false,
     };
 
-    const { schemaDefList } = this.props;
-    if (schemaDefList === undefined || schemaDefList.length === 0) {
-      this.props.loadSchemaDefList();
-    }
+    this.props.loadSchemaDefList();
 
-    this.deleteSchemaDef = this.deleteSchemaDef.bind(this);
     this.submitSchemaDef = this.submitSchemaDef.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
   }
@@ -47,12 +45,8 @@ class SchemaDefList extends Component {
     this.props.createSchemaDef(schemaDef);
   }
 
-  deleteSchemaDef(id) {
-    this.props.deleteSchemaDef(id);
-  }
-
   render() {
-    const { schemaDefList } = this.props;
+    const { schemaDefIdList } = this.props;
     return (
       <div>
         <Jumbotron>
@@ -77,11 +71,18 @@ class SchemaDefList extends Component {
             </CardHeader>
 
             <ListGroup className="list-group-flush">
-              <SchemaDefListComponent
-                schemaDefList={schemaDefList}
-                deleteSchemaDef={this.deleteSchemaDef}
-                updateAvailable={this.props.updateSchemaDef}
-              />
+              {(schemaDefIdList.length === 0) ? (
+                <p>List is Empty</p>
+              ) : (
+                <div>
+                  { schemaDefIdList.map(schemaDefId => (
+                    <SchemaDefListItem
+                      key={schemaDefId}
+                      schemaDefId={schemaDefId}
+                    />
+                  ))}
+                </div>
+              )}
               <Collapse isOpen={this.state.collapseForm}>
                 <SchemaDefForm
                   onSubmit={this.submitSchemaDef}
@@ -109,14 +110,12 @@ class SchemaDefList extends Component {
 }
 
 const mapStateToProps = state => ({
-  schemaDefList: SchemaDefSelector.getList(state),
+  schemaDefIdList: SchemaDefSelector.getList(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   createSchemaDef: bindActionCreators(SchemaDefActions.create, dispatch),
   loadSchemaDefList: bindActionCreators(SchemaDefActions.readAll, dispatch),
-  updateSchemaDef: bindActionCreators(SchemaDefActions.update, dispatch),
-  deleteSchemaDef: bindActionCreators(SchemaDefActions.delete, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchemaDefList);

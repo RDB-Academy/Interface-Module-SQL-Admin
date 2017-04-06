@@ -1,7 +1,8 @@
 import { SchemaDefActionTypes as types } from 'actionTypes';
 
 const initialState = {
-  schemaDefList: [],
+  byId: {},
+  entities: [],
   error: null,
 };
 
@@ -13,34 +14,39 @@ const schemaDefReducer = (state = initialState, action) => {
     case types.CREATE_SUCCESS:
     case types.UPDATE_SUCCESS:
     case types.READ_SUCCESS: {
-      const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
-      if (oldIndex === -1) {
-        return {
-          ...state,
-          schemaDefList: [
-            ...state.schemaDefList,
-            action.data,
-          ],
-        };
-      }
+      const entities = new Set(state.entities);
       const newState = {
         ...state,
-        schemaDefList: [
-          ...state.schemaDefList.slice(0, oldIndex),
-          action.data,
-          ...state.schemaDefList.slice(oldIndex + 1),
-        ],
       };
+
+      newState.byId[action.data.id] = action.data;
+      entities.add(action.data.id);
+
+      newState.entities = Array.from(entities);
+      newState.entities.sort((a, b) => a - b);
       return newState;
     }
-  /**
-   * Read All
-   */
-    case types.READ_ALL_SUCCESS: {
-      return Object.assign({}, state, {
-        schemaDefList: action.data,
-        error: null,
+
+    /**
+     * Read a List of SchemaDef objects
+     */
+    case types.READ_LIST_SUCCESS: {
+      const schemaDefList = action.data;
+      const entities = new Set(state.entities);
+
+      const newState = {
+        ...state,
+      };
+
+      schemaDefList.sort((a, b) => (a.id > b.id));
+      action.data.forEach((schemaDef) => {
+        newState.byId[schemaDef.id] = schemaDef;
+        entities.add(schemaDef.id);
       });
+
+      newState.entities = Array.from(entities);
+      newState.entities.sort((a, b) => a - b);
+      return newState;
     }
 
     case types.READ_ALL_FAILURE: {
@@ -54,22 +60,13 @@ const schemaDefReducer = (state = initialState, action) => {
     }
 
     case types.DELETE_SUCCESS: {
-      const oldIndex = state.schemaDefList.findIndex(e => e.id === action.data.id);
-      if (oldIndex === -1) {
-        return {
-          ...state,
-          schemaDefList: [
-            ...state.schemaDefList,
-          ],
-        };
-      }
       const newState = {
         ...state,
-        schemaDefList: [
-          ...state.schemaDefList.slice(0, oldIndex),
-          ...state.schemaDefList.slice(oldIndex + 1),
-        ],
+        entities: state.entities.filter(a => (a !== action.data.id)),
       };
+
+      delete newState.byId[action.data.id];
+
       return newState;
     }
 

@@ -3,36 +3,24 @@ import { Badge, ListGroupItem, ListGroupItemText } from 'reactstrap';
 
 import Link from 'react-router-dom/Link';
 
-import { ImprovedMoment, OcticonButton } from 'components/Tools';
+import { ImprovedMoment, OcticonButton, handleClick } from 'components/Tools';
 import { SchemaDefBase } from 'PropTypes';
 
 class SchemaDefListEntry extends Component {
   static propTypes = {
     schemaDef: SchemaDefBase.isRequired,
-    updateAvailable: PropTypes.func.isRequired,
+    toggleAvailable: PropTypes.func.isRequired,
     deleteSchemaDef: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    this.toggleCollapse = this.toggleCollapse.bind(this);
-    this.setAvailable = this.setAvailable.bind(this);
-    this.delete = this.delete.bind(this);
     this.state = {
       collapse: true,
     };
-  }
 
-  setAvailable(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const schemaDef = {
-      available: !this.props.schemaDef.available,
-    };
-
-    this.props.updateAvailable(this.props.schemaDef.id, schemaDef);
+    this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
   toggleCollapse() {
@@ -41,22 +29,17 @@ class SchemaDefListEntry extends Component {
     });
   }
 
-  delete(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.props.deleteSchemaDef(this.props.schemaDef.id);
-  }
 
   render() {
-    const { schemaDef } = this.props;
+    const { schemaDef, toggleAvailable, deleteSchemaDef } = this.props;
     const { collapse } = this.state;
 
     const renderAvailable = () => (
-      <OcticonButton outline color={schemaDef.available ? 'success' : 'danger'} onClick={this.setAvailable} octiconName="eye" />
+      <OcticonButton outline color={schemaDef.available ? 'success' : 'danger'} onClick={e => handleClick(e, toggleAvailable)} octiconName="eye" />
     );
 
     const renderDelete = () => (
-      <OcticonButton outline color="danger" onClick={this.delete} octiconName="x" />
+      <OcticonButton outline color="danger" onClick={e => handleClick(e, deleteSchemaDef)} octiconName="x" />
     );
 
     return (

@@ -65,6 +65,7 @@
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.12",
+    "normalizr": "^3.2.2",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.5.0",
     "react-addons-transition-group": "^15.5.0",
