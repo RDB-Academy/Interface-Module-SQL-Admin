@@ -1,7 +1,13 @@
 # Interface-Module-SQL-Admin
 
 # ToDo
--   Add Proxy mode to Back-End
--   Index Page
--   Login Page
--   TaskView
+- Index Page
+- Login Page
+- TaskView
+
+
+
+
+# Warnings
+## Dependencie Updates
+React können wir erst updaten wen reactstrap aktualisiert wurde ...
