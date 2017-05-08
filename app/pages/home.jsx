@@ -1,6 +1,6 @@
 import React from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
-import { Container, Jumbotron } from 'reactstrap';
+import { Container, Col, Row, Jumbotron } from 'reactstrap';
 //  import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import Helmet from 'react-helmet';
 
@@ -54,8 +54,8 @@ export default class Home extends React.Component {
           </Container>
         </Jumbotron>
         <Container>
-          <div className="row">
-            <div className="col-sm-7" style={{ height: '300px', marginBottom: '40px', border: '5px', borderStyle: 'solid', borderColor: 'rgb(110, 88, 205)' }}>
+          <Row>
+            <Col sm="7" style={{ height: '300px', marginBottom: '40px', border: '5px', borderStyle: 'solid', borderColor: 'rgb(110, 88, 205)' }}>
               <Bar
                 data={diffcultyBar}
                 width={100}
@@ -64,15 +64,16 @@ export default class Home extends React.Component {
                   maintainAspectRatio: false,
                 }}
               />
-            </div>
-            <div className="col-sm-5">
-              <Doughnut data={taskPie}
+            </Col>
+            <Col sm="5">
+              <Doughnut
+                data={taskPie}
                 options={{
                   cutoutPercentage: 80,
                 }}
-               />
-            </div>
-          </div>
+              />
+            </Col>
+          </Row>
         </Container>
       </div>
     );
