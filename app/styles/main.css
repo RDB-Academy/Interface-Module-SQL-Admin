@@ -71,6 +71,13 @@ main {
   }
 }
 
+.leftcontainer {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 720px;
+	padding: 1em;
+}
+
 .schemadef-list-entry-footer {
   border-top: 1px solid lightgrey;
   display: inline-flex;

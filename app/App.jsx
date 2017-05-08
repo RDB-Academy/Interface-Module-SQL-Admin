@@ -15,7 +15,7 @@ import Navbar from 'components/Navbar';
 
 import { SessionSelector } from 'selectors';
 
-import { SchemaDefPage, LoginPage } from 'pages';
+import { Home, SchemaDefPage, LoginPage } from 'pages';
 
 import TaskPage from 'containers/Task';
 
@@ -47,7 +47,7 @@ class Application extends Component {
           <main>
             { isLoggedIn ? (
               <Switch>
-                <Route path="/" exact render={() => (<h1>Index</h1>)} />
+                <Route path="/" exact component={Home} />
                 <Route path="/schema-defs" component={SchemaDefPage} />
                 <Route path="/tasks" component={TaskPage} />
                 <Route path="/task-trials" exact render={() => (<h1>taskTrials</h1>)} />
