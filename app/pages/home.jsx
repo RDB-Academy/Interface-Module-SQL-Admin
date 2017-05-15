@@ -1,8 +1,9 @@
 import React from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
-import { Container, Col, Row, Jumbotron } from 'reactstrap';
+import { Container, Col, Row, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText } from 'reactstrap';
 //  import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import Helmet from 'react-helmet';
+import classnames from 'classnames';
 
 
 const taskPie = { labels: ['unsolved', 'solved'],
@@ -38,7 +39,18 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      activeTab: '1',
+    };
+  }
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab,
+      });
+    }
   }
 
   render() {
@@ -55,7 +67,7 @@ export default class Home extends React.Component {
         </Jumbotron>
         <Container>
           <Row>
-            <Col sm="7" style={{ height: '300px', marginBottom: '40px', border: '5px', borderStyle: 'solid', borderColor: 'rgb(110, 88, 205)' }}>
+            <Col sm="7" style={{ height: '300px', marginBottom: '40px', border: '3px', borderRadius: '15px', borderStyle: 'solid', borderColor: '#eceeef' }}>
               <Bar
                 data={diffcultyBar}
                 width={100}
@@ -65,7 +77,7 @@ export default class Home extends React.Component {
                 }}
               />
             </Col>
-            <Col sm="5">
+            <Col sm="5" style={{ height: '300px', marginBottom: '40px', border: '3px', borderRadius: '15px', borderStyle: 'solid', borderColor: '#eceeef' }}>
               <Doughnut
                 data={taskPie}
                 options={{
@@ -74,6 +86,79 @@ export default class Home extends React.Component {
               />
             </Col>
           </Row>
+        </Container>
+        <Container>
+          <Col sm="7" style={{ height: '300px', marginBottom: '40px', border: '3px', borderRadius: '15px', borderStyle: 'solid', borderColor: '#eceeef' }}>
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '1' })}
+                  onClick={() => { this.toggle('1'); }}
+                >
+                  Heute
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '2' })}
+                  onClick={() => { this.toggle('2'); }}
+                >
+                  Diese Woche
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '3' })}
+                  onClick={() => { this.toggle('3'); }}
+                >
+                  6 Monate
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '4' })}
+                  onClick={() => { this.toggle('4'); }}
+                >
+                  Gesamt
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+                <Row>
+                  <Col sm="12" style={{ height: '250px' }} >
+                    <Bar
+                      data={diffcultyBar}
+                      width={100}
+                      height={50}
+                      options={{
+                        maintainAspectRatio: false,
+                      }}
+                    />
+                  </Col>
+                </Row>
+              </TabPane>
+              <TabPane tabId="2">
+                <Row>
+                  <Col sm="12">
+                    <h4>Tab 2 Contents</h4>
+                  </Col>
+                </Row>
+              </TabPane><TabPane tabId="3">
+                <Row>
+                  <Col sm="12">
+                    <h4>Tab 3 Contents</h4>
+                  </Col>
+                </Row>
+              </TabPane><TabPane tabId="4">
+                <Row>
+                  <Col sm="12">
+                    <h4>Tab 4 Contents</h4>
+                  </Col>
+                </Row>
+              </TabPane>
+            </TabContent>
+          </Col>
         </Container>
       </div>
     );
