@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Input, ListGroupItem } from 'reactstrap';
-import Octicon from 'react-octicon';
+import Octicon from 'rdb-academy-octicon';
 
 class SchemaDefForm extends Component {
   static propTypes = {

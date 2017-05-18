@@ -12,7 +12,7 @@ import { ImprovedMoment } from 'components/Tools';
 import Moment from 'react-moment';
 import { ForeignKeyBase, ForeignKeyRelationBase } from 'PropTypes';
 import { ForeignKeyRelationSelector } from 'selectors';
-import Octicon from 'react-octicon';
+import Octicon from 'rdb-academy-octicon';
 
 export class ForeignKeyListItem extends Component {
   static propTypes = {

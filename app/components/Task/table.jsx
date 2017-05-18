@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Octicon from 'react-octicon';
+import Octicon from 'rdb-academy-octicon';
 import Link from 'react-router-dom/Link';
 import { Button, Table } from 'reactstrap';
 

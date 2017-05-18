@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
-import Octicon from 'react-octicon';
+import Octicon from 'rdb-academy-octicon';
 
 const OcticonButton = ({ outline, color, onClick, octiconName, children, size }) => (
   <Button

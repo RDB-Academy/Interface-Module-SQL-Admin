@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, CardHeader, CardFooter, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
-import Octicon from 'react-octicon';
+import Octicon from 'rdb-academy-octicon';
 import { connect } from 'react-redux';
 
 import { ForeignKeyBase } from 'PropTypes';

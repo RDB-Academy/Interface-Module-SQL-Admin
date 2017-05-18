@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ListGroupItem } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Octicon from 'react-octicon';
+import Octicon from 'rdb-academy-octicon';
 import { OcticonButton } from 'components/Tools';
 
 import { ColumnDefActions } from 'actions';

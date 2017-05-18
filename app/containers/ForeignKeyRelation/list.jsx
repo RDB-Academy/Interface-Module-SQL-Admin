@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, CardFooter, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
 import { ForeignKeyRelationForm, ForeignKeyRelationListItem } from 'containers/ForeignKeyRelation';
-import Octicon from 'react-octicon';
+import Octicon from 'rdb-academy-octicon';
 import { ForeignKeyRelationBase } from 'PropTypes';
 
 class ForeignKeyRelationList extends Component {
