@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { TableDefActions } from 'actions';
 import { TableDefSelector } from 'selectors';
 import { ImprovedMoment } from 'components/Tools';
-import Moment from 'react-moment';
+import Moment from 'rdb-academy-moment';
 import { TableDefBase, TableDefExtended } from 'PropTypes';
 import { ColumnDefList } from 'containers/ColumnDef';
 

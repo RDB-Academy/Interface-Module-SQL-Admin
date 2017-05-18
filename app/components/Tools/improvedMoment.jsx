@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tooltip } from 'reactstrap';
-import Moment from 'react-moment';
+import Moment from 'rdb-academy-moment';
 
 let id = 0;
 

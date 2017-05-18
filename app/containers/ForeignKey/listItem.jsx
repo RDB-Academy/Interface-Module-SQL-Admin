@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 import { ForeignKeyActions } from 'actions';
 import { ImprovedMoment } from 'components/Tools';
-import Moment from 'react-moment';
+import Moment from 'rdb-academy-moment';
 import { ForeignKeyBase, ForeignKeyRelationBase } from 'PropTypes';
 import { ForeignKeyRelationSelector } from 'selectors';
 import Octicon from 'rdb-academy-octicon';

@@ -18,7 +18,7 @@ import { SchemaDefSelector } from 'selectors';
  */
 class SchemaDefList extends Component {
   static propTypes = {
-    schemaDefIdList: React.PropTypes.arrayOf(
+    schemaDefIdList: PropTypes.arrayOf(
       PropTypes.number.isRequired,
     ).isRequired,
     createSchemaDef: PropTypes.func.isRequired,

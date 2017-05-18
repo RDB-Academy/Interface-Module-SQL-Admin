@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Jumbotron } from 'reactstrap';
 import Helmet from 'react-helmet';
-import Moment from 'react-moment';
+import Moment from 'rdb-academy-moment';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 

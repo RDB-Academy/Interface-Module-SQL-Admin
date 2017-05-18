@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Card, Container, Jumbotron } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,10 +11,10 @@ import { getTaskList } from 'selectors/taskSelector';
 
 class TaskList extends Component {
   static propTypes = {
-    taskList: React.PropTypes.arrayOf(
+    taskList: PropTypes.arrayOf(
       Task,
     ).isRequired,
-    loadTaskList: React.PropTypes.func.isRequired,
+    loadTaskList: PropTypes.func.isRequired,
   }
 
   constructor(props) {

@@ -34,7 +34,7 @@ const webpackConfig = {
       'reactstrap',
       'react-dom',
       'react-helmet',
-      'react-moment',
+      'rdb-academy-moment',
       'rdb-academy-octicon',
       'react-redux',
       'react-router',
