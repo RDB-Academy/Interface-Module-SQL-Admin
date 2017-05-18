@@ -2249,6 +2249,16 @@ etag@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.7.0.tgz#03d30b5f67dd6e632d2945d30d6652731a34d5d8"
 
+etch-octicon@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/etch-octicon/-/etch-octicon-1.0.0.tgz#cc0927567b8cfab1612aa1fbe435dc2654911115"
+  dependencies:
+    octicons "^5.0.1"
+
+etch@^0.12.4:
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/etch/-/etch-0.12.4.tgz#6c8b9500eeeda22a1e0962f58f94e2cf9573ac92"
+
 event-emitter@~0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/event-emitter/-/event-emitter-0.3.4.tgz#8d63ddfb4cfe1fae3b32ca265c4c720222080bb5"
@@ -3707,6 +3717,10 @@ obuf@^1.0.0, obuf@^1.1.0:
 octicons@^3.1.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/octicons/-/octicons-3.5.0.tgz#f7ff5935674d8b114f6d80c454bfaa01797a4e30"
+
+octicons@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/octicons/-/octicons-5.0.1.tgz#0fa0c4fd3680d251266f073736539317cb846e4f"
 
 on-finished@~2.3.0:
   version "2.3.0"
