@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Collapse, ListGroupItem } from 'reactstrap';
 import Octicon from 'react-octicon';
 import { connect } from 'react-redux';

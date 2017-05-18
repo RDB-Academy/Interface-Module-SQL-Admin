@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardBlock, CardHeader, CardText, Container, Jumbotron } from 'reactstrap';
 
 import Helmet from 'react-helmet';

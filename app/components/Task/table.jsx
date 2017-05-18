@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Octicon from 'react-octicon';
 import Link from 'react-router-dom/Link';
 import { Button, Table } from 'reactstrap';

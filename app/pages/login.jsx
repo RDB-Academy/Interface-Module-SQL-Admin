@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Card, CardBlock, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
