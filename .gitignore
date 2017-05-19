@@ -11,5 +11,9 @@ node_modules
 
 # Ignore eslint Cache
 .eslintcache
+
+# Apple Finder
 .DS_Store
+
+# Visual Studio Code
 .vscode
