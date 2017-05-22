@@ -20,10 +20,6 @@ import { Home, SchemaDefPage, LoginPage } from 'pages';
 
 import TaskPage from 'containers/Task';
 
-import LoginPage from './LoginPage';
-import SchemaDefPage from './SchemaDef';
-import TableDefPage from './TableDef';
-import TaskPage from './Task';
 import License from 'components/License';
 
 class Application extends Component {
