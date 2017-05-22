@@ -16,6 +16,7 @@ import LoginPage from './LoginPage';
 import SchemaDefPage from './SchemaDef';
 import TableDefPage from './TableDef';
 import TaskPage from './Task';
+import License from 'components/License';
 
 class App extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class App extends Component {
                 <Route path="/table-defs" component={TableDefPage} />
                 <Route path="/tasks" component={TaskPage} />
                 <Route path="/task-trials" exact render={() => (<h1>taskTrials</h1>)} />
-                <Route path="/status" exact render={() => (<h1>status</h1>)} />
+                <Route path="/license" component={License} />
                 <Route
                   render={() => (
                     <Redirect to="/" />
