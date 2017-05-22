@@ -25,7 +25,7 @@ class License extends Component {
                                     React JS
                                 </div>
                                 <ListGroupItemText>
-                                    Copyright (C) 2013-present Facebook, Inc.
+                                    Copyright (c) 2013-present Facebook, Inc.
                                     https://facebook.github.io/react/
                                 </ListGroupItemText>
                             </ListGroupItem>
@@ -34,7 +34,7 @@ class License extends Component {
                                     React Redux
                                 </div>
                                 <ListGroupItemText>
-                                    Copyright (C) 2015-present Dan Abramov
+                                    Copyright (c) 2015-present Dan Abramov
                                     http://redux.js.org
                                 </ListGroupItemText>
                             </ListGroupItem>
@@ -43,7 +43,7 @@ class License extends Component {
                                     React Moment
                                 </div>
                                 <ListGroupItemText>
-                                    Copyright (C) 2016 Sean Hickey
+                                    Copyright (c) 2016 Sean Hickey
                                     https://momentjs.com
                                 </ListGroupItemText>
                             </ListGroupItem>
@@ -52,7 +52,7 @@ class License extends Component {
                                     React Helmet
                                 </div>
                                 <ListGroupItemText>
-                                    Copyright (C) 2015 NFL
+                                    Copyright (c) 2015 NFL
                                     https://github.com/nfl/react-helmet
                                 </ListGroupItemText>
                             </ListGroupItem>
@@ -61,7 +61,7 @@ class License extends Component {
                                     Ember JS
                                 </div>
                                 <ListGroupItemText>
-                                    Copyright (C) 2017 Yehuda Katz, Tom Dale and Ember.js contributors
+                                    Copyright (c) 2017 Yehuda Katz, Tom Dale and Ember.js contributors
                                     https://emberjs.com
                                 </ListGroupItemText>
                             </ListGroupItem>
@@ -70,7 +70,7 @@ class License extends Component {
                                     Play Framework
                                 </div>
                                 <ListGroupItemText>
-                                    Copyright (C) 2017
+                                    Copyright (c) 2017
                                     https://www.playframework.com
                                 </ListGroupItemText>
                             </ListGroupItem>
@@ -79,7 +79,8 @@ class License extends Component {
                                     Yarn
                                 </div>
                                 <ListGroupItemText>
-                                    discription
+                                    Copyright (c) 2016-present, Yarn Contributors
+                                    https://yarnpkg.com/
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem>
@@ -87,7 +88,9 @@ class License extends Component {
                                     sbt
                                 </div>
                                 <ListGroupItemText>
-                                    discription
+                                    Copyright (c) 2008-2014 Typesafe Inc, Mark Harrah, Grzegorz Kossakowski,
+                                    Josh Suereth, Indrajit Raychaudhuri, Eugene Yokota, and other contributors.
+                                    http://www.scala-sbt.org
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem>
@@ -95,7 +98,9 @@ class License extends Component {
                                     Bootstrap
                                 </div>
                                 <ListGroupItemText>
-                                    discription
+                                    Copyright (c) 2011-2017 Twitter, Inc.
+                                    Copyright (c) 2011-2017 The Bootstrap Authors
+                                    http://getbootstrap.com
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem>
@@ -103,7 +108,8 @@ class License extends Component {
                                     Babel
                                 </div>
                                 <ListGroupItemText>
-                                    discription
+                                    Copyright (c) 2014-2017 Sebastian McKenzie
+                                    https://babeljs.io
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem>
@@ -111,7 +117,8 @@ class License extends Component {
                                     Webpack
                                 </div>
                                 <ListGroupItemText>
-                                    discription
+                                    Copyright (c) 2017 JS Foundation and other contributors
+                                    https://webpack.js.org
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem>
@@ -119,7 +126,8 @@ class License extends Component {
                                     jQuery
                                 </div>
                                 <ListGroupItemText>
-                                    discription
+                                    Copyright (c) 2017 JS Foundation and other contributors
+                                    https://jquery.com
                                 </ListGroupItemText>
                             </ListGroupItem>
                         </div>
