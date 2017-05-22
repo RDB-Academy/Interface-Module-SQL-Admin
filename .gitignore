@@ -12,4 +12,8 @@ node_modules
 # Ignore eslint Cache
 .eslintcache
 .DS_Store
+
 .vscode
+
+.idea/workspace.xml
+.idea

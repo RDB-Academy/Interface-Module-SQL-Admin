@@ -44,7 +44,7 @@ class Navbar extends Component {
                   <NavLink to="/task-trials" className="nav-link" activeClassName="active">TaskTrials</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/status" className="nav-link" activeClassName="active">Status</NavLink>
+                  <NavLink to="/license" className="nav-link" activeClassName="active">Licenses</NavLink>
                 </NavItem>
               </ul>
             )}
