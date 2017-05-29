@@ -5,7 +5,34 @@
 import React, { Component } from 'react';
 import { Jumbotron, Container, Table, ListGroup, ListGroupItem, ListGroupItemText } from 'reactstrap';
 
+function LicenseItem(props){
+    const license = {
+        name: props.name,
+        copyright: props.copyright,
+        url: props.url
+
+    };
+
+    return (
+        <ListGroupItem>
+            <div className="list-header d-flex w-100 justify-content-between">
+                {license.name}
+                <br/>
+                <br/>
+            </div>
+            <ListGroupItemText>
+                Copyright (c) {license.copyright}
+                <br/>
+                <a href={license.url}>
+                    {license.url}
+                </a>
+            </ListGroupItemText>
+        </ListGroupItem>
+    );
+}
+
 class License extends Component {
+
 
     render() {
         return (
@@ -20,116 +47,18 @@ class License extends Component {
                 <Container>
                     <ListGroup className="list-group-flush">
                         <div className="container">
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    React JS
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2013-present Facebook, Inc.
-                                    https://facebook.github.io/react/
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    React Redux
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2015-present Dan Abramov
-                                    http://redux.js.org
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    React Moment
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2016 Sean Hickey
-                                    https://momentjs.com
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    React Helmet
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2015 NFL
-                                    https://github.com/nfl/react-helmet
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    Ember JS
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2017 Yehuda Katz, Tom Dale and Ember.js contributors
-                                    https://emberjs.com
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    Play Framework
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2017
-                                    https://www.playframework.com
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    Yarn
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2016-present, Yarn Contributors
-                                    https://yarnpkg.com/
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    sbt
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2008-2014 Typesafe Inc, Mark Harrah, Grzegorz Kossakowski,
-                                    Josh Suereth, Indrajit Raychaudhuri, Eugene Yokota, and other contributors.
-                                    http://www.scala-sbt.org
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    Bootstrap
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2011-2017 Twitter, Inc.
-                                    Copyright (c) 2011-2017 The Bootstrap Authors
-                                    http://getbootstrap.com
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    Babel
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2014-2017 Sebastian McKenzie
-                                    https://babeljs.io
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    Webpack
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2017 JS Foundation and other contributors
-                                    https://webpack.js.org
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <div className="list-header d-flex w-100 justify-content-between">
-                                    jQuery
-                                </div>
-                                <ListGroupItemText>
-                                    Copyright (c) 2017 JS Foundation and other contributors
-                                    https://jquery.com
-                                </ListGroupItemText>
-                            </ListGroupItem>
+                            <LicenseItem name='React JS' copyright='2013-present Facebook, Inc.' url='https://facebook.github.io/react/'/>
+                            <LicenseItem name='React Redux' copyright='2015-present Dan Abramov' url='http://redux.js.org'/>
+                            <LicenseItem name='React Moment' copyright='2016 Sean Hickey' url='https://momentjs.com'/>
+                            <LicenseItem name='React Helmet' copyright='2015 NFL' url='https://github.com/nfl/react-helmet'/>
+                            <LicenseItem name='Ember JS' copyright='2017 Yehuda Katz, Tom Dale and Ember.js contributors' url='https://emberjs.com'/>
+                            <LicenseItem name='Play Framework' copyright='2017 Lightbend, Inc.' url='https://www.playframework.com'/>
+                            <LicenseItem name='Yarn' copyright='2016-present, Yarn Contributors' url='https://yarnpkg.com/'/>
+                            <LicenseItem name='sbt' copyright='2008-2014 Typesafe ,Inc.' url='http://www.scala-sbt.org'/>
+                            <LicenseItem name='Bootstrap' copyright='2011-2017 Twitter, Inc.' url='http://getbootstrap.com'/>
+                            <LicenseItem name='Babel' copyright='2014-2017 Sebastian McKenzie' url='https://babeljs.io'/>
+                            <LicenseItem name='Webpack' copyright='2017 JS Foundation and other contributors' url='https://webpack.js.org'/>
+                            <LicenseItem name='jQuery' copyright='2017 JS Foundation and other contributors' url='https://jquery.com'/>
                         </div>
                     </ListGroup>
 
