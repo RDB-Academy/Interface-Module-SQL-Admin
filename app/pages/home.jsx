@@ -1,7 +1,10 @@
 import React from 'react';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
-import { Container, Col, Row, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText } from 'reactstrap';
-//  import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { Container, Col, Row, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+// import {BootstrapTable, Card, CardTitle, CardText } from 'react-bootstrap-table';
+
+import { Ring } from 'components/Home';
+
 import Helmet from 'react-helmet';
 import classnames from 'classnames';
 
@@ -57,9 +60,9 @@ const lineData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }
-  ]
+      data: [65, 59, 80, 81, 56, 55, 40],
+    },
+  ],
 };
 
 export default class Home extends React.Component {
@@ -181,7 +184,7 @@ export default class Home extends React.Component {
                 </TabPane><TabPane tabId="4">
                   <Row>
                     <Col sm="12">
-                      <h4>Tab 4 Contents</h4>
+                      <Ring />
                     </Col>
                   </Row>
                 </TabPane>
@@ -190,7 +193,7 @@ export default class Home extends React.Component {
             <Col sm="5">
               <Line data={lineData} />
             </Col>
-        </Row>
+          </Row>
         </Container>
       </div>
     );

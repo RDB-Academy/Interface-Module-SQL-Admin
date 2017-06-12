@@ -61,6 +61,7 @@
     "bootstrap": "4.0.0-alpha.6",
     "chart.js": "^2.5.0",
     "classnames": "^2.2.5",
+    "components": "^0.1.0",
     "history": "^4.6.1",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
