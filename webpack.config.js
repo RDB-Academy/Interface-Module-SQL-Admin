@@ -67,7 +67,7 @@ const webpackConfig = {
         ],
       },
       {
-        test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
+        test: /\.(otf|eot|svg|ttf|woff|woff2|png).*$/,
         use: 'url-loader?limit=8192',
       },
       {
