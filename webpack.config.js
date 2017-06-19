@@ -13,6 +13,7 @@ const APP = {
   isProduction: nodeEnv === 'production',
 
   sourcePath: path.resolve(__dirname, './app'),
+  publicPath: path.resolve(__dirname, './public'),
 
   buildPath: path.resolve(__dirname, './dist'),
 };
@@ -82,6 +83,7 @@ const webpackConfig = {
     extensions: ['.js', '.json', '.jsx'],
     modules: [
       APP.sourcePath,
+      APP.publicPath,
       'node_modules',
     ],
   },

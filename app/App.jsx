@@ -20,6 +20,8 @@ import { Home, SchemaDefPage, LoginPage } from 'pages';
 
 import TaskPage from 'containers/Task';
 
+import License from 'components/License';
+
 class Application extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
@@ -52,7 +54,7 @@ class Application extends Component {
                 <Route path="/schema-defs" component={SchemaDefPage} />
                 <Route path="/tasks" component={TaskPage} />
                 <Route path="/task-trials" exact render={() => (<h1>taskTrials</h1>)} />
-                <Route path="/status" exact render={() => (<h1>status</h1>)} />
+                <Route path="/license" component={License} />
                 <Route
                   render={() => (
                     <Redirect to="/" />

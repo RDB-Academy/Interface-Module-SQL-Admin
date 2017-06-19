@@ -15,5 +15,9 @@ node_modules
 # Apple Finder
 .DS_Store
 
+
 # Visual Studio Code
 .vscode
+
+.idea/workspace.xml
+.idea

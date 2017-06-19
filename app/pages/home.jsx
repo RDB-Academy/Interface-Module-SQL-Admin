@@ -1,7 +1,10 @@
 import React from 'react';
-import { Doughnut, Bar } from 'react-chartjs-2';
-import { Container, Col, Row, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText } from 'reactstrap';
-//  import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { Doughnut, Bar, Line } from 'react-chartjs-2';
+import { Container, Col, Row, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+// import {BootstrapTable, Card, CardTitle, CardText } from 'react-bootstrap-table';
+
+import { Ring } from 'components/Home';
+
 import Helmet from 'react-helmet';
 import classnames from 'classnames';
 
@@ -31,6 +34,33 @@ const diffcultyBar = {
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
       data: [2, 1, 0, 1, 2],
+    },
+  ],
+};
+
+const lineData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [65, 59, 80, 81, 56, 55, 40],
     },
   ],
 };
@@ -88,79 +118,85 @@ export default class Home extends React.Component {
           </Row>
         </Container>
         <Container>
-          <Col sm="7" style={{ height: '300px', marginBottom: '40px', border: '3px', borderRadius: '15px', borderStyle: 'solid', borderColor: '#eceeef' }}>
-            <Nav tabs>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '1' })}
-                  onClick={() => { this.toggle('1'); }}
-                >
-                  Heute
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '2' })}
-                  onClick={() => { this.toggle('2'); }}
-                >
-                  Diese Woche
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '3' })}
-                  onClick={() => { this.toggle('3'); }}
-                >
-                  6 Monate
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '4' })}
-                  onClick={() => { this.toggle('4'); }}
-                >
-                  Gesamt
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="1">
-                <Row>
-                  <Col sm="12" style={{ height: '250px' }} >
-                    <Bar
-                      data={diffcultyBar}
-                      width={100}
-                      height={50}
-                      options={{
-                        maintainAspectRatio: false,
-                      }}
-                    />
-                  </Col>
-                </Row>
-              </TabPane>
-              <TabPane tabId="2">
-                <Row>
-                  <Col sm="12">
-                    <h4>Tab 2 Contents</h4>
-                  </Col>
-                </Row>
-              </TabPane><TabPane tabId="3">
-                <Row>
-                  <Col sm="12">
-                    <h4>Tab 3 Contents</h4>
-                  </Col>
-                </Row>
-              </TabPane><TabPane tabId="4">
-                <Row>
-                  <Col sm="12">
-                    <h4>Tab 4 Contents</h4>
-                  </Col>
-                </Row>
-              </TabPane>
-            </TabContent>
-          </Col>
+          <Row>
+            <Col sm="7" style={{ height: '300px', marginBottom: '40px', border: '3px', borderRadius: '15px', borderStyle: 'solid', borderColor: '#eceeef' }}>
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '1' })}
+                    onClick={() => { this.toggle('1'); }}
+                  >
+                    Heute
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '2' })}
+                    onClick={() => { this.toggle('2'); }}
+                  >
+                    Diese Woche
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '3' })}
+                    onClick={() => { this.toggle('3'); }}
+                  >
+                    6 Monate
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '4' })}
+                    onClick={() => { this.toggle('4'); }}
+                  >
+                    Gesamt
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                  <Row>
+                    <Col sm="12" style={{ height: '250px' }} >
+                      <Bar
+                        data={diffcultyBar}
+                        width={100}
+                        height={50}
+                        options={{
+                          maintainAspectRatio: false,
+                        }}
+                      />
+                    </Col>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="2">
+                  <Row>
+                    <Col sm="12" >
+                      <Line data={lineData} />
+                    </Col>
+                  </Row>
+                </TabPane><TabPane tabId="3">
+                  <Row>
+                    <Col sm="12">
+                      <h4>Tab 3 Contents</h4>
+                    </Col>
+                  </Row>
+                </TabPane><TabPane tabId="4">
+                  <Row>
+                    <Col sm="12">
+                      <Ring />
+                    </Col>
+                  </Row>
+                </TabPane>
+              </TabContent>
+            </Col>
+            <Col sm="5">
+              <Line data={lineData} />
+            </Col>
+          </Row>
         </Container>
       </div>
     );
   }
 }
+// Traffic als Line Graph darstellen
