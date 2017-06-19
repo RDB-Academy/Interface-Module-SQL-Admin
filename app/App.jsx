@@ -16,11 +16,9 @@ import Navbar from 'components/Navbar';
 
 import { SessionSelector } from 'selectors';
 
-import { Home, SchemaDefPage, LoginPage } from 'pages';
+import { Home, SchemaDefPage, LoginPage, License } from 'pages';
 
 import TaskPage from 'containers/Task';
-
-import License from 'components/License';
 
 class Application extends Component {
   static propTypes = {
